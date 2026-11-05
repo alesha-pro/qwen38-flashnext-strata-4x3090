@@ -1,0 +1,56 @@
+{
+ "turn1": {
+  "prompt_n": 54856,
+  "cache_n": 0,
+  "prefill_tok_s": 3295.1,
+  "decode_tok_s": 70.7,
+  "wall_s": 18.31
+ },
+ "save": {
+  "code": 200,
+  "seconds": 0.5,
+  "body": {
+   "id_slot": 0,
+   "filename": "split-test-1793871370.sess",
+   "n_saved": 54957,
+   "n_written": 1018615576,
+   "timings": {
+    "save_ms": 516.7
+   }
+  }
+ },
+ "turn2_live": {
+  "prompt_n": 33,
+  "cache_n": 54957,
+  "prefill_tok_s": 120.6,
+  "decode_tok_s": 52.6,
+  "wall_s": 0.64
+ },
+ "restore": {
+  "code": 200,
+  "seconds": 0.7,
+  "body": {
+   "id_slot": 0,
+   "filename": "split-test-1793871370.sess",
+   "n_restored": 54957,
+   "n_read": 1018615576,
+   "timings": {
+    "restore_ms": 715.3
+   }
+  }
+ },
+ "turn2_after_restore": {
+  "prompt_n": 33,
+  "cache_n": 54957,
+  "prefill_tok_s": 114.5,
+  "decode_tok_s": 40.5,
+  "wall_s": 0.94
+ },
+ "turn2_same_answer": true,
+ "answers": {
+  "turn1": "The reference text covers a diverse array of topics, including historical events such as the reign of Nero, the American Civil War, and World War II military operations, as well as natural phenomena like tropical cyclones and the geological features of the Moon. It also discusses cultural subjects ranging from the film *American Beauty* and the poetry of T.S. Eliot to the history of ironclad warships, the Commonwealth War Graves Commission, and the geography and infrastructure of cities like Manila and Bintulu.",
+  "turn2_live": "Dvorak technique\noxaziridines\ntemnospondyls",
+  "turn2_after_restore": "Dvorak technique\noxaziridines\ntemnospondyls"
+ },
+ "session_file_bytes": 1018615576
+}

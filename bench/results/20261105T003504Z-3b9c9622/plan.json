@@ -1,0 +1,33 @@
+{
+ "base_config": "/mnt/nvme/projects/qwen38-flashnext-unsloth-strata/configs/final-bench-iq4xs-mix-r1-cyr.json",
+ "control": "/mnt/nvme/engines/strata/0.2.10/control",
+ "python": "/mnt/nvme/engines/strata/0.2.10/control/python/bin/python3",
+ "tokenizer": "/mnt/ssd/models/Qwen3.8-Flash-Next-unsloth-GGUF/d962012/packs/ud-iq4_xs/tokenizer",
+ "port": 18442,
+ "gpus": "2,3",
+ "depths": [
+  2048,
+  16384,
+  65536,
+  131072
+ ],
+ "repeat": 3,
+ "max_new": 512,
+ "tasks": [
+  "essay",
+  "code",
+  "edit",
+  "ru"
+ ],
+ "arms": [
+  {
+   "name": "final-iq4xs-df2c05-cyr-mixr1",
+   "cfg": {
+    "gpu": [
+     2,
+     3
+    ]
+   }
+  }
+ ]
+}

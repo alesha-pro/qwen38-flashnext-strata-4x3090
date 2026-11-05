@@ -1,0 +1,937 @@
+diff -ruN 0.2.10/source/include/strata/core/conversation_file.hpp 0.2.10-sessions/source/include/strata/core/conversation_file.hpp
+--- 0.2.10/source/include/strata/core/conversation_file.hpp	2026-11-02 22:37:27.000000000 +0000
++++ 0.2.10-sessions/source/include/strata/core/conversation_file.hpp	2026-11-05 09:07:20.079671979 +0000
+@@ -179,6 +179,15 @@
+                         const SessionFileIdentity& id, size_t& bytes, std::string& error,
+                         const SessionWriteOptions& options = {}, SessionStatus* status = nullptr);
+ 
++// A multi-GPU (format-v3) save: `meta.stage_images` holds the later stages, and `kv_stages` supplies the K/V for
++// each stage in order - kv_stages[0] for stage 0, kv_stages[k+1] for meta.stage_images[k].  Its length must equal
++// meta.stage_images.size() + 1; a mismatch is refused rather than silently truncating a stage.  Each meta.kv and
++// meta.stage_images[k].kv must be empty (the K/V comes only from kv_stages).
++bool session_file_write(const std::string& path, const SavedConversation& meta,
++                        const std::vector<std::vector<SessionKvSource>>& kv_stages,
++                        const SessionFileIdentity& id, size_t& bytes, std::string& error,
++                        const SessionWriteOptions& options = {}, SessionStatus* status = nullptr);
++
+ // The checkpoints worth a disk write: the deepest one (the next turn's resume point when the live tail was
+ // rewritten).  Earlier checkpoints only serve edits further back and cost ~118 MB each at this geometry.
+ std::vector<ConversationCheckpoint> session_checkpoints_to_save(const std::vector<ConversationCheckpoint>& chain);
+@@ -206,10 +215,19 @@
+ // these limits BEFORE its array is allocated; the defaults accept whatever the payload can hold.  The engine sets all
+ // of them from its runtime (conversation_session_read_limits), and then the file size is bounded too.
+ struct SessionReadLimits {
++    // Per-stage bounds for a format-v3 file's later stages (stage_images).  Stage 0 is bounded by the top-level
++    // fields above; each later stage k (0-based into stage_limits) is bounded by its own block here.  A stage past
++    // the end of the list is bounded by the payload only.
++    struct SessionStageLimits {
++        std::pair<int64_t, int64_t> layer_range{};   // this stage's [lo, hi): a file with another range is refused
++        std::array<uint64_t, 5> max_state_bytes{UINT64_MAX, UINT64_MAX, UINT64_MAX, UINT64_MAX, UINT64_MAX};
++        std::vector<std::array<uint64_t, 5>> max_kv_bytes;   // per K/V layer this stage owns (no draft for a later stage)
++    };
+     uint64_t max_file_bytes = UINT64_MAX;
+     uint64_t max_tokens = UINT64_MAX;       // token and image counts of the live state and of each checkpoint
+     uint64_t max_checkpoints = UINT64_MAX;
+     uint64_t max_kv_layers = UINT64_MAX;
++    uint64_t max_stages = UINT64_MAX;       // the number of later stages (stage_images) a v3 file may hold
+     // the runtime's geometry and layer range: a file with others is refused before its state arrays are read
+     std::optional<std::array<int64_t, 18>> geometry;
+     std::optional<std::pair<int64_t, int64_t>> layer_range;
+@@ -218,6 +236,9 @@
+     // per K/V layer (the QSA layers, then the draft): the most bytes of each part (k, v, k_scale, v_scale, pooled).
+     // A layer past the end of the list is bounded by the payload only.
+     std::vector<std::array<uint64_t, 5>> max_kv_bytes;
++    // per later stage (0-based): its layer range, running-state bounds and per-K/V-layer bounds.  A stage past the
++    // end of the list is bounded by the payload only.
++    std::vector<SessionStageLimits> stage_limits;
+     // the RAM PREFLIGHT: asked once the header and identity match and before any payload allocation, with what the
+     // parse holds at its peak (session_read_peak_bytes); false refuses the file.  Not a reservation.
+     std::function<bool(uint64_t need_bytes, std::string& why)> admit;
+diff -ruN 0.2.10/source/include/strata/core/conversation_snapshot.hpp 0.2.10-sessions/source/include/strata/core/conversation_snapshot.hpp
+--- 0.2.10/source/include/strata/core/conversation_snapshot.hpp	2026-11-02 22:37:27.000000000 +0000
++++ 0.2.10-sessions/source/include/strata/core/conversation_snapshot.hpp	2026-11-05 09:07:20.079671979 +0000
+@@ -55,6 +55,11 @@
+ bool conversation_session_read_limits(SessionReadLimits& limits, const SessionState& session, const ModelGeometry& g,
+                                       const QsaState& draft, uint64_t max_tokens, uint64_t max_checkpoints,
+                                       std::string& error);
++// One stage's read limits from its carve (its layer range, running-state bounds, per-K/V-layer bounds).  A layer
++// split builds SessionReadLimits.stage_limits by calling this per later stage (draft == nullptr for a later stage).
++bool conversation_stage_read_limits(SessionReadLimits::SessionStageLimits& stage_limits, const SessionState& session,
++                                    const ModelGeometry& g, const QsaState* draft, uint64_t max_tokens,
++                                    std::string& error);
+ 
+ struct ConversationStateSizes {
+     size_t gdn = 0, ple = 0, tail = 0, dead = 0, block_pos = 0;
+@@ -139,6 +144,11 @@
+ bool conversation_snapshot_sources(SavedConversation& meta, std::vector<SessionKvSource>& sources,
+                                    const ConversationView& view, const SessionState& session,
+                                    const ModelGeometry& g, const QsaState& draft, std::string& error);
++// The same with `draft == nullptr`: sources for a layer split's later stage (the session's own QSA layers only, no
++// draft ring).  `sources` then holds one source per owned QSA layer.
++bool conversation_snapshot_sources(SavedConversation& meta, std::vector<SessionKvSource>& sources,
++                                   const ConversationView& view, const SessionState& session,
++                                   const ModelGeometry& g, const QsaState* draft, std::string& error);
+ bool conversation_snapshot_validate(const SavedConversation& image, const SessionState& session,
+                                     const ModelGeometry& g, const QsaState& draft, std::string& error);
+ /// #2409: true when a restore (or a copy) on CUDA device `device` from the calling thread creates no copy stream: this
+diff -ruN 0.2.10/source/src/core/conversation_file.cpp 0.2.10-sessions/source/src/core/conversation_file.cpp
+--- 0.2.10/source/src/core/conversation_file.cpp	2026-11-02 22:37:27.000000000 +0000
++++ 0.2.10-sessions/source/src/core/conversation_file.cpp	2026-11-05 09:07:20.079671979 +0000
+@@ -46,6 +46,7 @@
+ constexpr char kMagic[8] = {'S', 'T', 'R', 'S', 'E', 'S', 'S', '\x01'};
+ constexpr char kEnd[8] = {'S', 'T', 'R', 'S', 'E', 'N', 'D', '\x01'};
+ constexpr uint32_t kVersion = 1;
++constexpr uint32_t kVersionStages = 3;   // a file that carries stage_images (a multi-GPU split); v2 is reserved for #2247's state codec
+ constexpr size_t kHeader = 64, kTrailer = 16;
+ 
+ // Progress for a transfer: one report after every block that was handed to (or read from) the OS, whatever its size
+@@ -686,7 +687,9 @@
+     o.u64(c.used);
+ }
+ 
+-void put_payload(Out& o, const SavedConversation& s, const std::vector<SessionKvSource>* sources = nullptr) {
++// One stage block: geometry, layer range, cvec, the live state, the checkpoint chain, and the K/V.  `sources`
++// supplies this stage's K/V as streamed sources; when null the K/V is taken from s.kv (the captured image).
++void put_stage(Out& o, const SavedConversation& s, const std::vector<SessionKvSource>* sources = nullptr) {
+     for (int64_t g : s.geometry) o.i64(g);
+     o.i64(s.layer_lo); o.i64(s.layer_hi); o.u64(s.cvec ? 1 : 0);
+     put_checkpoint(o, s.live);
+@@ -707,6 +710,18 @@
+     }
+ }
+ 
++// The whole payload: stage 0, then - only when a split is present - the count of later stages and each stage block.
++// `kv_stages` (optional) supplies the K/V per stage: kv_stages[0] for stage 0, kv_stages[k+1] for stage_images[k].
++// With no stage_images this is byte-for-byte the format-v1 payload.
++void put_payload(Out& o, const SavedConversation& s,
++                 const std::vector<std::vector<SessionKvSource>>* kv_stages = nullptr) {
++    put_stage(o, s, kv_stages ? &(*kv_stages)[0] : nullptr);
++    if (s.stage_images.empty()) return;
++    o.u64(s.stage_images.size());
++    for (size_t k = 0; k < s.stage_images.size(); ++k)
++        put_stage(o, s.stage_images[k], kv_stages ? &(*kv_stages)[k + 1] : nullptr);
++}
++
+ // ---- parsing: every count is checked against the bytes left and the caller's limits before anything is allocated
+ struct In {
+     FileSource* f;
+@@ -716,6 +731,10 @@
+     const SessionReadLimits& limits;
+     SessionError kind = SessionError::invalid;
+     size_t kv_layer = 0;
++    // active stage's running-state and per-K/V-layer bounds; null means stage 0's (the top-level limits).  A later
++    // stage sets these to its SessionStageLimits before reading its block.
++    const std::array<uint64_t, 5>* state_bytes = nullptr;
++    const std::vector<std::array<uint64_t, 5>>* kv_bytes = nullptr;
+     bool fail(const std::string& m) { if (error.empty()) error = "session file: " + m; return false; }
+     bool raw(void* p, size_t c) {
+         if (c > left) return fail("payload ends early");
+@@ -743,7 +762,8 @@
+     }
+     bool buffer(ConversationBuffer& b, size_t part) {
+         uint64_t n = 0;
+-        const uint64_t limit = kv_layer < limits.max_kv_bytes.size() ? limits.max_kv_bytes[kv_layer][part] : UINT64_MAX;
++        const auto& kvb = kv_bytes ? *kv_bytes : limits.max_kv_bytes;
++        const uint64_t limit = kv_layer < kvb.size() ? kvb[kv_layer][part] : UINT64_MAX;
+         if (!count(n, 1, limit)) return false;
+         b = {};
+         b.resize((size_t) n);
+@@ -757,30 +777,33 @@
+     if (!in.count(n, 16, in.limits.max_tokens)) return false;
+     c.imgs.resize((size_t) n);
+     for (auto& k : c.imgs) if (!in.i64(k.start) || !in.u64(k.hash)) return false;
+-    const auto& m = in.limits.max_state_bytes;   // byte arrays: element and byte counts are the same
++    const auto& m = in.state_bytes ? *in.state_bytes : in.limits.max_state_bytes;   // byte arrays: element and byte counts are the same
+     return in.vec(c.gdn, m[0]) && in.vec(c.ple, m[1]) && in.vec(c.tails, m[2]) && in.vec(c.dead, m[3]) &&
+            in.vec(c.block_pos, m[4]) && in.u64(c.used);
+ }
+ 
+-bool get_payload(In& in, SavedConversation& s) {
++// Reads one stage block.  The caller has set in.state_bytes / in.kv_bytes to this stage's bounds (null = stage 0's
++// top-level limits).  `want_range` (if non-null) is this stage's expected [lo, hi); `kv_layers` bounds its K/V count.
++bool get_stage(In& in, SavedConversation& s, const std::pair<int64_t, int64_t>* want_range, uint64_t kv_layers) {
+     for (auto& g : s.geometry) if (!in.i64(g)) return false;
+     // checked before any state array is read: a file of another geometry allocates nothing
+     if (in.limits.geometry && *in.limits.geometry != s.geometry)
+         return in.fail("saved with another model geometry than this runtime's");
+     uint64_t cvec = 0;
+     if (!in.i64(s.layer_lo) || !in.i64(s.layer_hi) || !in.u64(cvec)) return false;
+-    if (in.limits.layer_range &&
+-        (in.limits.layer_range->first != s.layer_lo || in.limits.layer_range->second != s.layer_hi))
++    if (want_range && (want_range->first != s.layer_lo || want_range->second != s.layer_hi))
+         return in.fail("saved with another layer range than this runtime's");
+     if (cvec > 1) return in.fail("invalid cvec flag");
+     s.cvec = cvec == 1;
+     if (!get_checkpoint(in, s.live)) return false;
+     uint64_t n = 0;
+-    // a checkpoint is at least 8 counts + used = 72 bytes; a K/V layer at least 7 + 5 = 96
++    // a checkpoint carrying the conversation's ids and at least one image is at least 72 bytes (the same bound the
++    // checkpoint count guard below uses); a K/V layer at least 7 + 5 = 96.  An empty checkpoint is 64, but a saved
++    // stage always carries the conversation's ids, so 72 is the bound that holds for every file the writer produces.
+     if (!in.count(n, 72, in.limits.max_checkpoints)) return false;
+     s.checkpoints.resize((size_t) n);
+     for (auto& c : s.checkpoints) if (!get_checkpoint(in, c)) return false;
+-    if (!in.count(n, 96, in.limits.max_kv_layers)) return false;
++    if (!in.count(n, 96, kv_layers)) return false;
+     s.kv.resize((size_t) n);
+     for (auto& k : s.kv) {
+         in.kv_layer = (size_t) (&k - s.kv.data());
+@@ -795,6 +818,27 @@
+     return true;
+ }
+ 
++bool get_payload(In& in, SavedConversation& s, uint32_t version) {
++    // stage 0 is bounded by the top-level limits
++    const auto* want0 = in.limits.layer_range ? &*in.limits.layer_range : nullptr;
++    if (!get_stage(in, s, want0, in.limits.max_kv_layers)) return false;
++    if (version < kVersionStages) return true;   // format v1: no stage section, stage_images stays empty
++    uint64_t n = 0;
++    // a stage block is at least 18*8 geometry + 3*8 range/cvec + a live checkpoint (>=72, as in get_stage: a saved
++    // stage carries the conversation's ids and an image) + 8 empty checkpoint list + 8 empty K/V list = 256 bytes
++    if (!in.count(n, 256, in.limits.max_stages)) return false;
++    s.stage_images.resize((size_t) n);
++    for (size_t k = 0; k < (size_t) n; ++k) {
++        const bool bounded = k < in.limits.stage_limits.size();
++        const SessionReadLimits::SessionStageLimits* sl = bounded ? &in.limits.stage_limits[k] : nullptr;
++        in.state_bytes = sl ? &sl->max_state_bytes : nullptr;
++        in.kv_bytes = sl ? &sl->max_kv_bytes : nullptr;
++        const uint64_t kv_layers = sl ? sl->max_kv_bytes.size() : UINT64_MAX;
++        if (!get_stage(in, s.stage_images[k], sl ? &sl->layer_range : nullptr, kv_layers)) return false;
++    }
++    return true;
++}
++
+ bool has_stage_parts(const SavedConversation& s) {
+     if (!s.live.stage_parts.empty()) return true;
+     for (const auto& c : s.checkpoints) if (!c.stage_parts.empty()) return true;
+@@ -803,10 +847,10 @@
+ 
+ // header v1, little-endian: magic[8] version:u32 header_size:u32 model:u64 config:u64 payload:u64 reserved:u64[2]
+ // header_hash:u64 (session_hash64 of bytes 0..55, seed 0)
+-void header_bytes(uint8_t* h, const SessionFileIdentity& id, uint64_t payload) {
++void header_bytes(uint8_t* h, const SessionFileIdentity& id, uint64_t payload, uint32_t version) {
+     std::memset(h, 0, kHeader);
+     std::memcpy(h, kMagic, 8);
+-    const uint32_t version = kVersion, size = kHeader;
++    const uint32_t size = kHeader;
+     std::memcpy(h + 8, &version, 4);
+     std::memcpy(h + 12, &size, 4);
+     std::memcpy(h + 16, &id.model, 8);
+@@ -1014,6 +1058,27 @@
+         n = sat_add(n, 7 * 8);
+         for (uint64_t b : l.max_kv_bytes[(size_t) i]) n = sat_add(n, sat_add(8, b));
+     }
++    // The stage section (format v3) is bounded only when the caller bounds it: max_stages closed and a complete,
++    // closed SessionStageLimits for each stage.  Without them the bound covers a v1 file only; a v3 file read under
++    // such limits is refused by the size check (fail closed) - the engine supplies stage_limits for a multi-GPU read.
++    if (l.max_stages != open && l.stage_limits.size() >= l.max_stages) {
++        n = sat_add(n, 8);   // the stage count itself
++        for (uint64_t k = 0; k < l.max_stages; ++k) {
++            const auto& sl = l.stage_limits[(size_t) k];
++            for (uint64_t b : sl.max_state_bytes) if (b == open) return l.max_file_bytes;
++            uint64_t scp = sat_add(16, sat_mul(l.max_tokens, 4 + 16));   // same token/image bound as stage 0
++            for (uint64_t b : sl.max_state_bytes) scp = sat_add(scp, sat_add(8, b));
++            scp = sat_add(scp, 8);
++            n = sat_add(n, 18 * 8 + 3 * 8);                              // geometry, layer range, cvec
++            n = sat_add(n, scp);                                         // live
++            n = sat_add(n, sat_add(8, sat_mul(l.max_checkpoints, scp))); // checkpoints
++            n = sat_add(n, 8);                                           // K/V count
++            for (const auto& kvb : sl.max_kv_bytes) {
++                n = sat_add(n, 7 * 8);
++                for (uint64_t b : kvb) n = sat_add(n, sat_add(8, b));
++            }
++        }
++    }
+     return std::min(n, l.max_file_bytes);
+ }
+ 
+@@ -1024,15 +1089,30 @@
+ }
+ 
+ namespace {
+-bool write_impl(const std::string& path, const SavedConversation& image, const std::vector<SessionKvSource>* sources,
++bool write_impl(const std::string& path, const SavedConversation& image,
++                const std::vector<std::vector<SessionKvSource>>* kv_stages,
+                 const SessionFileIdentity& id, size_t& bytes, std::string& error, const SessionWriteOptions& opt,
+                 SessionStatus& st) {
+     st = {};
+     st.error = SessionError::invalid;   // refusals before any disk access
+     if (has_stage_parts(image)) { error = "session file: layer-split state cannot be saved"; return false; }
+-    if (sources && !image.kv.empty()) { error = "session file: K/V given both in the image and as sources"; return false; }
++    // A split image must be given K/V for every stage (stage 0 plus each later stage), never fewer: a shorter list
++    // would silently drop a stage's K/V.  This is the last line of defence against silent truncation.
++    if (kv_stages && kv_stages->size() != image.stage_images.size() + 1) {
++        error = "session file: K/V given for " + std::to_string(kv_stages->size()) + " stage(s) but the image has " +
++                std::to_string(image.stage_images.size() + 1) + " (stage 0 plus " +
++                std::to_string(image.stage_images.size()) + " later stage(s))";
++        return false;
++    }
++    // K/V must come from one place per stage: the image or the sources, never both.
++    if (kv_stages) {
++        if (!image.kv.empty()) { error = "session file: K/V given both in the image and as sources"; return false; }
++        for (const auto& si : image.stage_images)
++            if (!si.kv.empty()) { error = "session file: K/V given both in the image and as sources"; return false; }
++    }
++    const uint32_t version = image.stage_images.empty() ? kVersion : kVersionStages;
+     Out sizing;
+-    put_payload(sizing, image, sources);
++    put_payload(sizing, image, kv_stages);
+     if (sizing.overflow || sizing.n > UINT64_MAX - kHeader - kTrailer ||
+         sizing.n + kHeader + kTrailer > (uint64_t) std::numeric_limits<size_t>::max()) {
+         error = "session file: the state is too large for this build";
+@@ -1069,13 +1149,13 @@
+     f.write_fault = injected(fault, "write");
+     f.flush_fault = injected(fault, "file_flush");
+     uint8_t h[kHeader];
+-    header_bytes(h, id, payload);
++    header_bytes(h, id, payload, version);
+     bool ok = f.write(h, kHeader);
+     SessionHasher hash(0);
+     Out out;
+     out.f = &f;
+     out.hash = &hash;
+-    if (ok) put_payload(out, image, sources);
++    if (ok) put_payload(out, image, kv_stages);
+     ok = ok && out.ok && out.n == payload;
+     if (ok) {
+         const uint64_t ph = hash.digest();
+@@ -1100,13 +1180,14 @@
+     return false;   // Publisher removes this call's temporary file, and only that
+ }
+ 
+-bool write_guarded(const std::string& path, const SavedConversation& image, const std::vector<SessionKvSource>* sources,
++bool write_guarded(const std::string& path, const SavedConversation& image,
++                   const std::vector<std::vector<SessionKvSource>>* kv_stages,
+                    const SessionFileIdentity& id, size_t& bytes, std::string& error, const SessionWriteOptions& opt,
+                    SessionStatus* status) {
+     SessionStatus st;
+     bool ok = false;
+     try {
+-        ok = write_impl(path, image, sources, id, bytes, error, opt, st);
++        ok = write_impl(path, image, kv_stages, id, bytes, error, opt, st);
+     } catch (const std::bad_alloc&) {
+         error = "session file: out of memory while writing " + path;
+         st.error = SessionError::memory;
+@@ -1162,7 +1243,15 @@
+ bool session_file_write(const std::string& path, const SavedConversation& meta, const std::vector<SessionKvSource>& kv,
+                         const SessionFileIdentity& id, size_t& bytes, std::string& error,
+                         const SessionWriteOptions& options, SessionStatus* status) {
+-    return write_guarded(path, meta, &kv, id, bytes, error, options, status);
++    const std::vector<std::vector<SessionKvSource>> kv_stages{kv};   // a single stage: stage 0 only
++    return write_guarded(path, meta, &kv_stages, id, bytes, error, options, status);
++}
++
++bool session_file_write(const std::string& path, const SavedConversation& meta,
++                       const std::vector<std::vector<SessionKvSource>>& kv_stages,
++                       const SessionFileIdentity& id, size_t& bytes, std::string& error,
++                       const SessionWriteOptions& options, SessionStatus* status) {
++    return write_guarded(path, meta, &kv_stages, id, bytes, error, options, status);
+ }
+ 
+ bool session_file_write(const std::string& path, const SavedConversation& image, const SessionFileIdentity& id,
+@@ -1204,7 +1293,10 @@
+     std::memcpy(&r0, h + 40, 8); std::memcpy(&r1, h + 48, 8); std::memcpy(&hh, h + 56, 8);
+     if (std::memcmp(h, kMagic, 8) != 0) { error = "session file: not a Strata session file (magic)"; return false; }
+     if (hh != session_hash64(h, 56, 0)) { error = "session file: header checksum mismatch"; return false; }
+-    if (version != kVersion) { error = "session file: unsupported version " + std::to_string(version); return false; }
++    if (version != kVersion && version != kVersionStages) {
++        // v2 is reserved for #2247's state codec; this build does not implement it.
++        error = "session file: unsupported version " + std::to_string(version); return false;
++    }
+     if (hsize != kHeader || r0 || r1) { error = "session file: invalid header fields"; return false; }
+     if (model != id.model) { error = "session file: saved with another model (model fingerprint differs)"; return false; }
+     if (config != id.config) { error = "session file: saved with another engine configuration (config fingerprint differs)"; return false; }
+@@ -1223,7 +1315,7 @@
+     }
+     SavedConversation parsed;
+     In in{&f, SessionHasher(0), payload, error, limits};
+-    if (!get_payload(in, parsed)) { st.error = in.kind; return false; }
++    if (!get_payload(in, parsed, version)) { st.error = in.kind; return false; }
+     if (in.left) { error = "session file: payload has " + std::to_string(in.left) + " unparsed bytes"; return false; }
+     uint8_t t[kTrailer];
+     if (!f.read(t, kTrailer)) { st.error = f.kind(); error = "session file: trailer read error: " + f.error(); return false; }
+diff -ruN 0.2.10/source/src/core/conversation_file_test.cpp 0.2.10-sessions/source/src/core/conversation_file_test.cpp
+--- 0.2.10/source/src/core/conversation_file_test.cpp	2026-11-02 22:37:27.000000000 +0000
++++ 0.2.10-sessions/source/src/core/conversation_file_test.cpp	2026-11-05 09:07:20.079671979 +0000
+@@ -148,6 +148,43 @@
+     }
+     return !ok && !error.empty();
+ }
++
++// same() plus the later stage images, compared stage by stage
++bool same_full(const SavedConversation& a, const SavedConversation& b) {
++    if (!same(a, b)) return false;
++    if (a.stage_images.size() != b.stage_images.size()) return false;
++    for (size_t i = 0; i < a.stage_images.size(); ++i)
++        if (!same(a.stage_images[i], b.stage_images[i])) return false;
++    return true;
++}
++
++uint32_t file_version(const std::vector<char>& d) {
++    uint32_t v = 0; std::memcpy(&v, d.data() + 8, 4); return v;
++}
++
++// a two-stage image: stage 0 is sample() (layers [0,48)), one later stage owns [48,96) with its own checkpoints/K/V
++SavedConversation two_stage() {
++    SavedConversation s = sample();
++    SavedConversation st;
++    for (size_t i = 0; i < st.geometry.size(); ++i) st.geometry[i] = int64_t(100 + i);   // same model geometry
++    st.layer_lo = 48; st.layer_hi = 96;
++    st.cvec = false;
++    st.live = checkpoint(20, 7);
++    st.checkpoints.push_back(checkpoint(5, 8));
++    for (int layer = 0; layer < 2; ++layer) {
++        ConversationKv kv;
++        kv.format = 2 + layer; kv.cells = 512; kv.heads = 2; kv.head_dim = 256;
++        kv.page_size = 64; kv.pooled_rows = 0; kv.idx_dim = 128;
++        kv.k = pattern(1024, uint8_t(50 + layer));
++        kv.v = pattern(1024 + layer, uint8_t(60 + layer));
++        kv.k_scale = pattern(256, uint8_t(70 + layer));
++        kv.v_scale = pattern(256, uint8_t(80 + layer));
++        kv.pooled = pattern(0, 0);
++        st.kv.push_back(std::move(kv));
++    }
++    s.stage_images.push_back(std::move(st));
++    return s;
++}
+ } // namespace
+ 
+ int main() {
+@@ -241,13 +278,22 @@
+     // other model or other configuration
+     check(rejects(good, {id.model ^ 1, id.config}, "model"), "different model fingerprint rejected");
+     check(rejects(good, {id.model, id.config ^ 1}, "config"), "different configuration rejected");
+-    // wrong version: header field patched and header hash recomputed so only the version differs
++    // wrong version: header field patched and header hash recomputed so only the version differs.
++    // v1 and v3 are accepted; v2 (reserved for #2247's state codec) and v4+ are rejected.
+     {
+         auto d = image;
+-        uint32_t v = 2; std::memcpy(d.data() + 8, &v, 4);
++        uint32_t v = 4; std::memcpy(d.data() + 8, &v, 4);
+         const uint64_t h = session_hash64(d.data(), 56, 0); std::memcpy(d.data() + 56, &h, 8);
+         const fs::path p = dir / "ver.bin"; spit(p, d);
+-        check(rejects(p, id, "version"), "unknown version rejected");
++        check(rejects(p, id, "version"), "unknown version (4) rejected");
++    }
++    // v2 is reserved for #2247's state codec; this build rejects it explicitly (not a silent v1 misparse).
++    {
++        auto d = image;
++        uint32_t v = 2; std::memcpy(d.data() + 8, &v, 4);
++        const uint64_t h = session_hash64(d.data(), 56, 0); std::memcpy(d.data() + 56, &h, 8);
++        const fs::path p = dir / "ver2.bin"; spit(p, d);
++        check(rejects(p, id, "version"), "version 2 (state codec) rejected by this build");
+     }
+     // a corrupted element count with a recomputed payload hash must fail on bounds, not allocate
+     {
+@@ -769,6 +815,123 @@
+     }
+ #endif
+ 
++    // ---- multi-GPU stage format (v3) ----
++    // a two-stage image writes as v3 and reads back identical, including the later stage
++    {
++        SavedConversation two = two_stage();
++        const fs::path p = dir / "twostage.bin";
++        check(session_file_write(p.string(), two, id, written, error), "two-stage image written");
++        const auto d = slurp(p);
++        check(file_version(d) == 3, "a split image is written as version 3 (never silently truncated to v1)");
++        SavedConversation back; size_t n = 0; std::string err;
++        check(session_file_read(p.string(), id, back, n, err) && back.stage_images.size() == 1 &&
++              same_full(two, back), "two-stage round trip is identical");
++    }
++    // a v3 file truncated inside its stage section is rejected.  A plain truncation is caught by the file-size
++    // check (the header still declares the full payload); a truncation whose header is made self-consistent with
++    // the shorter file reaches the parser, which stops at the truncated stage section ("payload ends early").
++    {
++        const auto d = slurp(dir / "twostage.bin");
++        const size_t V = d.size();
++        // stage 0's payload is byte-identical to the v1 file's, so the stage section begins where the v1 trailer is
++        const size_t stage0_end = image.size() - 16;
++        check(stage0_end + 100 < V - 16, "the v3 file has a stage section to truncate");
++        // plain truncations inside the stage section: rejected (the declared payload no longer matches the file)
++        for (size_t cut : {stage0_end + 1, stage0_end + 8, stage0_end + 100, V - 1}) {
++            const fs::path p = dir / "cutstage.bin";
++            spit(p, std::vector<char>(d.begin(), d.begin() + (std::ptrdiff_t) cut));
++            check(rejects(p, id), "v3 file truncated inside its stage section rejected");
++        }
++        // a truncation the size check accepts: rewrite the payload length and header hash so the declared payload
++        // covers stage 0 only; the parser finishes stage 0 and stops reading the stage-count field, i.e. the
++        // truncated-stage-section path, not the file-size guard.
++        {
++            const size_t cut = stage0_end + 16;   // declared payload = stage 0's payload exactly
++            auto t = std::vector<char>(d.begin(), d.begin() + (std::ptrdiff_t) cut);
++            const uint64_t payload = (uint64_t) cut - 64 - 16;   // kHeader + kTrailer, so the size check passes
++            std::memcpy(t.data() + 32, &payload, 8);
++            const uint64_t hh = session_hash64(t.data(), 56, 0);
++            std::memcpy(t.data() + 56, &hh, 8);
++            const fs::path p = dir / "cutstageparse.bin"; spit(p, t);
++            SavedConversation back; size_t n = 0; std::string err;
++            const bool ok = session_file_read(p.string(), id, back, n, err);
++            check(!ok && !err.empty(), "v3 file truncated at its stage section is rejected");
++            check(err.find("does not match the header") == std::string::npos,
++                  "the truncated stage section reaches the parser, not the file-size guard");
++            check(err.find("payload ends early") != std::string::npos,
++                  "the truncated stage section reports 'payload ends early'");
++        }
++    }
++    // a v1 file (no stage section) still reads, with stage_images empty and the version byte still 1
++    {
++        SavedConversation back; size_t n = 0; std::string err;
++        check(session_file_read(good.string(), id, back, n, err) && back.stage_images.empty() && same(back, original),
++              "a v1 file reads with no stage images");
++        check(file_version(slurp(good)) == 1, "the single-GPU file is still version 1");
++    }
++    // reading a file with 2 later stages when the runtime allows only 1 is refused before allocation
++    {
++        SavedConversation three = two_stage();
++        three.stage_images.push_back(three.stage_images[0]);   // a second later stage -> n_stages = 2
++        const fs::path p = dir / "threestage.bin";
++        check(session_file_write(p.string(), three, id, written, error), "three-stage image written");
++        check(file_version(slurp(p)) == 3, "a multi-stage image is version 3");
++        SessionReadLimits l; l.max_stages = 1;
++        check(rejects(p, id, "count", l), "stage count over the runtime limit refused");
++    }
++    // a stage block whose layer range differs from the runtime's is refused before its state is read
++    {
++        SessionReadLimits l; l.max_stages = 2;
++        SessionReadLimits::SessionStageLimits sl;
++        sl.layer_range = std::make_pair(int64_t(0), int64_t(24));   // the file's later stage is [48,96)
++        l.stage_limits.push_back(sl);
++        check(rejects(dir / "twostage.bin", id, "layer", l), "a foreign stage layer range refused");
++    }
++    // a split image must be given K/V for every stage: a wrong-sized kv_stages list is refused (no silent truncation).
++    // The image's own K/V is cleared so the refusal can only come from the stage-count consistency check.
++    {
++        SavedConversation meta = two_stage();   // stage 0 + 1 later stage -> needs 2 K/V stage lists
++        meta.kv.clear();
++        meta.stage_images[0].kv.clear();
++        const std::vector<std::vector<SessionKvSource>> bad(1);   // only stage 0 given, the later stage's K/V would be dropped
++        const fs::path p = dir / "badstages.bin";
++        std::string err;
++        check(!session_file_write(p.string(), meta, bad, id, written, err), "split image with the wrong K/V stage count refused");
++        check(err.find("stage(s) but the image has") != std::string::npos, "the refusal names both stage counts");
++        check(!fs::exists(p) && no_temp(dir), "refused split write leaves no file");
++    }
++    // fully-specified per-stage limits bound a v3 file, the read succeeds, and a tightened stage bound is refused
++    {
++        SavedConversation two = two_stage();
++        const fs::path p = dir / "bounded.bin";
++        check(session_file_write(p.string(), two, id, written, error), "bounded split written");
++        const auto d = slurp(p);
++        SessionReadLimits l;
++        l.max_tokens = 1000; l.max_checkpoints = 2; l.max_kv_layers = 3;
++        l.geometry = two.geometry;
++        l.layer_range = std::make_pair(two.layer_lo, two.layer_hi);
++        l.max_state_bytes = {two.live.gdn.size(), two.live.ple.size(), two.live.tails.size(), two.live.dead.size(), two.live.block_pos.size()};
++        for (const auto& k : two.kv)
++            l.max_kv_bytes.push_back({k.k.size(), k.v.size(), k.k_scale.size(), k.v_scale.size(), k.pooled.size()});
++        l.max_stages = 1;
++        const SavedConversation& s0 = two.stage_images[0];
++        SessionReadLimits::SessionStageLimits sl;
++        sl.layer_range = std::make_pair(s0.layer_lo, s0.layer_hi);
++        sl.max_state_bytes = {s0.live.gdn.size(), s0.live.ple.size(), s0.live.tails.size(), s0.live.dead.size(), s0.live.block_pos.size()};
++        for (const auto& k : s0.kv)
++            sl.max_kv_bytes.push_back({k.k.size(), k.v.size(), k.k_scale.size(), k.v_scale.size(), k.pooled.size()});
++        l.stage_limits.push_back(sl);
++        check(session_read_max_file_bytes(l) >= d.size() && session_read_max_file_bytes(l) < UINT64_MAX,
++              "limits: the per-stage limits bound the v3 file size");
++        SavedConversation back; size_t n = 0; std::string err;
++        check(session_file_read(p.string(), id, back, n, err, l) && same_full(two, back),
++              "limits: a v3 file within the full per-stage limits reads");
++        auto l2 = l; l2.stage_limits[0].max_state_bytes[0] = s0.live.gdn.size() - 1;
++        check(rejects(p, id, "limit", l2), "limits: a later stage's GDN state over its bound refused");
++        l2 = l; l2.stage_limits[0].max_kv_bytes[0][0] = s0.kv[0].k.size() - 1;
++        check(rejects(p, id, "limit", l2), "limits: a later stage's K buffer over its bound refused");
++    }
++
+     fs::remove_all(dir);
+     std::printf("conversation_file_test: %d checks passed\n", checks);
+     return 0;
+diff -ruN 0.2.10/source/src/core/conversation_snapshot_test.cpp 0.2.10-sessions/source/src/core/conversation_snapshot_test.cpp
+--- 0.2.10/source/src/core/conversation_snapshot_test.cpp	2026-11-02 22:37:27.000000000 +0000
++++ 0.2.10-sessions/source/src/core/conversation_snapshot_test.cpp	2026-11-05 09:07:20.079671979 +0000
+@@ -324,6 +324,25 @@
+               "a layer split's image is refused by the whole-session form");
+         ConversationKvReuse wrong{a.kv,65,65,{}};
+         check(!conversation_snapshot_capture_bytes(wrong,view,ss,g,nullptr,peak,err),"a draft image's K/V is not a stage's reuse");
++        // the QsaState* overload of conversation_snapshot_sources: a later stage's sources, no draft ring
++        SavedConversation meta_s; std::vector<SessionKvSource> srcs_stage, srcs_full;
++        check(conversation_snapshot_sources(meta_s, srcs_stage, view, ss, g, nullptr, err),
++              "stage sources captured with a null draft");
++        check(srcs_stage.size() == stage.kv.size(), "a later stage's sources are its own layers only, no draft");
++        check(conversation_snapshot_sources(meta_s, srcs_full, view, ss, g, &draft.state, err),
++              "whole-session sources captured with a draft");
++        check(srcs_full.size() == srcs_stage.size() + 1, "the whole-session form adds the draft source");
++        // the per-stage limits helper reproduces the whole-session limits for stage 0, and drops the draft for a later stage
++        SessionReadLimits whole;
++        check(conversation_session_read_limits(whole, ss, g, draft.state, 100000, 8, err), "whole-session read limits");
++        SessionReadLimits::SessionStageLimits sl_full, sl_stage;
++        check(conversation_stage_read_limits(sl_full, ss, g, &draft.state, 100000, err), "stage 0 limits with a draft");
++        check(sl_full.layer_range == whole.layer_range && sl_full.max_state_bytes == whole.max_state_bytes &&
++              sl_full.max_kv_bytes == whole.max_kv_bytes, "the per-stage helper matches the whole-session limits");
++        check(conversation_stage_read_limits(sl_stage, ss, g, nullptr, 100000, err), "later-stage limits with a null draft");
++        const std::vector<std::array<uint64_t, 5>> drop_draft(whole.max_kv_bytes.begin(), whole.max_kv_bytes.end() - 1);
++        check(sl_stage.layer_range == whole.layer_range && sl_stage.max_state_bytes == whole.max_state_bytes &&
++              sl_stage.max_kv_bytes == drop_draft, "a later stage's limits drop the draft layer");
+     }
+     check(conversation_snapshot_restore(a,ss,g,draft.state,err)==ConversationRestore::restored,"restore A after stage images");
+     check(conversation_checkpoint_restore(a.checkpoints[0],ss,g,err),"restore early running checkpoint");
+diff -ruN 0.2.10/source/src/core/conversation_state.cpp 0.2.10-sessions/source/src/core/conversation_state.cpp
+--- 0.2.10/source/src/core/conversation_state.cpp	2026-11-02 22:37:27.000000000 +0000
++++ 0.2.10-sessions/source/src/core/conversation_state.cpp	2026-11-05 09:07:20.079671979 +0000
+@@ -50,6 +50,12 @@
+ size_t owned_qsa(const SessionState& ss) { return (size_t) std::max<int64_t>(ss.qsa_alloc, 0); }
+ const QsaState& owned(const SessionState& ss, size_t j) { return ss.qsa_states[(size_t) ss.qsa_ord0 + j]; }
+ 
++// The token bound a session's read limits can ever use: at most the caller's max_tokens, never more than the
++// session's own cells.  Shared by the per-stage and whole-session read limits so the clamp is defined once.
++uint64_t read_limit_tokens(uint64_t max_tokens, const SessionState& ss) {
++    return std::min<uint64_t>(max_tokens, (uint64_t) ss.max_cells);
++}
++
+ bool image_keys(const std::vector<ConversationImageKey>& images, size_t tokens) {
+     int64_t previous = -1;
+     for (const auto& image : images) {
+@@ -621,7 +627,7 @@
+ 
+ bool conversation_snapshot_sources(SavedConversation& meta, std::vector<SessionKvSource>& sources,
+                                    const ConversationView& view, const SessionState& ss, const ModelGeometry& g,
+-                                   const QsaState& draft, std::string& error) {
++                                   const QsaState* draft, std::string& error) {
+     if (!view_validate(view, ss, g, error) || !sync(error)) return false;
+     SavedConversation captured;
+     captured.geometry = geometry_key(g);
+@@ -633,42 +639,66 @@
+     conversation_checkpoint_join(captured.live.gdn.data());
+     const int64_t upto = (int64_t) view.ids.size();
+     const size_t layers = owned_qsa(ss);
+-    std::vector<SessionKvSource> out(layers + 1);
++    std::vector<SessionKvSource> out(layers + (draft ? 1 : 0));
+     for (size_t j = 0; j < layers; ++j)
+         if (!conversation_kv_source(out[j], owned(ss, j), g, upto, true, error)) return false;
+-    if (!conversation_kv_source(out.back(), draft, g, upto, false, error)) return false;
++    // a later stage owns no draft: with draft == nullptr the sources are the session's own layers only
++    if (draft && !conversation_kv_source(out.back(), *draft, g, upto, false, error)) return false;
+     meta = std::move(captured);
+     sources = std::move(out);
+     return true;
+ }
+ 
+-bool conversation_session_read_limits(SessionReadLimits& limits, const SessionState& ss, const ModelGeometry& g,
+-                                      const QsaState& draft, uint64_t max_tokens, uint64_t max_checkpoints,
+-                                      std::string& error) {
++bool conversation_snapshot_sources(SavedConversation& meta, std::vector<SessionKvSource>& sources,
++                                   const ConversationView& view, const SessionState& ss, const ModelGeometry& g,
++                                   const QsaState& draft, std::string& error) {
++    return conversation_snapshot_sources(meta, sources, view, ss, g, &draft, error);
++}
++
++// One stage's read limits from its carve: its layer range, running-state bounds and per-K/V-layer bounds.  It does
++// not touch the top-level max_tokens / max_checkpoints / geometry / max_kv_layers; the caller sets those.  A later
++// stage passes draft == nullptr (it owns no draft layer).
++bool conversation_stage_read_limits(SessionReadLimits::SessionStageLimits& sl, const SessionState& ss,
++                                    const ModelGeometry& g, const QsaState* draft, uint64_t max_tokens,
++                                    std::string& error) {
+     ConversationStateSizes z;
+     if (!conversation_session_sizes(g, ss, z, error)) return false;
+     if (ss.max_cells < 0) return fail(error, "invalid session cells");
+-    const uint64_t tokens = std::min<uint64_t>(max_tokens, (uint64_t) ss.max_cells);
++    const uint64_t tokens = read_limit_tokens(max_tokens, ss);
+     const size_t layers = owned_qsa(ss);
+     if ((owned_qsa(ss) && !ss.qsa_states)) return fail(error, "invalid session running-state targets");
+     size_t tails = 0, dead = 0, block_pos = 0;
+     if (!product(tails, {layers, z.tail}) || !product(dead, {layers, z.dead}) ||
+         !product(block_pos, {layers, z.block_pos})) return fail(error, "indexer byte count overflow");
+-    SessionReadLimits l = limits;   // keeps the caller's admit / progress / max_file_bytes
+-    l.max_tokens = tokens;
+-    l.max_checkpoints = max_checkpoints;
+-    l.max_kv_layers = layers + 1;
+-    l.geometry = geometry_key(g);
+-    l.layer_range = std::make_pair(ss.layer_lo, ss.layer_hi);
+-    l.max_state_bytes = {z.gdn, ss.ple_hist ? z.ple : 0, tails, dead, block_pos};
+-    l.max_kv_bytes.assign(layers + 1, {});
++    sl.layer_range = std::make_pair(ss.layer_lo, ss.layer_hi);
++    sl.max_state_bytes = {z.gdn, ss.ple_hist ? z.ple : 0, tails, dead, block_pos};
++    const size_t kv_layers = layers + (draft ? 1 : 0);
++    sl.max_kv_bytes.assign(kv_layers, {});
+     for (size_t j = 0; j < layers; ++j) {
+         const auto& st = owned(ss, j);
+         const int64_t upto = (int64_t) std::min<uint64_t>(tokens, (uint64_t) std::max<int64_t>(st.max_cells, 0));
+-        if (!conversation_kv_part_sizes(st, g, upto, true, l.max_kv_bytes[j], error)) return false;
++        if (!conversation_kv_part_sizes(st, g, upto, true, sl.max_kv_bytes[j], error)) return false;
++    }
++    if (draft) {
++        const int64_t dupto = (int64_t) std::min<uint64_t>(tokens, (uint64_t) std::max<int64_t>(draft->max_cells, 0));
++        if (!conversation_kv_part_sizes(*draft, g, dupto, false, sl.max_kv_bytes.back(), error)) return false;
+     }
+-    const int64_t dupto = (int64_t) std::min<uint64_t>(tokens, (uint64_t) std::max<int64_t>(draft.max_cells, 0));
+-    if (!conversation_kv_part_sizes(draft, g, dupto, false, l.max_kv_bytes.back(), error)) return false;
++    return true;
++}
++
++bool conversation_session_read_limits(SessionReadLimits& limits, const SessionState& ss, const ModelGeometry& g,
++                                      const QsaState& draft, uint64_t max_tokens, uint64_t max_checkpoints,
++                                      std::string& error) {
++    SessionReadLimits l = limits;   // keeps the caller's admit / progress / max_file_bytes
++    l.max_checkpoints = max_checkpoints;
++    l.geometry = geometry_key(g);
++    SessionReadLimits::SessionStageLimits sl;
++    if (!conversation_stage_read_limits(sl, ss, g, &draft, max_tokens, error)) return false;
++    l.max_tokens = read_limit_tokens(max_tokens, ss);
++    l.max_kv_layers = sl.max_kv_bytes.size();   // the QSA layers, then the draft
++    l.layer_range = sl.layer_range;
++    l.max_state_bytes = sl.max_state_bytes;
++    l.max_kv_bytes = std::move(sl.max_kv_bytes);
+     limits = std::move(l);
+     return true;
+ }
+diff -ruN 0.2.10/source/src/program/generate.cpp 0.2.10-sessions/source/src/program/generate.cpp
+--- 0.2.10/source/src/program/generate.cpp	2026-11-02 22:37:27.000000000 +0000
++++ 0.2.10-sessions/source/src/program/generate.cpp	2026-11-05 09:20:03.206862491 +0000
+@@ -2302,6 +2302,16 @@
+     bool stop_ = false;
+ };
+ 
++// Which stage's image carries the draft head's K/V: the LAST stage when the drafter is loaded there (!mtp_first),
++// none when there is no draft (--no-mtp); otherwise no later stage (it stays on stage 0).  Shared by the parking
++// path and the session save/restore path so draft placement is edited in one place within this backend (the SYCL
++// port keeps its own variant).  `draft0` (the stage-0 special case, kept at each call site) is NOT this: with no
++// split the single image always carries the draft.
++const strata::core::QsaState* draft_stage_kv(size_t k, size_t n_st, bool mtp_first, bool use_mtp,
++                                             const strata::core::QsaState& mtp_kv) {
++    return use_mtp && !mtp_first && k + 1 == n_st ? &mtp_kv : nullptr;
++}
++
+ // --control-vector-scaled: llama.cpp's `common_control_vector_load` (every file's `direction.<l>` times its scale,
+ // summed; layer 0 has none) and `llama_adapter_cvec::apply` with the projection-mode patch (project: the unit
+ // direction and its norm as the scale), into the tables `cvec_upload` takes.  `summary` is what INFO reports;
+@@ -14886,7 +14896,6 @@
+                 strata::core::conversation_checkpoint_join(nullptr);
+                 strata::core::conversation_park_join();   // (STRATA_PARK_ASYNC: the last park's K/V)
+                 if (path.empty()) { refuse("missing path"); continue; }
+-                if (!stages.empty() || multi_gpu) { refuse("session files do not support --layer-split"); continue; }
+                 if (o.peer_device >= 1) { refuse("session files do not support --peer-device"); continue; }
+                 if (o.batch > 0) { refuse("session files do not support --batch (parallel requests)"); continue; }
+                 if (o.prompt_cache <= 0) { refuse("session files need --prompt-cache > 0"); continue; }
+@@ -14907,6 +14916,17 @@
+                     refuse(std::string("session identity: ") + e.what(), strata::core::SessionError::io);
+                     continue;
+                 }
++                // A layer split saves one image per stage; the draft layer's K/V is written once, with the stage that
++                // owns the draft head.  For a split the routing matches park_current_body (:8248-8249): with !mtp_first
++                // the draft goes to the LAST stage and stage 0 holds none; with mtp_first it stays on stage 0.  With no
++                // split (n_st == 0) the single image always carries the draft, exactly as the single-GPU path did.
++                const size_t n_st = stages.size();
++                // (0.2.10 port) the same routing as park_current_body: no draft K/V at all without --mtp (DFlash2 alone keeps
++                // no K/V ring of its own here; it rebuilds its context from the request), else stage 0 unless a split put the
++                // drafter on the last stage.  The PR passed the unused MTP state on one card, which a DFlash2 start refuses
++                // ("invalid K/V extent").
++                const strata::core::QsaState* draft0 = (n_st > 0 && !mtp_first) || !use_mtp ? nullptr : &mtp.kv_state();
++                auto draft_of = [&](size_t k) -> const strata::core::QsaState* { return draft_stage_kv(k, n_st, mtp_first, use_mtp, mtp.kv_state()); };
+                 if (save) {
+                     if (!live_ok || live.empty()) { refuse("no complete session to save"); continue; }
+                     size_t bytes = 0, kept = 0;
+@@ -14920,18 +14940,30 @@
+                         // the authoritative pools straight into the file, without a full host capture.
+                         strata::core::SessionSaveLive sl;
+                         {
+-                            strata::core::ConversationStateSizes z;
+-                            std::string why;
+-                            uint64_t state = UINT64_MAX;   // unknown sizes: the preflight refuses rather than guesses
+-                            if (strata::core::conversation_session_sizes(g, ss, z, why)) {
+-                                const uint64_t q = (uint64_t) std::max<int64_t>(ss.qsa_alloc, 0);
++                            // Sum the live running state over stage 0 (ss) and every later stage: the capture copies
++                            // each stage's state, so the preflight must cover all of them.  An unknown or overflowing
++                            // carve makes the whole estimate unknown (UINT64_MAX): the preflight refuses rather than
++                            // guesses.  K/V layers: every stage's owned QSA layers, plus the one draft ring (written
++                            // once, by whichever stage owns it).
++                            uint64_t state = 0, kv_layers = 0;
++                            bool known = true;
++                            auto add_carve = [&](const strata::core::SessionState& s) {
++                                strata::core::ConversationStateSizes z;
++                                std::string why;
++                                if (!strata::core::conversation_session_sizes(g, s, z, why)) { known = false; return; }
++                                const uint64_t q = (uint64_t) std::max<int64_t>(s.qsa_alloc, 0);
+                                 const uint64_t per = (uint64_t) z.tail + z.dead + z.block_pos;
+-                                if (q == 0 || per <= (UINT64_MAX - z.gdn - z.ple) / q) state = z.gdn + z.ple + q * per;
+-                            }
+-                            sl.state_bytes = state;
++                                if (q != 0 && per > (UINT64_MAX - z.gdn - z.ple) / q) { known = false; return; }
++                                const uint64_t carve = z.gdn + z.ple + q * per;
++                                if (carve > UINT64_MAX - state) known = false; else state += carve;
++                                kv_layers += q;
++                            };
++                            add_carve(ss);
++                            for (const auto& st : stages) add_carve(st->ss);
++                            sl.state_bytes = known ? state : UINT64_MAX;
+                             sl.tokens = live.size();
+                             sl.images = live_imgs.size();
+-                            sl.kv_layers = (uint64_t) std::max<int64_t>(ss.qsa_alloc, 0) + 1;
++                            sl.kv_layers = kv_layers + 1;   // the draft ring, written once
+                         }
+                         const uint64_t floor = (uint64_t) o.conversation_cache_min_free_mib << 20;
+                         if (o.session_save_reclaim) {
+@@ -14964,23 +14996,51 @@
+                             continue;
+                         }
+                         kept = disk_checks.size();
+-                        const strata::core::ConversationView view{live, live_imgs, disk_checks, cvec_cached};
++                        // Split the already-copied deepest checkpoint into per-stage parts for the per-stage images.
++                        // `checks` is never moved here - only the throwaway copy is split - so a failed save leaves the
++                        // live chain whole without a merge-back guard.  With no split, stage 0 uses the whole
++                        // checkpoint directly (the single-GPU path, byte-for-byte unchanged).
++                        strata::core::ConversationCheckpointSplit cs;
++                        if (n_st > 0) {
++                            cs = strata::core::conversation_checkpoints_split(std::move(disk_checks), n_st);
++                            if (!cs.rest.empty()) {
++                                refuse("session save: a checkpoint is incomplete for this layer split", strata::core::SessionError::io);
++                                continue;
++                            }
++                        }
++                        const strata::core::ConversationView view0{live, live_imgs,
++                                                                   n_st > 0 ? cs.stage0 : disk_checks, cvec_cached};
+                         strata::core::SavedConversation meta;
+-                        std::vector<strata::core::SessionKvSource> sources;
++                        std::vector<std::vector<strata::core::SessionKvSource>> kv_stages;
++                        std::vector<strata::core::SessionKvSource> sources0;
+                         // the live running state comes off the device in one synchronous copy
+                         blocking("capture", sl.state_bytes == UINT64_MAX ? 0 : sl.state_bytes);
+-                        if (!strata::core::conversation_snapshot_sources(meta, sources, view, ss, g, mtp.kv_state(),
+-                                                                         err)) {
++                        if (!strata::core::conversation_snapshot_sources(meta, sources0, view0, ss, g, draft0, err)) {
+                             refuse(err, strata::core::SessionError::io);
+                             continue;
+                         }
++                        kv_stages.push_back(std::move(sources0));
+                         capture_ms = ms();
++                        bool stage_err = false;
++                        for (size_t k = 0; k < n_st; ++k) {   // the later stages (the last one with the draft layer's K/V)
++                            auto& stg = stages[k];
++                            const strata::core::OnDevice on(stg->dev);
++                            if (cudaDeviceSynchronize() != cudaSuccess) { err = "stage capture: device sync failed"; stage_err = true; break; }
++                            const strata::core::ConversationView view_k{live, live_imgs, cs.parts[k], cvec_cached};
++                            strata::core::SavedConversation part;
++                            std::vector<strata::core::SessionKvSource> sources_k;
++                            if (!strata::core::conversation_snapshot_sources(part, sources_k, view_k, stg->ss, g,
++                                                                            draft_of(k), err)) { stage_err = true; break; }
++                            meta.stage_images.push_back(std::move(part));
++                            kv_stages.push_back(std::move(sources_k));
++                        }
++                        if (stage_err) { refuse(err, strata::core::SessionError::io); continue; }
+                         strata::core::SessionWriteOptions wo;
+                         wo.min_free_bytes = (uint64_t) o.session_min_free_mib << 20;
+                         wo.progress = moving;
+                         wo.phase = blocking;
+                         strata::core::SessionStatus st;
+-                        if (!strata::core::session_file_write(path, meta, sources, id, bytes, err, wo, &st)) {
++                        if (!strata::core::session_file_write(path, meta, kv_stages, id, bytes, err, wo, &st)) {
+                             refuse(err, st.error, st.published);
+                             continue;
+                         }
+@@ -15020,6 +15080,22 @@
+                             refuse(err, strata::core::SessionError::io);
+                             continue;
+                         }
++                        // A layer split's later stages: bound each stage block by its own carve (its layer range,
++                        // running-state and K/V sizes).  The draft layer belongs only to the stage that owns it.
++                        // max_stages caps the stage count so a file from a different split is refused before parsing.
++                        limits.max_stages = n_st;
++                        limits.stage_limits.clear();
++                        bool stage_limit_bad = false;
++                        for (size_t k = 0; k < n_st; ++k) {
++                            strata::core::SessionReadLimits::SessionStageLimits sl;
++                            if (!strata::core::conversation_stage_read_limits(sl, stages[k]->ss, g, draft_of(k),
++                                                                             (uint64_t) o.max_context, err)) {
++                                stage_limit_bad = true;
++                                break;
++                            }
++                            limits.stage_limits.push_back(std::move(sl));
++                        }
++                        if (stage_limit_bad) { refuse(err, strata::core::SessionError::io); continue; }
+                         strata::core::SessionStatus st;
+                         if (!strata::core::session_file_read(path, id, image, bytes, err, limits, &st)) {
+                             refuse(err, st.error);
+@@ -15030,9 +15106,23 @@
+                         continue;
+                     }
+                     const double read_ms = ms();
+-                    // the whole image against this engine, still without any device write
++                    // Validate the whole image against this engine before any device write, stage by stage (mirrors the
++                    // parked restore): a stage-count mismatch or a foreign/invalid stage is refused here, so a bad file
++                    // never reaches the device.  Stage 0 uses the pointer overload (the whole-session form rejects an
++                    // image that carries stage images).
+                     blocking("validate", bytes);
+-                    if (!strata::core::conversation_snapshot_validate(image, ss, g, mtp.kv_state(), err)) {
++                    if (image.stage_images.size() != n_st) {
++                        refuse("session file: stage count does not match this engine's layer split");
++                        continue;
++                    }
++                    bool stage_bad = false;
++                    for (size_t k = 0; k < n_st; ++k) {
++                        const strata::core::OnDevice on(stages[k]->dev);
++                        if (!strata::core::conversation_snapshot_validate(image.stage_images[k], stages[k]->ss, g,
++                                                                         draft_of(k), err)) { stage_bad = true; break; }
++                    }
++                    if (stage_bad) { refuse(err); continue; }
++                    if (!strata::core::conversation_snapshot_validate(image, ss, g, draft0, err)) {
+                         refuse(err);
+                         continue;
+                     }
+@@ -15043,9 +15133,12 @@
+                     }
+                     conversations.take_reuse();   // retained K/V described the outgoing session
+                     live_ok = false;
+-                    // host -> device in synchronous copies of the whole state: one bounded allowance
++                    // host -> device in synchronous copies of the whole state: one bounded allowance.  Stage 0 first,
++                    // then each later stage under its own device (mirrors the parked restore).  A transfer failure in
++                    // any stage is fatal: a half-restored split is the same class of failure as a half-restored single
++                    // session, and the server starts the engine again.
+                     blocking("transfer", bytes);
+-                    if (strata::core::conversation_snapshot_restore(image, ss, g, mtp.kv_state(), err) !=
++                    if (strata::core::conversation_snapshot_restore(image, ss, g, draft0, err) !=
+                         strata::core::ConversationRestore::restored) {
+                         // validated above: a failure here is a transfer failure, after device writes began - never
+                         // decode from a partial state; the server starts the engine again
+@@ -15056,9 +15149,41 @@
+                         std::fflush(stdout);
+                         return 1;
+                     }
++                    for (size_t k = 0; k < n_st; ++k) {
++                        const strata::core::OnDevice on(stages[k]->dev);
++                        if (strata::core::conversation_snapshot_restore(image.stage_images[k], stages[k]->ss, g,
++                                draft_of(k), err) != strata::core::ConversationRestore::restored) {
++                            std::fprintf(stderr, "strata serve: session restore %s: stage CUDA%d transfer failed: %s\n",
++                                         path.c_str(), stages[k]->dev, err.c_str());
++                            std::printf("FATAL restoring the session file failed after the device state was changed "
++                                        "(stage CUDA%d): %s\n", stages[k]->dev, err.c_str());
++                            std::fflush(stdout);
++                            return 1;
++                        }
++                        if (cudaDeviceSynchronize() != cudaSuccess) {
++                            std::printf("FATAL restoring the session file: stage CUDA%d sync failed\n", stages[k]->dev);
++                            std::fflush(stdout);
++                            return 1;
++                        }
++                    }
+                     live = std::move(image.live.ids);
+                     live_imgs = std::move(image.live.imgs);
+-                    checks = std::move(image.checkpoints);
++                    // Re-assemble the checkpoint chain from the per-stage images (the split's inverse).  A restored
++                    // image carries no `complete` flags, so merge treats every position as whole (conversation_cache).
++                    if (n_st == 0) {
++                        checks = std::move(image.checkpoints);
++                    } else {
++                        strata::core::ConversationCheckpointSplit cs;
++                        cs.stage0 = std::move(image.checkpoints);
++                        for (auto& si : image.stage_images) cs.parts.push_back(std::move(si.checkpoints));
++                        if (!strata::core::conversation_checkpoints_merge(std::move(cs), checks)) {
++                            // Prevalidated stage by stage; a merge failure means the per-stage checkpoints do not line
++                            // up (a corrupt file).  The device state is already written: fatal, never decode from it.
++                            std::printf("FATAL restoring the session file: the stage checkpoints do not reassemble\n");
++                            std::fflush(stdout);
++                            return 1;
++                        }
++                    }
+                     for (const ConvCheckpoint& c : checks) check_clock = std::max(check_clock, c.used);
+                     cvec_cached = image.cvec;
+                     live_ok = true;

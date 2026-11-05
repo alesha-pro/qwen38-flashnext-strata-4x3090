@@ -1,0 +1,34 @@
+[strata] sampling defaults from the config: temperature=1.0, top_k=20, top_p=0.95, min_p=0.0, presence_penalty=0.0, repetition_penalty=1.0
+loading the model (the first start takes a minute or two) ...
+[strata] cards in stage order: GPU 2, then GPU 3 (as nvidia-smi numbers them); the engine's log calls them CUDA0, CUDA1 - the first runs the first layers and the picture reader, the last runs the head and the draft layer
+[strata] layer split across GPUs [2, 3] (auto)
+[strata] starting the engine: reading the model's weights ...
+[strata] loading the experts into RAM (tens of GB) and locking part of them for the GPU.
+         YOUR PC CAN BE SLOW OR STOP RESPONDING FOR 1-3 MINUTES NOW - this is normal.
+         Please wait and don't close this window; the server says when it is ready.
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/mnt/nvme/engines/strata/0.2.10/control/serve/server.py", line 10117, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/mnt/nvme/engines/strata/0.2.10/control/serve/server.py", line 9809, in main
+    engine = start_engine_or_fallback(cfg, exe, effort_end, env, lazy, tok, offline=a.offline, batch_telemetry=a.batch_telemetry)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/nvme/engines/strata/0.2.10/control/serve/server.py", line 9114, in start_engine_or_fallback
+    return StrataEngine(exe, engine_args(cfg, exe) + (effort_end or []), cwd=cfg.get("cwd"), log=cfg.get("log"), env=env, lazy=lazy,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/nvme/engines/strata/0.2.10/control/serve/server.py", line 1172, in __init__
+    line = ready_q.get(timeout=left)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/nvme/engines/strata/0.2.10/control/python/lib/python3.12/queue.py", line 180, in get
+    self.not_empty.wait(remaining)
+  File "/mnt/nvme/engines/strata/0.2.10/control/python/lib/python3.12/threading.py", line 359, in wait
+    gotit = waiter.acquire(True, timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/nvme/engines/strata/0.2.10/control/serve/lifeline.py", line 327, in handler
+    request_stop(reason)
+  File "/mnt/nvme/engines/strata/0.2.10/control/serve/server.py", line 9598, in request_stop
+    raise KeyboardInterrupt
+KeyboardInterrupt
+[strata] still starting (26 s) - please wait ...

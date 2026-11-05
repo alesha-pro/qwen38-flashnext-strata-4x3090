@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 460" width="920" height="460" role="img" aria-labelledby="t d" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+<title id="t">Decode speed on 2x RTX 3090</title><desc id="d">Grouped bars: decode tokens per second for code, file edits, English prose and Russian at 2K, 16K, 64K and 128K context on two RTX 3090. Code 147 to 152, file edits 150 to 163, prose 123 to 131, Russian 112 to 116.</desc>
+<rect width="920" height="460" rx="14" fill="#fcfcfb"/>
+<text x="24" y="44" font-size="22" font-weight="650" fill="#0b0b0b">Decode speed on 2x RTX 3090</text>
+<text x="24" y="70" font-size="14" fill="#52514e">Qwen3.8-Flash-Next UD-IQ4_XS, Strata 0.2.10, DFlash2 drafter, refusal vector on, 262K context window</text>
+<rect x="24" y="88" width="14" height="14" rx="3" fill="#86b6ef"/>
+<text x="44" y="100" font-size="13" fill="#52514e">2K context</text>
+<rect x="150" y="88" width="14" height="14" rx="3" fill="#3987e5"/>
+<text x="170" y="100" font-size="13" fill="#52514e">16K</text>
+<rect x="220" y="88" width="14" height="14" rx="3" fill="#1c5cab"/>
+<text x="240" y="100" font-size="13" fill="#52514e">64K</text>
+<rect x="290" y="88" width="14" height="14" rx="3" fill="#0d366b"/>
+<text x="310" y="100" font-size="13" fill="#52514e">128K</text>
+<line x1="64" x2="896" y1="390.0" y2="390.0" stroke="#e6e5e1" stroke-width="1"/>
+<text x="54" y="394.0" font-size="12" text-anchor="end" fill="#52514e">0</text>
+<line x1="64" x2="896" y1="315.1" y2="315.1" stroke="#e6e5e1" stroke-width="1"/>
+<text x="54" y="319.1" font-size="12" text-anchor="end" fill="#52514e">50</text>
+<line x1="64" x2="896" y1="240.3" y2="240.3" stroke="#e6e5e1" stroke-width="1"/>
+<text x="54" y="244.3" font-size="12" text-anchor="end" fill="#52514e">100</text>
+<line x1="64" x2="896" y1="165.4" y2="165.4" stroke="#e6e5e1" stroke-width="1"/>
+<text x="54" y="169.4" font-size="12" text-anchor="end" fill="#52514e">150</text>
+<text x="18" y="140" font-size="12" fill="#52514e">tok/s</text>
+<path d="M113.0,390.0 V167.0 Q113.0,163.0 117.0,163.0 H135.0 Q139.0,163.0 139.0,167.0 V390.0 Z" fill="#86b6ef"><title>Code, 2K context: 152 tok/s</title></path>
+<path d="M141.0,390.0 V167.3 Q141.0,163.3 145.0,163.3 H163.0 Q167.0,163.3 167.0,167.3 V390.0 Z" fill="#3987e5"><title>Code, 16K: 151 tok/s</title></path>
+<path d="M169.0,390.0 V166.4 Q169.0,162.4 173.0,162.4 H191.0 Q195.0,162.4 195.0,166.4 V390.0 Z" fill="#1c5cab"><title>Code, 64K: 152 tok/s</title></path>
+<path d="M197.0,390.0 V174.3 Q197.0,170.3 201.0,170.3 H219.0 Q223.0,170.3 223.0,174.3 V390.0 Z" fill="#0d366b"><title>Code, 128K: 147 tok/s</title></path>
+<text x="168.0" y="152.4" font-size="14" font-weight="600" text-anchor="middle" fill="#0b0b0b">147-152</text>
+<text x="168.0" y="414" font-size="14" text-anchor="middle" fill="#0b0b0b">Code</text>
+<path d="M321.0,390.0 V156.7 Q321.0,152.7 325.0,152.7 H343.0 Q347.0,152.7 347.0,156.7 V390.0 Z" fill="#86b6ef"><title>File edits, 2K context: 158 tok/s</title></path>
+<path d="M349.0,390.0 V149.6 Q349.0,145.6 353.0,145.6 H371.0 Q375.0,145.6 375.0,149.6 V390.0 Z" fill="#3987e5"><title>File edits, 16K: 163 tok/s</title></path>
+<path d="M377.0,390.0 V153.0 Q377.0,149.0 381.0,149.0 H399.0 Q403.0,149.0 403.0,153.0 V390.0 Z" fill="#1c5cab"><title>File edits, 64K: 161 tok/s</title></path>
+<path d="M405.0,390.0 V169.0 Q405.0,165.0 409.0,165.0 H427.0 Q431.0,165.0 431.0,169.0 V390.0 Z" fill="#0d366b"><title>File edits, 128K: 150 tok/s</title></path>
+<text x="376.0" y="135.6" font-size="14" font-weight="600" text-anchor="middle" fill="#0b0b0b">150-163</text>
+<text x="376.0" y="414" font-size="14" text-anchor="middle" fill="#0b0b0b">File edits</text>
+<path d="M529.0,390.0 V198.4 Q529.0,194.4 533.0,194.4 H551.0 Q555.0,194.4 555.0,198.4 V390.0 Z" fill="#86b6ef"><title>English prose, 2K context: 131 tok/s</title></path>
+<path d="M557.0,390.0 V205.0 Q557.0,201.0 561.0,201.0 H579.0 Q583.0,201.0 583.0,205.0 V390.0 Z" fill="#3987e5"><title>English prose, 16K: 126 tok/s</title></path>
+<path d="M585.0,390.0 V208.4 Q585.0,204.4 589.0,204.4 H607.0 Q611.0,204.4 611.0,208.4 V390.0 Z" fill="#1c5cab"><title>English prose, 64K: 124 tok/s</title></path>
+<path d="M613.0,390.0 V210.2 Q613.0,206.2 617.0,206.2 H635.0 Q639.0,206.2 639.0,210.2 V390.0 Z" fill="#0d366b"><title>English prose, 128K: 123 tok/s</title></path>
+<text x="584.0" y="184.4" font-size="14" font-weight="600" text-anchor="middle" fill="#0b0b0b">123-131</text>
+<text x="584.0" y="414" font-size="14" text-anchor="middle" fill="#0b0b0b">English prose</text>
+<path d="M737.0,390.0 V223.7 Q737.0,219.7 741.0,219.7 H759.0 Q763.0,219.7 763.0,223.7 V390.0 Z" fill="#86b6ef"><title>Russian, 2K context: 114 tok/s</title></path>
+<path d="M765.0,390.0 V222.5 Q765.0,218.5 769.0,218.5 H787.0 Q791.0,218.5 791.0,222.5 V390.0 Z" fill="#3987e5"><title>Russian, 16K: 115 tok/s</title></path>
+<path d="M793.0,390.0 V219.8 Q793.0,215.8 797.0,215.8 H815.0 Q819.0,215.8 819.0,219.8 V390.0 Z" fill="#1c5cab"><title>Russian, 64K: 116 tok/s</title></path>
+<path d="M821.0,390.0 V226.1 Q821.0,222.1 825.0,222.1 H843.0 Q847.0,222.1 847.0,226.1 V390.0 Z" fill="#0d366b"><title>Russian, 128K: 112 tok/s</title></path>
+<text x="792.0" y="205.8" font-size="14" font-weight="600" text-anchor="middle" fill="#0b0b0b">112-116</text>
+<text x="792.0" y="414" font-size="14" text-anchor="middle" fill="#0b0b0b">Russian</text>
+<line x1="64" x2="896" y1="390" y2="390" stroke="#52514e" stroke-width="1"/>
+<text x="24" y="442" font-size="12" fill="#52514e">Single request, greedy, 512 new tokens, no thinking, 300 W per card. Mean of repeats 1 and 2. Run 20261105T003504Z.</text>
+</svg>

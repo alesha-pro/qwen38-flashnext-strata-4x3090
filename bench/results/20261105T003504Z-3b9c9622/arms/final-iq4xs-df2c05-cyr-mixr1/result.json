@@ -1,0 +1,1851 @@
+{
+ "arm": {
+  "name": "final-iq4xs-df2c05-cyr-mixr1",
+  "cfg": {
+   "gpu": [
+    2,
+    3
+   ]
+  }
+ },
+ "argv": [
+  "/mnt/nvme/engines/strata/0.2.10/control/python/bin/python3",
+  "-u",
+  "-m",
+  "serve.server",
+  "--engine",
+  "strata",
+  "--config",
+  "/mnt/nvme/projects/qwen38-flashnext-unsloth-strata/runs/20261105T003504Z-3b9c9622/arms/final-iq4xs-df2c05-cyr-mixr1/config.json",
+  "--port",
+  "18442",
+  "--gpu",
+  "2,3"
+ ],
+ "cwd": "/mnt/nvme/engines/strata/0.2.10/control",
+ "engine_argv": [
+  "/mnt/nvme/engines/strata/0.2.10/engine/strata",
+  "--pack",
+  "/mnt/ssd/models/Qwen3.8-Flash-Next-unsloth-GGUF/d962012/packs/ud-iq4_xs",
+  "--native",
+  "/mnt/ssd/models/Qwen3.8-Flash-Next-unsloth-GGUF/d962012/UD-IQ4_XS/Qwen3.8-Flash-Next-UD-IQ4_XS-00001-of-00004.gguf",
+  "--expert-profile",
+  "/mnt/nvme/engines/strata/0.2.10/control/data/expert-profile.bin",
+  "--expert-cache",
+  "auto",
+  "--prefill",
+  "auto",
+  "--max-context",
+  "262144",
+  "--kv",
+  "int8",
+  "--mtp",
+  "/mnt/ssd/models/Qwen3.8-Flash-Next-unsloth-GGUF/d962012/mtp/rt",
+  "--spec",
+  "4",
+  "--ple-io",
+  "direct",
+  "--vram-reserve-later-mib",
+  "1394",
+  "--vram-reserve-mib",
+  "768",
+  "--control-vector-scaled",
+  "/mnt/nvme/projects/qwen38-flashnext-unsloth-strata/abl/vectors/mix-r1.gguf:1.0",
+  "--control-vector-layer-range",
+  "1",
+  "47",
+  "--cvec-mode",
+  "project",
+  "--cvec-dir",
+  "per-layer"
+ ],
+ "env": {},
+ "power_limit_w": {
+  "2": 300.0,
+  "3": 300.0
+ },
+ "started": "2026-11-05T00:35:05Z",
+ "ready_s": 32.0,
+ "vram_peak_mib": {
+  "2": 23580,
+  "3": 23364
+ },
+ "rows": [
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "essay",
+   "depth": 2048,
+   "repeat": 0,
+   "prompt_n": 2026,
+   "cache_n": 0,
+   "prefill_tok_s": 608.3,
+   "decode_tok_s": 116.7,
+   "predicted_n": 512,
+   "draft_n": 475,
+   "draft_acc": 307,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 2026,
+    "prompt_ms": 3330.7,
+    "prompt_per_token_ms": 1.644,
+    "prompt_per_second": 608.3,
+    "predicted_n": 512,
+    "predicted_ms": 4388.0,
+    "predicted_per_token_ms": 8.57,
+    "predicted_per_second": 116.7,
+    "draft_n": 475,
+    "draft_n_accepted": 307
+   },
+   "wall_s": 7.75,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 2026,
+    "completion_tokens": 512,
+    "total_tokens": 2538,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "# The Architecture of Data Access: A Technical Analysis of Indexes, B-Trees, Hash Tables, Transactions, and Replication\n\nIn the realm of modern computer science"
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "essay",
+   "depth": 2048,
+   "repeat": 1,
+   "prompt_n": 2017,
+   "cache_n": 0,
+   "prefill_tok_s": 663.3,
+   "decode_tok_s": 131.7,
+   "predicted_n": 512,
+   "draft_n": 461,
+   "draft_acc": 303,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 2017,
+    "prompt_ms": 3040.8,
+    "prompt_per_token_ms": 1.508,
+    "prompt_per_second": 663.3,
+    "predicted_n": 512,
+    "predicted_ms": 3888.9,
+    "predicted_per_token_ms": 7.596,
+    "predicted_per_second": 131.7,
+    "draft_n": 461,
+    "draft_n_accepted": 303
+   },
+   "wall_s": 6.96,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 2017,
+    "completion_tokens": 512,
+    "total_tokens": 2529,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "**The Architecture of Data Persistence: A Technical Analysis of Indexes, B-Trees, Hash Tables, Transactions, and Replication**\n\nIn the realm of modern computer "
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "essay",
+   "depth": 2048,
+   "repeat": 2,
+   "prompt_n": 2011,
+   "cache_n": 0,
+   "prefill_tok_s": 669.8,
+   "decode_tok_s": 129.6,
+   "predicted_n": 512,
+   "draft_n": 475,
+   "draft_acc": 297,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 2011,
+    "prompt_ms": 3002.5,
+    "prompt_per_token_ms": 1.493,
+    "prompt_per_second": 669.8,
+    "predicted_n": 512,
+    "predicted_ms": 3951.2,
+    "predicted_per_token_ms": 7.717,
+    "predicted_per_second": 129.6,
+    "draft_n": 475,
+    "draft_n_accepted": 297
+   },
+   "wall_s": 6.97,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 2011,
+    "completion_tokens": 512,
+    "total_tokens": 2523,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "# The Architecture of Data Integrity and Performance: A Technical Analysis of Indexes, B-Trees, Hash Tables, Transactions, and Replication\n\nIn the realm of mode"
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "essay",
+   "depth": 16384,
+   "repeat": 0,
+   "prompt_n": 16251,
+   "cache_n": 0,
+   "prefill_tok_s": 2505.3,
+   "decode_tok_s": 130.1,
+   "predicted_n": 512,
+   "draft_n": 464,
+   "draft_acc": 300,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16251,
+    "prompt_ms": 6486.7,
+    "prompt_per_token_ms": 0.399,
+    "prompt_per_second": 2505.3,
+    "predicted_n": 512,
+    "predicted_ms": 3934.6,
+    "predicted_per_token_ms": 7.685,
+    "predicted_per_second": 130.1,
+    "draft_n": 464,
+    "draft_n_accepted": 300
+   },
+   "wall_s": 10.49,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 16251,
+    "completion_tokens": 512,
+    "total_tokens": 16763,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "**The Architecture of Data Persistence: A Technical Analysis of Indexes, B-Trees, Hash Tables, Transactions, and Replication**\n\nIn the realm of computer science"
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "essay",
+   "depth": 16384,
+   "repeat": 1,
+   "prompt_n": 16265,
+   "cache_n": 0,
+   "prefill_tok_s": 2520.3,
+   "decode_tok_s": 122.4,
+   "predicted_n": 512,
+   "draft_n": 482,
+   "draft_acc": 282,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16265,
+    "prompt_ms": 6453.5,
+    "prompt_per_token_ms": 0.397,
+    "prompt_per_second": 2520.3,
+    "predicted_n": 512,
+    "predicted_ms": 4183.9,
+    "predicted_per_token_ms": 8.172,
+    "predicted_per_second": 122.4,
+    "draft_n": 482,
+    "draft_n_accepted": 282
+   },
+   "wall_s": 10.7,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 16265,
+    "completion_tokens": 512,
+    "total_tokens": 16777,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "**The Architecture of Data Persistence: A Technical Analysis of Indexes, B-Trees, Hash Tables, Transactions, and Replication**\n\nIn the realm of computer science"
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "essay",
+   "depth": 16384,
+   "repeat": 2,
+   "prompt_n": 16269,
+   "cache_n": 0,
+   "prefill_tok_s": 2461.3,
+   "decode_tok_s": 130.1,
+   "predicted_n": 512,
+   "draft_n": 473,
+   "draft_acc": 302,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16269,
+    "prompt_ms": 6609.9,
+    "prompt_per_token_ms": 0.406,
+    "prompt_per_second": 2461.3,
+    "predicted_n": 512,
+    "predicted_ms": 3935.4,
+    "predicted_per_token_ms": 7.686,
+    "predicted_per_second": 130.1,
+    "draft_n": 473,
+    "draft_n_accepted": 302
+   },
+   "wall_s": 10.61,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 16269,
+    "completion_tokens": 512,
+    "total_tokens": 16781,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "**The Architecture of Data Integrity and Performance: A Technical Analysis of Indexes, B-Trees, Hash Tables, Transactions, and Replication**\n\nIn the realm of mo"
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "essay",
+   "depth": 65536,
+   "repeat": 0,
+   "prompt_n": 65114,
+   "cache_n": 0,
+   "prefill_tok_s": 3419.9,
+   "decode_tok_s": 129.0,
+   "predicted_n": 512,
+   "draft_n": 458,
+   "draft_acc": 303,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 65114,
+    "prompt_ms": 19039.8,
+    "prompt_per_token_ms": 0.292,
+    "prompt_per_second": 3419.9,
+    "predicted_n": 512,
+    "predicted_ms": 3969.6,
+    "predicted_per_token_ms": 7.753,
+    "predicted_per_second": 129.0,
+    "draft_n": 458,
+    "draft_n_accepted": 303
+   },
+   "wall_s": 23.15,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 65114,
+    "completion_tokens": 512,
+    "total_tokens": 65626,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "# The Architecture of Data: A Technical Analysis of Database Indexes, B-Trees, Hash Tables, Transactions, and Replication\n\nModern database management systems (D"
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "essay",
+   "depth": 65536,
+   "repeat": 1,
+   "prompt_n": 65092,
+   "cache_n": 0,
+   "prefill_tok_s": 3362.2,
+   "decode_tok_s": 119.8,
+   "predicted_n": 512,
+   "draft_n": 455,
+   "draft_acc": 285,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 65092,
+    "prompt_ms": 19360.0,
+    "prompt_per_token_ms": 0.297,
+    "prompt_per_second": 3362.2,
+    "predicted_n": 512,
+    "predicted_ms": 4274.6,
+    "predicted_per_token_ms": 8.349,
+    "predicted_per_second": 119.8,
+    "draft_n": 455,
+    "draft_n_accepted": 285
+   },
+   "wall_s": 23.76,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 65092,
+    "completion_tokens": 512,
+    "total_tokens": 65604,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "# The Architecture of Data: A Technical Analysis of Indexes, Storage Structures, Transactions, and Replication\n\nModern database management systems (DBMS) are th"
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "essay",
+   "depth": 65536,
+   "repeat": 2,
+   "prompt_n": 65096,
+   "cache_n": 0,
+   "prefill_tok_s": 3412.0,
+   "decode_tok_s": 128.2,
+   "predicted_n": 512,
+   "draft_n": 454,
+   "draft_acc": 301,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 65096,
+    "prompt_ms": 19078.5,
+    "prompt_per_token_ms": 0.293,
+    "prompt_per_second": 3412.0,
+    "predicted_n": 512,
+    "predicted_ms": 3993.1,
+    "predicted_per_token_ms": 7.799,
+    "predicted_per_second": 128.2,
+    "draft_n": 454,
+    "draft_n_accepted": 301
+   },
+   "wall_s": 23.17,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 65096,
+    "completion_tokens": 512,
+    "total_tokens": 65608,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "# The Architecture of Data: A Technical Analysis of Database Indexes, B-Trees, Hash Tables, Transactions, and Replication\n\nModern database management systems (D"
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "essay",
+   "depth": 131072,
+   "repeat": 0,
+   "prompt_n": 130217,
+   "cache_n": 0,
+   "prefill_tok_s": 3574.2,
+   "decode_tok_s": 125.6,
+   "predicted_n": 512,
+   "draft_n": 449,
+   "draft_acc": 301,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 130217,
+    "prompt_ms": 36432.0,
+    "prompt_per_token_ms": 0.28,
+    "prompt_per_second": 3574.2,
+    "predicted_n": 512,
+    "predicted_ms": 4075.1,
+    "predicted_per_token_ms": 7.959,
+    "predicted_per_second": 125.6,
+    "draft_n": 449,
+    "draft_n_accepted": 301
+   },
+   "wall_s": 40.7,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 130217,
+    "completion_tokens": 512,
+    "total_tokens": 130729,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "# The Architecture of Data: A Technical Analysis of Database Indexes, B-Trees, Hash Tables, Transactions, and Replication\n\nModern database management systems (D"
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "essay",
+   "depth": 131072,
+   "repeat": 1,
+   "prompt_n": 130236,
+   "cache_n": 0,
+   "prefill_tok_s": 3497.1,
+   "decode_tok_s": 124.7,
+   "predicted_n": 512,
+   "draft_n": 452,
+   "draft_acc": 306,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 130236,
+    "prompt_ms": 37241.4,
+    "prompt_per_token_ms": 0.286,
+    "prompt_per_second": 3497.1,
+    "predicted_n": 512,
+    "predicted_ms": 4106.0,
+    "predicted_per_token_ms": 8.02,
+    "predicted_per_second": 124.7,
+    "draft_n": 452,
+    "draft_n_accepted": 306
+   },
+   "wall_s": 41.53,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 130236,
+    "completion_tokens": 512,
+    "total_tokens": 130748,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "# The Architecture of Data: A Technical Analysis of Database Indexes, B-Trees, Hash Tables, Transactions, and Replication\n\nModern database management systems (D"
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "essay",
+   "depth": 131072,
+   "repeat": 2,
+   "prompt_n": 130220,
+   "cache_n": 0,
+   "prefill_tok_s": 3519.9,
+   "decode_tok_s": 120.8,
+   "predicted_n": 512,
+   "draft_n": 452,
+   "draft_acc": 298,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 130220,
+    "prompt_ms": 36995.0,
+    "prompt_per_token_ms": 0.284,
+    "prompt_per_second": 3519.9,
+    "predicted_n": 512,
+    "predicted_ms": 4239.4,
+    "predicted_per_token_ms": 8.28,
+    "predicted_per_second": 120.8,
+    "draft_n": 452,
+    "draft_n_accepted": 298
+   },
+   "wall_s": 41.39,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 130220,
+    "completion_tokens": 512,
+    "total_tokens": 130732,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "# The Architecture of Data: A Technical Analysis of Database Indexes, B-Trees, Hash Tables, Transactions, and Replication\n\nModern database management systems (D"
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "code",
+   "depth": 2048,
+   "repeat": 0,
+   "prompt_n": 2025,
+   "cache_n": 0,
+   "prefill_tok_s": 542.0,
+   "decode_tok_s": 128.6,
+   "predicted_n": 512,
+   "draft_n": 502,
+   "draft_acc": 357,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 2025,
+    "prompt_ms": 3736.5,
+    "prompt_per_token_ms": 1.845,
+    "prompt_per_second": 542.0,
+    "predicted_n": 512,
+    "predicted_ms": 3982.3,
+    "predicted_per_token_ms": 7.778,
+    "predicted_per_second": 128.6,
+    "draft_n": 502,
+    "draft_n_accepted": 357
+   },
+   "wall_s": 7.74,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 2025,
+    "completion_tokens": 512,
+    "total_tokens": 2537,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n\"\"\"\nLRU Cache with TTL Expiry, Thread-Safe Wrapper, and Memoization Decorator.\n\nThis module provides:\n1. `LRUCache`: A Least Recently Used cache with "
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "code",
+   "depth": 2048,
+   "repeat": 1,
+   "prompt_n": 2024,
+   "cache_n": 0,
+   "prefill_tok_s": 675.0,
+   "decode_tok_s": 151.2,
+   "predicted_n": 512,
+   "draft_n": 496,
+   "draft_acc": 357,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 2024,
+    "prompt_ms": 2998.4,
+    "prompt_per_token_ms": 1.481,
+    "prompt_per_second": 675.0,
+    "predicted_n": 512,
+    "predicted_ms": 3386.2,
+    "predicted_per_token_ms": 6.614,
+    "predicted_per_second": 151.2,
+    "draft_n": 496,
+    "draft_n_accepted": 357
+   },
+   "wall_s": 6.4,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 2024,
+    "completion_tokens": 512,
+    "total_tokens": 2536,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n\"\"\"\nLRU Cache with TTL Expiry, Thread-Safe Wrapper, and Memoization Decorator.\n\nThis module provides:\n1. `LRUCache`: A Least Recently Used cache with "
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "code",
+   "depth": 2048,
+   "repeat": 2,
+   "prompt_n": 2029,
+   "cache_n": 0,
+   "prefill_tok_s": 682.7,
+   "decode_tok_s": 152.0,
+   "predicted_n": 512,
+   "draft_n": 497,
+   "draft_acc": 352,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 2029,
+    "prompt_ms": 2972.1,
+    "prompt_per_token_ms": 1.465,
+    "prompt_per_second": 682.7,
+    "predicted_n": 512,
+    "predicted_ms": 3368.0,
+    "predicted_per_token_ms": 6.578,
+    "predicted_per_second": 152.0,
+    "draft_n": 497,
+    "draft_n_accepted": 352
+   },
+   "wall_s": 6.35,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 2029,
+    "completion_tokens": 512,
+    "total_tokens": 2541,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n\"\"\"\nLRU Cache with TTL Expiry, Thread-Safe Wrapper, and Memoization Decorator.\n\nThis module provides:\n1. `LRUCache`: A Least Recently Used cache with "
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "code",
+   "depth": 16384,
+   "repeat": 0,
+   "prompt_n": 16275,
+   "cache_n": 0,
+   "prefill_tok_s": 2611.0,
+   "decode_tok_s": 147.7,
+   "predicted_n": 512,
+   "draft_n": 525,
+   "draft_acc": 356,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16275,
+    "prompt_ms": 6233.3,
+    "prompt_per_token_ms": 0.383,
+    "prompt_per_second": 2611.0,
+    "predicted_n": 512,
+    "predicted_ms": 3467.2,
+    "predicted_per_token_ms": 6.772,
+    "predicted_per_second": 147.7,
+    "draft_n": 525,
+    "draft_n_accepted": 356
+   },
+   "wall_s": 9.74,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 16275,
+    "completion_tokens": 512,
+    "total_tokens": 16787,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n\"\"\"\nLRU Cache with TTL Expiry, Thread-Safety, and Memoization Decorator.\n\nThis module provides:\n1. `LRUCache`: A thread-safe Least Recently Used cache"
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "code",
+   "depth": 16384,
+   "repeat": 1,
+   "prompt_n": 16264,
+   "cache_n": 0,
+   "prefill_tok_s": 2513.8,
+   "decode_tok_s": 152.1,
+   "predicted_n": 512,
+   "draft_n": 514,
+   "draft_acc": 364,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16264,
+    "prompt_ms": 6470.0,
+    "prompt_per_token_ms": 0.398,
+    "prompt_per_second": 2513.8,
+    "predicted_n": 512,
+    "predicted_ms": 3367.0,
+    "predicted_per_token_ms": 6.576,
+    "predicted_per_second": 152.1,
+    "draft_n": 514,
+    "draft_n_accepted": 364
+   },
+   "wall_s": 9.87,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 16264,
+    "completion_tokens": 512,
+    "total_tokens": 16776,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n\"\"\"\nLRU Cache with TTL Expiry, Thread-Safety, and Memoization Decorator.\n\nThis module provides:\n1. `LRUCache`: A thread-safe Least Recently Used cache"
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "code",
+   "depth": 16384,
+   "repeat": 2,
+   "prompt_n": 16264,
+   "cache_n": 0,
+   "prefill_tok_s": 2586.9,
+   "decode_tok_s": 150.7,
+   "predicted_n": 512,
+   "draft_n": 527,
+   "draft_acc": 363,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16264,
+    "prompt_ms": 6287.0,
+    "prompt_per_token_ms": 0.387,
+    "prompt_per_second": 2586.9,
+    "predicted_n": 512,
+    "predicted_ms": 3396.5,
+    "predicted_per_token_ms": 6.634,
+    "predicted_per_second": 150.7,
+    "draft_n": 527,
+    "draft_n_accepted": 363
+   },
+   "wall_s": 9.72,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 16264,
+    "completion_tokens": 512,
+    "total_tokens": 16776,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n\"\"\"\nLRU Cache with TTL Expiry, Thread-Safety, and Memoization Decorator.\n\nThis module provides:\n1. `LRUCache`: A thread-safe Least Recently Used cache"
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "code",
+   "depth": 65536,
+   "repeat": 0,
+   "prompt_n": 65100,
+   "cache_n": 0,
+   "prefill_tok_s": 3472.2,
+   "decode_tok_s": 142.0,
+   "predicted_n": 512,
+   "draft_n": 532,
+   "draft_acc": 352,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 65100,
+    "prompt_ms": 18748.8,
+    "prompt_per_token_ms": 0.288,
+    "prompt_per_second": 3472.2,
+    "predicted_n": 512,
+    "predicted_ms": 3606.0,
+    "predicted_per_token_ms": 7.043,
+    "predicted_per_second": 142.0,
+    "draft_n": 532,
+    "draft_n_accepted": 352
+   },
+   "wall_s": 22.46,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 65100,
+    "completion_tokens": 512,
+    "total_tokens": 65612,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n\"\"\"\nLRU Cache with TTL Expiry, Thread-Safety, and Memoization Decorator.\n\nThis module provides:\n1. `LRUCache`: A Least Recently Used cache with Time-T"
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "code",
+   "depth": 65536,
+   "repeat": 1,
+   "prompt_n": 65110,
+   "cache_n": 0,
+   "prefill_tok_s": 3427.0,
+   "decode_tok_s": 153.0,
+   "predicted_n": 512,
+   "draft_n": 504,
+   "draft_acc": 363,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 65110,
+    "prompt_ms": 18999.0,
+    "prompt_per_token_ms": 0.292,
+    "prompt_per_second": 3427.0,
+    "predicted_n": 512,
+    "predicted_ms": 3346.7,
+    "predicted_per_token_ms": 6.537,
+    "predicted_per_second": 153.0,
+    "draft_n": 504,
+    "draft_n_accepted": 363
+   },
+   "wall_s": 22.44,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 65110,
+    "completion_tokens": 512,
+    "total_tokens": 65622,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n\"\"\"\nLRU Cache with TTL Expiry, Thread-Safety, and Memoization Decorator.\n\nThis module provides:\n1. `LRUCache`: A thread-safe Least Recently Used cache"
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "code",
+   "depth": 65536,
+   "repeat": 2,
+   "prompt_n": 65092,
+   "cache_n": 0,
+   "prefill_tok_s": 3413.8,
+   "decode_tok_s": 151.0,
+   "predicted_n": 512,
+   "draft_n": 512,
+   "draft_acc": 361,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 65092,
+    "prompt_ms": 19067.3,
+    "prompt_per_token_ms": 0.293,
+    "prompt_per_second": 3413.8,
+    "predicted_n": 512,
+    "predicted_ms": 3390.0,
+    "predicted_per_token_ms": 6.621,
+    "predicted_per_second": 151.0,
+    "draft_n": 512,
+    "draft_n_accepted": 361
+   },
+   "wall_s": 22.55,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 65092,
+    "completion_tokens": 512,
+    "total_tokens": 65604,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n\"\"\"\nLRU Cache with TTL Expiry, Thread-Safety, and Memoization Decorator.\n\nThis module provides:\n1. `LRUCache`: A thread-safe Least Recently Used cache"
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "code",
+   "depth": 131072,
+   "repeat": 0,
+   "prompt_n": 130205,
+   "cache_n": 0,
+   "prefill_tok_s": 3538.9,
+   "decode_tok_s": 143.3,
+   "predicted_n": 512,
+   "draft_n": 508,
+   "draft_acc": 355,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 130205,
+    "prompt_ms": 36792.5,
+    "prompt_per_token_ms": 0.283,
+    "prompt_per_second": 3538.9,
+    "predicted_n": 512,
+    "predicted_ms": 3572.8,
+    "predicted_per_token_ms": 6.978,
+    "predicted_per_second": 143.3,
+    "draft_n": 508,
+    "draft_n_accepted": 355
+   },
+   "wall_s": 40.53,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 130205,
+    "completion_tokens": 512,
+    "total_tokens": 130717,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n\"\"\"\nLRU Cache with TTL Expiry, Thread-Safety, and Memoization Decorator.\n\nThis module provides:\n1. `LRUCache`: A Least Recently Used cache with Time-T"
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "code",
+   "depth": 131072,
+   "repeat": 1,
+   "prompt_n": 130200,
+   "cache_n": 0,
+   "prefill_tok_s": 3521.0,
+   "decode_tok_s": 147.3,
+   "predicted_n": 512,
+   "draft_n": 509,
+   "draft_acc": 369,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 130200,
+    "prompt_ms": 36977.8,
+    "prompt_per_token_ms": 0.284,
+    "prompt_per_second": 3521.0,
+    "predicted_n": 512,
+    "predicted_ms": 3476.6,
+    "predicted_per_token_ms": 6.79,
+    "predicted_per_second": 147.3,
+    "draft_n": 509,
+    "draft_n_accepted": 369
+   },
+   "wall_s": 40.62,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 130200,
+    "completion_tokens": 512,
+    "total_tokens": 130712,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n\"\"\"\nLRU Cache with TTL Expiry, Thread-Safety, and Memoization Decorator.\n\nThis module provides:\n1. `LRUCache`: A thread-safe Least Recently Used cache"
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "code",
+   "depth": 131072,
+   "repeat": 2,
+   "prompt_n": 130248,
+   "cache_n": 0,
+   "prefill_tok_s": 3515.2,
+   "decode_tok_s": 146.2,
+   "predicted_n": 512,
+   "draft_n": 520,
+   "draft_acc": 363,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 130248,
+    "prompt_ms": 37052.4,
+    "prompt_per_token_ms": 0.284,
+    "prompt_per_second": 3515.2,
+    "predicted_n": 512,
+    "predicted_ms": 3503.0,
+    "predicted_per_token_ms": 6.842,
+    "predicted_per_second": 146.2,
+    "draft_n": 520,
+    "draft_n_accepted": 363
+   },
+   "wall_s": 40.7,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 130248,
+    "completion_tokens": 512,
+    "total_tokens": 130760,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n\"\"\"\nLRU Cache with TTL Expiry, Thread-Safety, and Memoization Decorator.\n\nThis module provides:\n1. `LRUCache`: A thread-safe Least Recently Used cache"
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "edit",
+   "depth": 2048,
+   "repeat": 0,
+   "prompt_n": 1990,
+   "cache_n": 0,
+   "prefill_tok_s": 552.5,
+   "decode_tok_s": 126.1,
+   "predicted_n": 512,
+   "draft_n": 437,
+   "draft_acc": 400,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 1990,
+    "prompt_ms": 3602.0,
+    "prompt_per_token_ms": 1.81,
+    "prompt_per_second": 552.5,
+    "predicted_n": 512,
+    "predicted_ms": 4060.3,
+    "predicted_per_token_ms": 7.93,
+    "predicted_per_second": 126.1,
+    "draft_n": 437,
+    "draft_n_accepted": 400
+   },
+   "wall_s": 7.69,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 1990,
+    "completion_tokens": 512,
+    "total_tokens": 2502,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n# Checks coverage of recent words by 12-word passages seen at least three times.\ndef reasoning_repeat_coverage(text):\n    \"\"\"Coverage of recent words "
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "edit",
+   "depth": 2048,
+   "repeat": 1,
+   "prompt_n": 1999,
+   "cache_n": 0,
+   "prefill_tok_s": 686.0,
+   "decode_tok_s": 160.4,
+   "predicted_n": 445,
+   "draft_n": 375,
+   "draft_acc": 362,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 1999,
+    "prompt_ms": 2914.1,
+    "prompt_per_token_ms": 1.458,
+    "prompt_per_second": 686.0,
+    "predicted_n": 445,
+    "predicted_ms": 2774.7,
+    "predicted_per_token_ms": 6.235,
+    "predicted_per_second": 160.4,
+    "draft_n": 375,
+    "draft_n_accepted": 362
+   },
+   "wall_s": 5.7,
+   "finish": "stop",
+   "usage": {
+    "prompt_tokens": 1999,
+    "completion_tokens": 445,
+    "total_tokens": 2444,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n    def _take_control(self, cancel, plen: int, after_epoch: int | None = None, new: bool = False, prompt=None):\n        \"\"\"Waits for the control lines"
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "edit",
+   "depth": 2048,
+   "repeat": 2,
+   "prompt_n": 1976,
+   "cache_n": 0,
+   "prefill_tok_s": 671.6,
+   "decode_tok_s": 156.6,
+   "predicted_n": 512,
+   "draft_n": 444,
+   "draft_acc": 418,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 1976,
+    "prompt_ms": 2942.2,
+    "prompt_per_token_ms": 1.489,
+    "prompt_per_second": 671.6,
+    "predicted_n": 512,
+    "predicted_ms": 3270.5,
+    "predicted_per_token_ms": 6.388,
+    "predicted_per_second": 156.6,
+    "draft_n": 444,
+    "draft_n_accepted": 418
+   },
+   "wall_s": 6.23,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 1976,
+    "completion_tokens": 512,
+    "total_tokens": 2488,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n# How long close() gives the engine at each step of ending it (seconds). Module values so that a test can shorten them.\nENGINE_QUIT_WAIT_S, ENGINE_TER"
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "edit",
+   "depth": 16384,
+   "repeat": 0,
+   "prompt_n": 16294,
+   "cache_n": 0,
+   "prefill_tok_s": 2528.1,
+   "decode_tok_s": 167.6,
+   "predicted_n": 226,
+   "draft_n": 188,
+   "draft_acc": 183,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16294,
+    "prompt_ms": 6445.1,
+    "prompt_per_token_ms": 0.396,
+    "prompt_per_second": 2528.1,
+    "predicted_n": 226,
+    "predicted_ms": 1348.2,
+    "predicted_per_token_ms": 5.965,
+    "predicted_per_second": 167.6,
+    "draft_n": 188,
+    "draft_n_accepted": 183
+   },
+   "wall_s": 7.84,
+   "finish": "stop",
+   "usage": {
+    "prompt_tokens": 16294,
+    "completion_tokens": 226,
+    "total_tokens": 16520,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n        if not self.alive():\n            raise EngineDied(\"the engine is unavailable; this request was not sent\")\n        self.progress, self.progress"
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "edit",
+   "depth": 16384,
+   "repeat": 1,
+   "prompt_n": 16247,
+   "cache_n": 0,
+   "prefill_tok_s": 2586.6,
+   "decode_tok_s": 159.2,
+   "predicted_n": 512,
+   "draft_n": 449,
+   "draft_acc": 412,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16247,
+    "prompt_ms": 6281.3,
+    "prompt_per_token_ms": 0.387,
+    "prompt_per_second": 2586.6,
+    "predicted_n": 512,
+    "predicted_ms": 3215.5,
+    "predicted_per_token_ms": 6.28,
+    "predicted_per_second": 159.2,
+    "draft_n": 449,
+    "draft_n_accepted": 412
+   },
+   "wall_s": 9.55,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 16247,
+    "completion_tokens": 512,
+    "total_tokens": 16759,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n    def pen_from_key(self, orig_len: int, prompt_len: int) -> str:\n        \"\"\"` pen_from=N` for a leg that continues a request (prompt + what it gener"
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "edit",
+   "depth": 16384,
+   "repeat": 2,
+   "prompt_n": 16222,
+   "cache_n": 0,
+   "prefill_tok_s": 2682.0,
+   "decode_tok_s": 167.3,
+   "predicted_n": 196,
+   "draft_n": 164,
+   "draft_acc": 159,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16222,
+    "prompt_ms": 6048.4,
+    "prompt_per_token_ms": 0.373,
+    "prompt_per_second": 2682.0,
+    "predicted_n": 196,
+    "predicted_ms": 1171.2,
+    "predicted_per_token_ms": 5.976,
+    "predicted_per_second": 167.3,
+    "draft_n": 164,
+    "draft_n_accepted": 159
+   },
+   "wall_s": 7.27,
+   "finish": "stop",
+   "usage": {
+    "prompt_tokens": 16222,
+    "completion_tokens": 196,
+    "total_tokens": 16418,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n    def _parse_done(self, line):\n        f = line.split()\n        self.last = {\"generated\": int(f[1]), \"prompt_tokens\": int(f[2]), \"prompt_ms\": float("
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "edit",
+   "depth": 65536,
+   "repeat": 0,
+   "prompt_n": 65191,
+   "cache_n": 0,
+   "prefill_tok_s": 3471.5,
+   "decode_tok_s": 154.0,
+   "predicted_n": 382,
+   "draft_n": 323,
+   "draft_acc": 312,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 65191,
+    "prompt_ms": 18778.8,
+    "prompt_per_token_ms": 0.288,
+    "prompt_per_second": 3471.5,
+    "predicted_n": 382,
+    "predicted_ms": 2480.0,
+    "predicted_per_token_ms": 6.492,
+    "predicted_per_second": 154.0,
+    "draft_n": 323,
+    "draft_n_accepted": 312
+   },
+   "wall_s": 21.4,
+   "finish": "stop",
+   "usage": {
+    "prompt_tokens": 65191,
+    "completion_tokens": 382,
+    "total_tokens": 65573,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n            if self.offline and any(src.startswith((\"http://\", \"https://\")) for src in images):\n                raise ValueError(\"offline mode cannot "
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "edit",
+   "depth": 65536,
+   "repeat": 1,
+   "prompt_n": 65173,
+   "cache_n": 0,
+   "prefill_tok_s": 3527.4,
+   "decode_tok_s": 165.1,
+   "predicted_n": 512,
+   "draft_n": 435,
+   "draft_acc": 419,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 65173,
+    "prompt_ms": 18476.3,
+    "prompt_per_token_ms": 0.283,
+    "prompt_per_second": 3527.4,
+    "predicted_n": 512,
+    "predicted_ms": 3101.0,
+    "predicted_per_token_ms": 6.057,
+    "predicted_per_second": 165.1,
+    "draft_n": 435,
+    "draft_n_accepted": 419
+   },
+   "wall_s": 21.7,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 65173,
+    "completion_tokens": 512,
+    "total_tokens": 65685,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n            if self.vision is None:\n                if self.family == \"deepseek41\":\n                    raise ValueError(\"this server was started with"
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "edit",
+   "depth": 65536,
+   "repeat": 2,
+   "prompt_n": 65110,
+   "cache_n": 0,
+   "prefill_tok_s": 3502.2,
+   "decode_tok_s": 156.8,
+   "predicted_n": 443,
+   "draft_n": 383,
+   "draft_acc": 358,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 65110,
+    "prompt_ms": 18591.3,
+    "prompt_per_token_ms": 0.286,
+    "prompt_per_second": 3502.2,
+    "predicted_n": 443,
+    "predicted_ms": 2824.9,
+    "predicted_per_token_ms": 6.377,
+    "predicted_per_second": 156.8,
+    "draft_n": 383,
+    "draft_n_accepted": 358
+   },
+   "wall_s": 21.53,
+   "finish": "stop",
+   "usage": {
+    "prompt_tokens": 65110,
+    "completion_tokens": 443,
+    "total_tokens": 65553,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n        self.api_key = \"\"                              # when set, /v1/* needs it (Bearer or x-api-key)\n        # #458 (opt-in, the config's \"effort_p"
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "edit",
+   "depth": 131072,
+   "repeat": 0,
+   "prompt_n": 130421,
+   "cache_n": 0,
+   "prefill_tok_s": 3601.0,
+   "decode_tok_s": 150.6,
+   "predicted_n": 367,
+   "draft_n": 314,
+   "draft_acc": 295,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 130421,
+    "prompt_ms": 36217.8,
+    "prompt_per_token_ms": 0.278,
+    "prompt_per_second": 3601.0,
+    "predicted_n": 367,
+    "predicted_ms": 2436.7,
+    "predicted_per_token_ms": 6.64,
+    "predicted_per_second": 150.6,
+    "draft_n": 314,
+    "draft_n_accepted": 295
+   },
+   "wall_s": 38.89,
+   "finish": "stop",
+   "usage": {
+    "prompt_tokens": 130421,
+    "completion_tokens": 367,
+    "total_tokens": 130788,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n    ap.add_argument(\"--engine\", choices=[\"mock\", \"strata\"], default=\"mock\")\n    ap.add_argument(\"--config\", help=\"strata engine config (JSON: exe, arg"
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "edit",
+   "depth": 131072,
+   "repeat": 1,
+   "prompt_n": 130383,
+   "cache_n": 0,
+   "prefill_tok_s": 3594.4,
+   "decode_tok_s": 148.9,
+   "predicted_n": 512,
+   "draft_n": 431,
+   "draft_acc": 417,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 130383,
+    "prompt_ms": 36273.7,
+    "prompt_per_token_ms": 0.278,
+    "prompt_per_second": 3594.4,
+    "predicted_n": 512,
+    "predicted_ms": 3437.8,
+    "predicted_per_token_ms": 6.714,
+    "predicted_per_second": 148.9,
+    "draft_n": 431,
+    "draft_n_accepted": 417
+   },
+   "wall_s": 39.93,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 130383,
+    "completion_tokens": 512,
+    "total_tokens": 130895,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n    if not isinstance(args, list):\n        return\n    out, value, i = [], None, 0\n    while i < len(args):\n        a = args[i]\n        if a == \"--reas"
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "edit",
+   "depth": 131072,
+   "repeat": 2,
+   "prompt_n": 130404,
+   "cache_n": 0,
+   "prefill_tok_s": 3611.7,
+   "decode_tok_s": 151.7,
+   "predicted_n": 512,
+   "draft_n": 438,
+   "draft_acc": 410,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 130404,
+    "prompt_ms": 36105.7,
+    "prompt_per_token_ms": 0.277,
+    "prompt_per_second": 3611.7,
+    "predicted_n": 512,
+    "predicted_ms": 3375.4,
+    "predicted_per_token_ms": 6.593,
+    "predicted_per_second": 151.7,
+    "draft_n": 438,
+    "draft_n_accepted": 410
+   },
+   "wall_s": 39.7,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 130404,
+    "completion_tokens": 512,
+    "total_tokens": 130916,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n# Lifts a reasoning effort argument from engine args to config key.\ndef lift_reasoning_effort_arg(cfg: dict) -> None:\n    \"\"\"#1641: \"--reasoning-effor"
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "ru",
+   "depth": 2048,
+   "repeat": 0,
+   "prompt_n": 2060,
+   "cache_n": 0,
+   "prefill_tok_s": 558.5,
+   "decode_tok_s": 87.0,
+   "predicted_n": 512,
+   "draft_n": 426,
+   "draft_acc": 253,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 2060,
+    "prompt_ms": 3688.4,
+    "prompt_per_token_ms": 1.79,
+    "prompt_per_second": 558.5,
+    "predicted_n": 512,
+    "predicted_ms": 5887.1,
+    "predicted_per_token_ms": 11.498,
+    "predicted_per_second": 87.0,
+    "draft_n": 426,
+    "draft_n_accepted": 253
+   },
+   "wall_s": 9.59,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 2060,
+    "completion_tokens": 512,
+    "total_tokens": 2572,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "**\u0410\u0440\u0445\u0438\u0442\u0435\u043a\u0442\u0443\u0440\u0430 \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u0434\u0438\u0442\u0435\u043b\u044c\u043d\u043e\u0441\u0442\u0438 \u0438 \u0446\u0435\u043b\u043e\u0441\u0442\u043d\u043e\u0441\u0442\u0438 \u0434\u0430\u043d\u043d\u044b\u0445: \u0413\u043b\u0443\u0431\u043e\u043a\u0438\u0439 \u0430\u043d\u0430\u043b\u0438\u0437 \u0438\u043d\u0434\u0435\u043a\u0441\u043e\u0432, B-\u0434\u0435\u0440\u0435\u0432\u044c\u0435\u0432, \u0445\u0435\u0448-\u0442\u0430\u0431\u043b\u0438\u0446, \u0442\u0440\u0430\u043d\u0437\u0430\u043a\u0446\u0438\u0439 \u0438 \u0440\u0435\u043f\u043b\u0438\u043a\u0430\u0446\u0438\u0438 \u0432 \u0441\u043e\u0432\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0445 \u0441\u0438\u0441\u0442\u0435\u043c\u0430\u0445 \u0443\u043f\u0440\u0430\u0432\u043b\u0435\u043d"
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "ru",
+   "depth": 2048,
+   "repeat": 1,
+   "prompt_n": 2051,
+   "cache_n": 0,
+   "prefill_tok_s": 702.6,
+   "decode_tok_s": 113.9,
+   "predicted_n": 512,
+   "draft_n": 425,
+   "draft_acc": 256,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 2051,
+    "prompt_ms": 2919.0,
+    "prompt_per_token_ms": 1.423,
+    "prompt_per_second": 702.6,
+    "predicted_n": 512,
+    "predicted_ms": 4496.5,
+    "predicted_per_token_ms": 8.782,
+    "predicted_per_second": 113.9,
+    "draft_n": 425,
+    "draft_n_accepted": 256
+   },
+   "wall_s": 7.43,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 2051,
+    "completion_tokens": 512,
+    "total_tokens": 2563,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "**\u0410\u0440\u0445\u0438\u0442\u0435\u043a\u0442\u0443\u0440\u0430 \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u0434\u0438\u0442\u0435\u043b\u044c\u043d\u043e\u0441\u0442\u0438 \u0438 \u043d\u0430\u0434\u0435\u0436\u043d\u043e\u0441\u0442\u0438: \u0413\u043b\u0443\u0431\u043e\u043a\u0438\u0439 \u0430\u043d\u0430\u043b\u0438\u0437 \u0438\u043d\u0434\u0435\u043a\u0441\u043e\u0432, \u0442\u0440\u0430\u043d\u0437\u0430\u043a\u0446\u0438\u0439 \u0438 \u0440\u0435\u043f\u043b\u0438\u043a\u0430\u0446\u0438\u0438 \u0432 \u0441\u043e\u0432\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0445 \u0441\u0438\u0441\u0442\u0435\u043c\u0430\u0445 \u0443\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u044f \u0431\u0430\u0437\u0430\u043c\u0438 \u0434\u0430\u043d\u043d\u044b\u0445**\n\n\u0421\u043e\u0432\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0435 "
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "ru",
+   "depth": 2048,
+   "repeat": 2,
+   "prompt_n": 2045,
+   "cache_n": 0,
+   "prefill_tok_s": 690.6,
+   "decode_tok_s": 113.6,
+   "predicted_n": 512,
+   "draft_n": 433,
+   "draft_acc": 254,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 2045,
+    "prompt_ms": 2961.1,
+    "prompt_per_token_ms": 1.448,
+    "prompt_per_second": 690.6,
+    "predicted_n": 512,
+    "predicted_ms": 4507.4,
+    "predicted_per_token_ms": 8.804,
+    "predicted_per_second": 113.6,
+    "draft_n": 433,
+    "draft_n_accepted": 254
+   },
+   "wall_s": 7.48,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 2045,
+    "completion_tokens": 512,
+    "total_tokens": 2557,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "# \u0410\u0440\u0445\u0438\u0442\u0435\u043a\u0442\u0443\u0440\u0430 \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u0434\u0438\u0442\u0435\u043b\u044c\u043d\u043e\u0441\u0442\u0438 \u0438 \u0446\u0435\u043b\u043e\u0441\u0442\u043d\u043e\u0441\u0442\u0438 \u0434\u0430\u043d\u043d\u044b\u0445: \u0413\u043b\u0443\u0431\u043e\u043a\u0438\u0439 \u0430\u043d\u0430\u043b\u0438\u0437 \u0438\u043d\u0434\u0435\u043a\u0441\u043e\u0432, B-\u0434\u0435\u0440\u0435\u0432\u044c\u0435\u0432, \u0445\u0435\u0448-\u0442\u0430\u0431\u043b\u0438\u0446, \u0442\u0440\u0430\u043d\u0437\u0430\u043a\u0446\u0438\u0439 \u0438 \u0440\u0435\u043f\u043b\u0438\u043a\u0430\u0446\u0438\u0438\n\n\u0421\u043e\u0432\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0435 \u0441\u0438\u0441\u0442\u0435\u043c\u044b \u0443\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u044f"
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "ru",
+   "depth": 16384,
+   "repeat": 0,
+   "prompt_n": 16285,
+   "cache_n": 0,
+   "prefill_tok_s": 2511.5,
+   "decode_tok_s": 117.3,
+   "predicted_n": 512,
+   "draft_n": 428,
+   "draft_acc": 259,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16285,
+    "prompt_ms": 6484.1,
+    "prompt_per_token_ms": 0.398,
+    "prompt_per_second": 2511.5,
+    "predicted_n": 512,
+    "predicted_ms": 4364.0,
+    "predicted_per_token_ms": 8.523,
+    "predicted_per_second": 117.3,
+    "draft_n": 428,
+    "draft_n_accepted": 259
+   },
+   "wall_s": 10.88,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 16285,
+    "completion_tokens": 512,
+    "total_tokens": 16797,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "**\u0410\u0440\u0445\u0438\u0442\u0435\u043a\u0442\u0443\u0440\u0430 \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u0434\u0438\u0442\u0435\u043b\u044c\u043d\u043e\u0441\u0442\u0438 \u0438 \u0446\u0435\u043b\u043e\u0441\u0442\u043d\u043e\u0441\u0442\u0438 \u0434\u0430\u043d\u043d\u044b\u0445: \u0413\u043b\u0443\u0431\u043e\u043a\u0438\u0439 \u0430\u043d\u0430\u043b\u0438\u0437 \u0438\u043d\u0434\u0435\u043a\u0441\u043e\u0432, B-\u0434\u0435\u0440\u0435\u0432\u044c\u0435\u0432, \u0445\u0435\u0448-\u0442\u0430\u0431\u043b\u0438\u0446, \u0442\u0440\u0430\u043d\u0437\u0430\u043a\u0446\u0438\u0439 \u0438 \u0440\u0435\u043f\u043b\u0438\u043a\u0430\u0446\u0438\u0438 \u0432 \u0441\u043e\u0432\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0445 \u0441\u0438\u0441\u0442\u0435\u043c\u0430\u0445 \u0443\u043f\u0440\u0430\u0432\u043b\u0435\u043d"
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "ru",
+   "depth": 16384,
+   "repeat": 1,
+   "prompt_n": 16299,
+   "cache_n": 0,
+   "prefill_tok_s": 2549.7,
+   "decode_tok_s": 111.4,
+   "predicted_n": 512,
+   "draft_n": 434,
+   "draft_acc": 247,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16299,
+    "prompt_ms": 6392.5,
+    "prompt_per_token_ms": 0.392,
+    "prompt_per_second": 2549.7,
+    "predicted_n": 512,
+    "predicted_ms": 4597.4,
+    "predicted_per_token_ms": 8.979,
+    "predicted_per_second": 111.4,
+    "draft_n": 434,
+    "draft_n_accepted": 247
+   },
+   "wall_s": 11.03,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 16299,
+    "completion_tokens": 512,
+    "total_tokens": 16811,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "**\u0410\u0440\u0445\u0438\u0442\u0435\u043a\u0442\u0443\u0440\u0430 \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u0434\u0438\u0442\u0435\u043b\u044c\u043d\u043e\u0441\u0442\u0438 \u0438 \u0446\u0435\u043b\u043e\u0441\u0442\u043d\u043e\u0441\u0442\u0438 \u0434\u0430\u043d\u043d\u044b\u0445: \u0413\u043b\u0443\u0431\u043e\u043a\u0438\u0439 \u0430\u043d\u0430\u043b\u0438\u0437 \u0438\u043d\u0434\u0435\u043a\u0441\u043e\u0432, B-\u0434\u0435\u0440\u0435\u0432\u044c\u0435\u0432, \u0445\u0435\u0448-\u0442\u0430\u0431\u043b\u0438\u0446, \u0442\u0440\u0430\u043d\u0437\u0430\u043a\u0446\u0438\u0439 \u0438 \u0440\u0435\u043f\u043b\u0438\u043a\u0430\u0446\u0438\u0438 \u0432 \u0441\u043e\u0432\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0445 \u0441\u0438\u0441\u0442\u0435\u043c\u0430\u0445 \u0443\u043f\u0440\u0430\u0432\u043b\u0435\u043d"
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "ru",
+   "depth": 16384,
+   "repeat": 2,
+   "prompt_n": 16303,
+   "cache_n": 0,
+   "prefill_tok_s": 2505.5,
+   "decode_tok_s": 117.7,
+   "predicted_n": 512,
+   "draft_n": 438,
+   "draft_acc": 263,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16303,
+    "prompt_ms": 6506.9,
+    "prompt_per_token_ms": 0.399,
+    "prompt_per_second": 2505.5,
+    "predicted_n": 512,
+    "predicted_ms": 4350.0,
+    "predicted_per_token_ms": 8.496,
+    "predicted_per_second": 117.7,
+    "draft_n": 438,
+    "draft_n_accepted": 263
+   },
+   "wall_s": 10.89,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 16303,
+    "completion_tokens": 512,
+    "total_tokens": 16815,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "**\u0410\u0440\u0445\u0438\u0442\u0435\u043a\u0442\u0443\u0440\u0430 \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u0434\u0438\u0442\u0435\u043b\u044c\u043d\u043e\u0441\u0442\u0438 \u0438 \u0446\u0435\u043b\u043e\u0441\u0442\u043d\u043e\u0441\u0442\u0438 \u0434\u0430\u043d\u043d\u044b\u0445: \u0413\u043b\u0443\u0431\u043e\u043a\u0438\u0439 \u0430\u043d\u0430\u043b\u0438\u0437 \u0438\u043d\u0434\u0435\u043a\u0441\u043e\u0432, B-\u0434\u0435\u0440\u0435\u0432\u044c\u0435\u0432, \u0445\u0435\u0448-\u0442\u0430\u0431\u043b\u0438\u0446, \u0442\u0440\u0430\u043d\u0437\u0430\u043a\u0446\u0438\u0439 \u0438 \u0440\u0435\u043f\u043b\u0438\u043a\u0430\u0446\u0438\u0438**\n\n\u0421\u043e\u0432\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0435 \u0438\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u043e\u043d\u043d\u044b\u0435 \u0441"
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "ru",
+   "depth": 65536,
+   "repeat": 0,
+   "prompt_n": 65148,
+   "cache_n": 0,
+   "prefill_tok_s": 3493.0,
+   "decode_tok_s": 113.9,
+   "predicted_n": 512,
+   "draft_n": 468,
+   "draft_acc": 262,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 65148,
+    "prompt_ms": 18651.2,
+    "prompt_per_token_ms": 0.286,
+    "prompt_per_second": 3493.0,
+    "predicted_n": 512,
+    "predicted_ms": 4496.5,
+    "predicted_per_token_ms": 8.782,
+    "predicted_per_second": 113.9,
+    "draft_n": 468,
+    "draft_n_accepted": 262
+   },
+   "wall_s": 23.24,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 65148,
+    "completion_tokens": 512,
+    "total_tokens": 65660,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "**\u0410\u0440\u0445\u0438\u0442\u0435\u043a\u0442\u0443\u0440\u0430 \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u0434\u0438\u0442\u0435\u043b\u044c\u043d\u043e\u0441\u0442\u0438 \u0438 \u0446\u0435\u043b\u043e\u0441\u0442\u043d\u043e\u0441\u0442\u0438 \u0434\u0430\u043d\u043d\u044b\u0445: \u0413\u043b\u0443\u0431\u043e\u043a\u0438\u0439 \u0430\u043d\u0430\u043b\u0438\u0437 \u0438\u043d\u0434\u0435\u043a\u0441\u043e\u0432, B-\u0434\u0435\u0440\u0435\u0432\u044c\u0435\u0432, \u0445\u0435\u0448-\u0442\u0430\u0431\u043b\u0438\u0446, \u0442\u0440\u0430\u043d\u0437\u0430\u043a\u0446\u0438\u0439 \u0438 \u0440\u0435\u043f\u043b\u0438\u043a\u0430\u0446\u0438\u0438 \u0432 \u0441\u0438\u0441\u0442\u0435\u043c\u0430\u0445 \u0443\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u044f \u0431\u0430\u0437\u0430\u043c\u0438 \u0434\u0430"
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "ru",
+   "depth": 65536,
+   "repeat": 1,
+   "prompt_n": 65126,
+   "cache_n": 0,
+   "prefill_tok_s": 3434.4,
+   "decode_tok_s": 118.6,
+   "predicted_n": 512,
+   "draft_n": 427,
+   "draft_acc": 271,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 65126,
+    "prompt_ms": 18962.6,
+    "prompt_per_token_ms": 0.291,
+    "prompt_per_second": 3434.4,
+    "predicted_n": 512,
+    "predicted_ms": 4317.5,
+    "predicted_per_token_ms": 8.433,
+    "predicted_per_second": 118.6,
+    "draft_n": 427,
+    "draft_n_accepted": 271
+   },
+   "wall_s": 23.37,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 65126,
+    "completion_tokens": 512,
+    "total_tokens": 65638,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "**\u0410\u0440\u0445\u0438\u0442\u0435\u043a\u0442\u0443\u0440\u0430 \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u0434\u0438\u0442\u0435\u043b\u044c\u043d\u043e\u0441\u0442\u0438 \u0438 \u043d\u0430\u0434\u0435\u0436\u043d\u043e\u0441\u0442\u0438: \u0413\u043b\u0443\u0431\u043e\u043a\u0438\u0439 \u0430\u043d\u0430\u043b\u0438\u0437 \u0438\u043d\u0434\u0435\u043a\u0441\u043e\u0432, B-\u0434\u0435\u0440\u0435\u0432\u044c\u0435\u0432, \u0445\u0435\u0448-\u0442\u0430\u0431\u043b\u0438\u0446, \u0442\u0440\u0430\u043d\u0437\u0430\u043a\u0446\u0438\u0439 \u0438 \u0440\u0435\u043f\u043b\u0438\u043a\u0430\u0446\u0438\u0438 \u0432 \u0441\u0438\u0441\u0442\u0435\u043c\u0430\u0445 \u0443\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u044f \u0431\u0430\u0437\u0430\u043c\u0438 \u0434\u0430\u043d\u043d\u044b\u0445**\n\n"
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "ru",
+   "depth": 65536,
+   "repeat": 2,
+   "prompt_n": 65130,
+   "cache_n": 0,
+   "prefill_tok_s": 3441.2,
+   "decode_tok_s": 114.1,
+   "predicted_n": 512,
+   "draft_n": 399,
+   "draft_acc": 251,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 65130,
+    "prompt_ms": 18926.4,
+    "prompt_per_token_ms": 0.291,
+    "prompt_per_second": 3441.2,
+    "predicted_n": 512,
+    "predicted_ms": 4486.5,
+    "predicted_per_token_ms": 8.763,
+    "predicted_per_second": 114.1,
+    "draft_n": 399,
+    "draft_n_accepted": 251
+   },
+   "wall_s": 23.51,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 65130,
+    "completion_tokens": 512,
+    "total_tokens": 65642,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "**\u0410\u0440\u0445\u0438\u0442\u0435\u043a\u0442\u0443\u0440\u0430 \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u0434\u0438\u0442\u0435\u043b\u044c\u043d\u043e\u0441\u0442\u0438 \u0438 \u043d\u0430\u0434\u0435\u0436\u043d\u043e\u0441\u0442\u0438: \u0413\u043b\u0443\u0431\u043e\u043a\u0438\u0439 \u0430\u043d\u0430\u043b\u0438\u0437 \u0438\u043d\u0434\u0435\u043a\u0441\u043e\u0432, B-\u0434\u0435\u0440\u0435\u0432\u044c\u0435\u0432, \u0445\u0435\u0448-\u0442\u0430\u0431\u043b\u0438\u0446, \u0442\u0440\u0430\u043d\u0437\u0430\u043a\u0446\u0438\u0439 \u0438 \u0440\u0435\u043f\u043b\u0438\u043a\u0430\u0446\u0438\u0438 \u0432 \u0441\u0438\u0441\u0442\u0435\u043c\u0430\u0445 \u0443\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u044f \u0431\u0430\u0437\u0430\u043c\u0438 \u0434\u0430\u043d\u043d\u044b\u0445**\n\n"
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "ru",
+   "depth": 131072,
+   "repeat": 0,
+   "prompt_n": 130251,
+   "cache_n": 0,
+   "prefill_tok_s": 3555.8,
+   "decode_tok_s": 114.6,
+   "predicted_n": 512,
+   "draft_n": 427,
+   "draft_acc": 270,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 130251,
+    "prompt_ms": 36630.2,
+    "prompt_per_token_ms": 0.281,
+    "prompt_per_second": 3555.8,
+    "predicted_n": 512,
+    "predicted_ms": 4465.9,
+    "predicted_per_token_ms": 8.722,
+    "predicted_per_second": 114.6,
+    "draft_n": 427,
+    "draft_n_accepted": 270
+   },
+   "wall_s": 41.26,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 130251,
+    "completion_tokens": 512,
+    "total_tokens": 130763,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "# \u0410\u0440\u0445\u0438\u0442\u0435\u043a\u0442\u0443\u0440\u0430 \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u0434\u0438\u0442\u0435\u043b\u044c\u043d\u043e\u0441\u0442\u0438 \u0438 \u043d\u0430\u0434\u0435\u0436\u043d\u043e\u0441\u0442\u0438: \u0413\u043b\u0443\u0431\u043e\u043a\u0438\u0439 \u0430\u043d\u0430\u043b\u0438\u0437 \u0438\u043d\u0434\u0435\u043a\u0441\u043e\u0432, \u0442\u0440\u0430\u043d\u0437\u0430\u043a\u0446\u0438\u0439 \u0438 \u0440\u0435\u043f\u043b\u0438\u043a\u0430\u0446\u0438\u0438 \u0432 \u0441\u0438\u0441\u0442\u0435\u043c\u0430\u0445 \u0443\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u044f \u0431\u0430\u0437\u0430\u043c\u0438 \u0434\u0430\u043d\u043d\u044b\u0445\n\n\u0421\u043e\u0432\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0435 \u0441\u0438\u0441\u0442\u0435\u043c\u044b \u0443\u043f\u0440\u0430\u0432\u043b"
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "ru",
+   "depth": 131072,
+   "repeat": 1,
+   "prompt_n": 130270,
+   "cache_n": 0,
+   "prefill_tok_s": 3521.6,
+   "decode_tok_s": 111.8,
+   "predicted_n": 512,
+   "draft_n": 445,
+   "draft_acc": 264,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 130270,
+    "prompt_ms": 36991.9,
+    "prompt_per_token_ms": 0.284,
+    "prompt_per_second": 3521.6,
+    "predicted_n": 512,
+    "predicted_ms": 4579.7,
+    "predicted_per_token_ms": 8.945,
+    "predicted_per_second": 111.8,
+    "draft_n": 445,
+    "draft_n_accepted": 264
+   },
+   "wall_s": 41.73,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 130270,
+    "completion_tokens": 512,
+    "total_tokens": 130782,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "# \u0410\u0440\u0445\u0438\u0442\u0435\u043a\u0442\u0443\u0440\u0430 \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u0434\u0438\u0442\u0435\u043b\u044c\u043d\u043e\u0441\u0442\u0438 \u0438 \u043d\u0430\u0434\u0435\u0436\u043d\u043e\u0441\u0442\u0438: \u0413\u043b\u0443\u0431\u043e\u043a\u0438\u0439 \u0430\u043d\u0430\u043b\u0438\u0437 \u0438\u043d\u0434\u0435\u043a\u0441\u043e\u0432, B-\u0434\u0435\u0440\u0435\u0432\u044c\u0435\u0432, \u0445\u0435\u0448-\u0442\u0430\u0431\u043b\u0438\u0446, \u0442\u0440\u0430\u043d\u0437\u0430\u043a\u0446\u0438\u0439 \u0438 \u0440\u0435\u043f\u043b\u0438\u043a\u0430\u0446\u0438\u0438 \u0432 \u0441\u0438\u0441\u0442\u0435\u043c\u0430\u0445 \u0443\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u044f \u0431\u0430\u0437\u0430\u043c\u0438 \u0434\u0430\u043d\u043d\u044b\u0445\n\n\u0421\u043e"
+  },
+  {
+   "arm": "final-iq4xs-df2c05-cyr-mixr1",
+   "task": "ru",
+   "depth": 131072,
+   "repeat": 2,
+   "prompt_n": 130254,
+   "cache_n": 0,
+   "prefill_tok_s": 3542.0,
+   "decode_tok_s": 112.5,
+   "predicted_n": 512,
+   "draft_n": 432,
+   "draft_acc": 264,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 130254,
+    "prompt_ms": 36774.0,
+    "prompt_per_token_ms": 0.282,
+    "prompt_per_second": 3542.0,
+    "predicted_n": 512,
+    "predicted_ms": 4550.0,
+    "predicted_per_token_ms": 8.887,
+    "predicted_per_second": 112.5,
+    "draft_n": 432,
+    "draft_n_accepted": 264
+   },
+   "wall_s": 41.48,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 130254,
+    "completion_tokens": 512,
+    "total_tokens": 130766,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "**\u0410\u0440\u0445\u0438\u0442\u0435\u043a\u0442\u0443\u0440\u0430 \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u0434\u0438\u0442\u0435\u043b\u044c\u043d\u043e\u0441\u0442\u0438 \u0438 \u043d\u0430\u0434\u0435\u0436\u043d\u043e\u0441\u0442\u0438: \u0413\u043b\u0443\u0431\u043e\u043a\u0438\u0439 \u0430\u043d\u0430\u043b\u0438\u0437 \u0438\u043d\u0434\u0435\u043a\u0441\u043e\u0432, \u0442\u0440\u0430\u043d\u0437\u0430\u043a\u0446\u0438\u0439 \u0438 \u0440\u0435\u043f\u043b\u0438\u043a\u0430\u0446\u0438\u0438 \u0432 \u0441\u0438\u0441\u0442\u0435\u043c\u0430\u0445 \u0443\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u044f \u0431\u0430\u0437\u0430\u043c\u0438 \u0434\u0430\u043d\u043d\u044b\u0445**\n\n\u0421\u043e\u0432\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0435 \u0441\u0438\u0441\u0442\u0435\u043c\u044b \u0443\u043f\u0440\u0430"
+  }
+ ]
+}

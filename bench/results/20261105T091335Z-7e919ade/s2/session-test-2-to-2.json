@@ -1,0 +1,53 @@
+{
+ "turn1": {
+  "prompt_n": 27599,
+  "cache_n": 0,
+  "prefill_tok_s": 1669.2,
+  "decode_tok_s": 56.0,
+  "wall_s": 18.37
+ },
+ "save": {
+  "code": 500,
+  "seconds": 0.1,
+  "body": {
+   "error": {
+    "code": 500,
+    "message": "conversation snapshot: invalid K/V extent",
+    "type": "server_error",
+    "kind": "io"
+   }
+  }
+ },
+ "turn2_live": {
+  "prompt_n": 33,
+  "cache_n": 27693,
+  "prefill_tok_s": 93.8,
+  "decode_tok_s": 39.2,
+  "wall_s": 0.81
+ },
+ "restore": {
+  "code": 404,
+  "seconds": 0.0,
+  "body": {
+   "error": {
+    "code": 404,
+    "message": "no saved session named split-test-1793870296.sess",
+    "type": "invalid_request_error"
+   }
+  }
+ },
+ "turn2_after_restore": {
+  "prompt_n": 27726,
+  "cache_n": 0,
+  "prefill_tok_s": 1619.2,
+  "decode_tok_s": 33.4,
+  "wall_s": 17.75
+ },
+ "turn2_same_answer": false,
+ "answers": {
+  "turn1": "The reference text covers a diverse range of topics, including historical events such as World War II naval battles, the Korean War, and the Roman Empire, as well as meteorological details about various hurricanes and typhoons. Additionally, it provides biographical and career information on figures like Brock Lesnar, Clayton Kershaw, and Brad Stevens, alongside discussions of the film *American Beauty*, the city of Manila, and the history of ironclad warships.",
+  "turn2_live": "oxaziridines\ntemnospondyls\nbreech-loading",
+  "turn2_after_restore": "oxaziridines\ntemnospondyls\nironclads"
+ },
+ "session_file_bytes": null
+}

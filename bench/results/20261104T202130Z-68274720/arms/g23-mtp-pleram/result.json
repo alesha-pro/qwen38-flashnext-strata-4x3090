@@ -1,0 +1,505 @@
+{
+ "arm": {
+  "name": "g23-mtp-pleram",
+  "cfg": {
+   "drafting": "mtp",
+   "gpu": [
+    2,
+    3
+   ]
+  }
+ },
+ "argv": [
+  "/mnt/nvme/engines/strata/0.2.10/control/python/bin/python3",
+  "-u",
+  "-m",
+  "serve.server",
+  "--engine",
+  "strata",
+  "--config",
+  "/mnt/nvme/projects/qwen38-flashnext-unsloth-strata/runs/20261104T202130Z-68274720/arms/g23-mtp-pleram/config.json",
+  "--port",
+  "18442",
+  "--gpu",
+  "2,3"
+ ],
+ "cwd": "/mnt/nvme/engines/strata/0.2.10/control",
+ "engine_argv": [
+  "/mnt/nvme/engines/strata/0.2.10/engine/strata",
+  "--pack",
+  "/mnt/ssd/models/Qwen3.8-Flash-Next-unsloth-GGUF/d962012/packs/ud-q4_k_xl",
+  "--native",
+  "/mnt/ssd/models/Qwen3.8-Flash-Next-unsloth-GGUF/d962012/UD-Q4_K_XL/Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf",
+  "--expert-profile",
+  "/mnt/nvme/engines/strata/0.2.10/control/data/expert-profile.bin",
+  "--expert-cache",
+  "auto",
+  "--prefill",
+  "auto",
+  "--max-context",
+  "262144",
+  "--kv",
+  "int8",
+  "--mtp",
+  "/mnt/ssd/models/Qwen3.8-Flash-Next-unsloth-GGUF/d962012/mtp/rt",
+  "--spec",
+  "4"
+ ],
+ "env": {},
+ "power_limit_w": {
+  "2": 300.0,
+  "3": 300.0
+ },
+ "started": "2026-11-04T20:21:31Z",
+ "ready_s": 322.1,
+ "vram_peak_mib": {
+  "2": 23566,
+  "3": 24018
+ },
+ "rows": [
+  {
+   "arm": "g23-mtp-pleram",
+   "task": "essay",
+   "depth": 2048,
+   "repeat": 0,
+   "prompt_n": 2026,
+   "cache_n": 0,
+   "prefill_tok_s": 425.9,
+   "decode_tok_s": 82.3,
+   "predicted_n": 512,
+   "draft_n": 615,
+   "draft_acc": 306,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 2026,
+    "prompt_ms": 4757.1,
+    "prompt_per_token_ms": 2.348,
+    "prompt_per_second": 425.9,
+    "predicted_n": 512,
+    "predicted_ms": 6220.4,
+    "predicted_per_token_ms": 12.149,
+    "predicted_per_second": 82.3,
+    "draft_n": 615,
+    "draft_n_accepted": 306
+   },
+   "wall_s": 11.01,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 2026,
+    "completion_tokens": 512,
+    "total_tokens": 2538,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "# The Architecture of Data Integrity and Performance: A Technical Analysis of Indexes, B-Trees, Hash Tables, Transactions, and Replication\n\nIn the realm of mode"
+  },
+  {
+   "arm": "g23-mtp-pleram",
+   "task": "essay",
+   "depth": 2048,
+   "repeat": 1,
+   "prompt_n": 2017,
+   "cache_n": 0,
+   "prefill_tok_s": 450.5,
+   "decode_tok_s": 92.5,
+   "predicted_n": 512,
+   "draft_n": 653,
+   "draft_acc": 294,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 2017,
+    "prompt_ms": 4477.7,
+    "prompt_per_token_ms": 2.22,
+    "prompt_per_second": 450.5,
+    "predicted_n": 512,
+    "predicted_ms": 5536.6,
+    "predicted_per_token_ms": 10.814,
+    "predicted_per_second": 92.5,
+    "draft_n": 653,
+    "draft_n_accepted": 294
+   },
+   "wall_s": 10.03,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 2017,
+    "completion_tokens": 512,
+    "total_tokens": 2529,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "**The Architecture of Data Integrity and Performance: A Technical Analysis of Indexes, B-Trees, Hash Tables, Transactions, and Replication**\n\nIn the realm of mo"
+  },
+  {
+   "arm": "g23-mtp-pleram",
+   "task": "essay",
+   "depth": 16384,
+   "repeat": 0,
+   "prompt_n": 16251,
+   "cache_n": 0,
+   "prefill_tok_s": 2030.8,
+   "decode_tok_s": 94.7,
+   "predicted_n": 512,
+   "draft_n": 640,
+   "draft_acc": 297,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16251,
+    "prompt_ms": 8002.3,
+    "prompt_per_token_ms": 0.492,
+    "prompt_per_second": 2030.8,
+    "predicted_n": 512,
+    "predicted_ms": 5403.9,
+    "predicted_per_token_ms": 10.554,
+    "predicted_per_second": 94.7,
+    "draft_n": 640,
+    "draft_n_accepted": 297
+   },
+   "wall_s": 13.48,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 16251,
+    "completion_tokens": 512,
+    "total_tokens": 16763,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "# The Architecture of Data Integrity and Performance: A Technical Analysis of Indexes, B-Trees, Hash Tables, Transactions, and Replication\n\nIn the realm of mode"
+  },
+  {
+   "arm": "g23-mtp-pleram",
+   "task": "essay",
+   "depth": 16384,
+   "repeat": 1,
+   "prompt_n": 16265,
+   "cache_n": 0,
+   "prefill_tok_s": 2024.0,
+   "decode_tok_s": 95.6,
+   "predicted_n": 512,
+   "draft_n": 633,
+   "draft_acc": 303,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16265,
+    "prompt_ms": 8036.1,
+    "prompt_per_token_ms": 0.494,
+    "prompt_per_second": 2024.0,
+    "predicted_n": 512,
+    "predicted_ms": 5357.6,
+    "predicted_per_token_ms": 10.464,
+    "predicted_per_second": 95.6,
+    "draft_n": 633,
+    "draft_n_accepted": 303
+   },
+   "wall_s": 13.5,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 16265,
+    "completion_tokens": 512,
+    "total_tokens": 16777,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "**The Architecture of Data Integrity and Performance: A Technical Analysis of Database Indexes, B-Trees, Hash Tables, Transactions, and Replication**\n\nIn the re"
+  },
+  {
+   "arm": "g23-mtp-pleram",
+   "task": "essay",
+   "depth": 65536,
+   "repeat": 0,
+   "prompt_n": 65114,
+   "cache_n": 0,
+   "prefill_tok_s": 2903.9,
+   "decode_tok_s": 90.0,
+   "predicted_n": 512,
+   "draft_n": 636,
+   "draft_acc": 299,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 65114,
+    "prompt_ms": 22423.3,
+    "prompt_per_token_ms": 0.344,
+    "prompt_per_second": 2903.9,
+    "predicted_n": 512,
+    "predicted_ms": 5690.1,
+    "predicted_per_token_ms": 11.113,
+    "predicted_per_second": 90.0,
+    "draft_n": 636,
+    "draft_n_accepted": 299
+   },
+   "wall_s": 28.27,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 65114,
+    "completion_tokens": 512,
+    "total_tokens": 65626,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "# The Architecture of Data: A Technical Analysis of Database Indexes, B-Trees, Hash Tables, Transactions, and Replication\n\nModern software systems are defined b"
+  },
+  {
+   "arm": "g23-mtp-pleram",
+   "task": "essay",
+   "depth": 65536,
+   "repeat": 1,
+   "prompt_n": 65092,
+   "cache_n": 0,
+   "prefill_tok_s": 2856.7,
+   "decode_tok_s": 91.1,
+   "predicted_n": 512,
+   "draft_n": 636,
+   "draft_acc": 302,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 65092,
+    "prompt_ms": 22786.0,
+    "prompt_per_token_ms": 0.35,
+    "prompt_per_second": 2856.7,
+    "predicted_n": 512,
+    "predicted_ms": 5619.4,
+    "predicted_per_token_ms": 10.975,
+    "predicted_per_second": 91.1,
+    "draft_n": 636,
+    "draft_n_accepted": 302
+   },
+   "wall_s": 28.54,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 65092,
+    "completion_tokens": 512,
+    "total_tokens": 65604,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "# The Architecture of Data: A Technical Analysis of Database Indexes, B-Trees, Hash Tables, Transactions, and Replication\n\nModern software systems are defined b"
+  },
+  {
+   "arm": "g23-mtp-pleram",
+   "task": "code",
+   "depth": 2048,
+   "repeat": 0,
+   "prompt_n": 2025,
+   "cache_n": 0,
+   "prefill_tok_s": 406.5,
+   "decode_tok_s": 90.4,
+   "predicted_n": 512,
+   "draft_n": 504,
+   "draft_acc": 345,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 2025,
+    "prompt_ms": 4981.7,
+    "prompt_per_token_ms": 2.46,
+    "prompt_per_second": 406.5,
+    "predicted_n": 512,
+    "predicted_ms": 5662.7,
+    "predicted_per_token_ms": 11.06,
+    "predicted_per_second": 90.4,
+    "draft_n": 504,
+    "draft_n_accepted": 345
+   },
+   "wall_s": 10.66,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 2025,
+    "completion_tokens": 512,
+    "total_tokens": 2537,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n\"\"\"\nLRU Cache with TTL Expiry, Thread-Safe Wrapper, and Memoization Decorator.\n\nThis module provides:\n1. `LRUCache`: A Least Recently Used cache with "
+  },
+  {
+   "arm": "g23-mtp-pleram",
+   "task": "code",
+   "depth": 2048,
+   "repeat": 1,
+   "prompt_n": 2024,
+   "cache_n": 0,
+   "prefill_tok_s": 451.6,
+   "decode_tok_s": 100.1,
+   "predicted_n": 512,
+   "draft_n": 549,
+   "draft_acc": 329,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 2024,
+    "prompt_ms": 4481.9,
+    "prompt_per_token_ms": 2.214,
+    "prompt_per_second": 451.6,
+    "predicted_n": 512,
+    "predicted_ms": 5114.9,
+    "predicted_per_token_ms": 9.99,
+    "predicted_per_second": 100.1,
+    "draft_n": 549,
+    "draft_n_accepted": 329
+   },
+   "wall_s": 9.62,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 2024,
+    "completion_tokens": 512,
+    "total_tokens": 2536,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n\"\"\"\nLRU Cache with TTL Expiry, Thread-Safe Wrapper, and Memoization Decorator.\n\nThis module provides:\n1. LRUCacheWithTTL: A Least Recently Used cache "
+  },
+  {
+   "arm": "g23-mtp-pleram",
+   "task": "code",
+   "depth": 16384,
+   "repeat": 0,
+   "prompt_n": 16275,
+   "cache_n": 0,
+   "prefill_tok_s": 2041.2,
+   "decode_tok_s": 111.2,
+   "predicted_n": 512,
+   "draft_n": 492,
+   "draft_acc": 350,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16275,
+    "prompt_ms": 7973.1,
+    "prompt_per_token_ms": 0.49,
+    "prompt_per_second": 2041.2,
+    "predicted_n": 512,
+    "predicted_ms": 4602.3,
+    "predicted_per_token_ms": 8.989,
+    "predicted_per_second": 111.2,
+    "draft_n": 492,
+    "draft_n_accepted": 350
+   },
+   "wall_s": 12.62,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 16275,
+    "completion_tokens": 512,
+    "total_tokens": 16787,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n\"\"\"\nLRU Cache with TTL Expiry, Thread-Safety, and Memoization Decorator.\n\nThis module provides:\n1. `LRUCache`: A thread-safe Least Recently Used cache"
+  },
+  {
+   "arm": "g23-mtp-pleram",
+   "task": "code",
+   "depth": 16384,
+   "repeat": 1,
+   "prompt_n": 16264,
+   "cache_n": 0,
+   "prefill_tok_s": 2021.8,
+   "decode_tok_s": 110.2,
+   "predicted_n": 512,
+   "draft_n": 495,
+   "draft_acc": 348,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16264,
+    "prompt_ms": 8044.5,
+    "prompt_per_token_ms": 0.495,
+    "prompt_per_second": 2021.8,
+    "predicted_n": 512,
+    "predicted_ms": 4646.5,
+    "predicted_per_token_ms": 9.075,
+    "predicted_per_second": 110.2,
+    "draft_n": 495,
+    "draft_n_accepted": 348
+   },
+   "wall_s": 12.74,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 16264,
+    "completion_tokens": 512,
+    "total_tokens": 16776,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n\"\"\"\nLRU Cache with TTL Expiry, Thread-Safety, and Memoization Decorator.\n\nThis module provides:\n1. `LRUCache`: A thread-safe Least Recently Used cache"
+  },
+  {
+   "arm": "g23-mtp-pleram",
+   "task": "code",
+   "depth": 65536,
+   "repeat": 0,
+   "prompt_n": 65100,
+   "cache_n": 0,
+   "prefill_tok_s": 2911.4,
+   "decode_tok_s": 102.6,
+   "predicted_n": 512,
+   "draft_n": 525,
+   "draft_acc": 336,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 65100,
+    "prompt_ms": 22360.4,
+    "prompt_per_token_ms": 0.343,
+    "prompt_per_second": 2911.4,
+    "predicted_n": 512,
+    "predicted_ms": 4990.8,
+    "predicted_per_token_ms": 9.748,
+    "predicted_per_second": 102.6,
+    "draft_n": 525,
+    "draft_n_accepted": 336
+   },
+   "wall_s": 27.47,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 65100,
+    "completion_tokens": 512,
+    "total_tokens": 65612,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n\"\"\"\nLRU Cache with TTL Expiry, Thread-Safety, and Memoization Decorator.\n\nThis module provides:\n1. `LRUCache`: A thread-safe Least Recently Used cache"
+  },
+  {
+   "arm": "g23-mtp-pleram",
+   "task": "code",
+   "depth": 65536,
+   "repeat": 1,
+   "prompt_n": 65110,
+   "cache_n": 0,
+   "prefill_tok_s": 2873.6,
+   "decode_tok_s": 106.4,
+   "predicted_n": 512,
+   "draft_n": 507,
+   "draft_acc": 342,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 65110,
+    "prompt_ms": 22657.7,
+    "prompt_per_token_ms": 0.348,
+    "prompt_per_second": 2873.6,
+    "predicted_n": 512,
+    "predicted_ms": 4810.9,
+    "predicted_per_token_ms": 9.396,
+    "predicted_per_second": 106.4,
+    "draft_n": 507,
+    "draft_n_accepted": 342
+   },
+   "wall_s": 27.58,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 65110,
+    "completion_tokens": 512,
+    "total_tokens": 65622,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n\"\"\"\nLRU Cache with TTL Expiry, Thread-Safety, and Memoization Decorator.\n\nThis module provides:\n1. `LRUCache`: A thread-safe Least Recently Used cache"
+  }
+ ]
+}

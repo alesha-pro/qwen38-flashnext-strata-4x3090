@@ -1,0 +1,292 @@
+{
+ "arm": {
+  "name": "g23-off-pledirect",
+  "cfg": {
+   "drafting": "off",
+   "gpu": [
+    2,
+    3
+   ]
+  },
+  "extra_args": [
+   "--ple-io",
+   "direct"
+  ],
+  "tasks": [
+   "essay"
+  ]
+ },
+ "argv": [
+  "/mnt/nvme/engines/strata/0.2.10/control/python/bin/python3",
+  "-u",
+  "-m",
+  "serve.server",
+  "--engine",
+  "strata",
+  "--config",
+  "/mnt/nvme/projects/qwen38-flashnext-unsloth-strata/runs/20261104T202130Z-68274720/arms/g23-off-pledirect/config.json",
+  "--port",
+  "18442",
+  "--gpu",
+  "2,3"
+ ],
+ "cwd": "/mnt/nvme/engines/strata/0.2.10/control",
+ "engine_argv": [
+  "/mnt/nvme/engines/strata/0.2.10/engine/strata",
+  "--pack",
+  "/mnt/ssd/models/Qwen3.8-Flash-Next-unsloth-GGUF/d962012/packs/ud-q4_k_xl",
+  "--native",
+  "/mnt/ssd/models/Qwen3.8-Flash-Next-unsloth-GGUF/d962012/UD-Q4_K_XL/Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf",
+  "--expert-profile",
+  "/mnt/nvme/engines/strata/0.2.10/control/data/expert-profile.bin",
+  "--expert-cache",
+  "auto",
+  "--prefill",
+  "auto",
+  "--max-context",
+  "262144",
+  "--kv",
+  "int8",
+  "--mtp",
+  "/mnt/ssd/models/Qwen3.8-Flash-Next-unsloth-GGUF/d962012/mtp/rt",
+  "--spec",
+  "4",
+  "--ple-io",
+  "direct"
+ ],
+ "env": {},
+ "power_limit_w": {
+  "2": 300.0,
+  "3": 300.0
+ },
+ "started": "2026-11-04T20:50:41Z",
+ "ready_s": 36.0,
+ "vram_peak_mib": {
+  "2": 23574,
+  "3": 23736
+ },
+ "rows": [
+  {
+   "arm": "g23-off-pledirect",
+   "task": "essay",
+   "depth": 2048,
+   "repeat": 0,
+   "prompt_n": 2026,
+   "cache_n": 0,
+   "prefill_tok_s": 437.0,
+   "decode_tok_s": 70.3,
+   "predicted_n": 512,
+   "draft_n": 11,
+   "draft_acc": 2,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 2026,
+    "prompt_ms": 4635.8,
+    "prompt_per_token_ms": 2.288,
+    "prompt_per_second": 437.0,
+    "predicted_n": 512,
+    "predicted_ms": 7278.6,
+    "predicted_per_token_ms": 14.216,
+    "predicted_per_second": 70.3,
+    "draft_n": 11,
+    "draft_n_accepted": 2
+   },
+   "wall_s": 11.95,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 2026,
+    "completion_tokens": 512,
+    "total_tokens": 2538,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "# The Architecture of Data Integrity and Performance: A Technical Analysis of Indexes, B-Trees, Hash Tables, Transactions, and Replication\n\nIn the realm of mode"
+  },
+  {
+   "arm": "g23-off-pledirect",
+   "task": "essay",
+   "depth": 2048,
+   "repeat": 1,
+   "prompt_n": 2017,
+   "cache_n": 0,
+   "prefill_tok_s": 469.2,
+   "decode_tok_s": 75.8,
+   "predicted_n": 512,
+   "draft_n": 2,
+   "draft_acc": 0,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 2017,
+    "prompt_ms": 4299.1,
+    "prompt_per_token_ms": 2.131,
+    "prompt_per_second": 469.2,
+    "predicted_n": 512,
+    "predicted_ms": 6752.2,
+    "predicted_per_token_ms": 13.188,
+    "predicted_per_second": 75.8,
+    "draft_n": 2,
+    "draft_n_accepted": 0
+   },
+   "wall_s": 11.07,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 2017,
+    "completion_tokens": 512,
+    "total_tokens": 2529,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "**The Architecture of Data Integrity and Performance: A Technical Analysis of Indexes, B-Trees, Hash Tables, Transactions, and Replication**\n\nIn the realm of mo"
+  },
+  {
+   "arm": "g23-off-pledirect",
+   "task": "essay",
+   "depth": 16384,
+   "repeat": 0,
+   "prompt_n": 16251,
+   "cache_n": 0,
+   "prefill_tok_s": 2123.4,
+   "decode_tok_s": 75.2,
+   "predicted_n": 512,
+   "draft_n": 4,
+   "draft_acc": 0,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16251,
+    "prompt_ms": 7653.2,
+    "prompt_per_token_ms": 0.471,
+    "prompt_per_second": 2123.4,
+    "predicted_n": 512,
+    "predicted_ms": 6804.5,
+    "predicted_per_token_ms": 13.29,
+    "predicted_per_second": 75.2,
+    "draft_n": 4,
+    "draft_n_accepted": 0
+   },
+   "wall_s": 14.53,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 16251,
+    "completion_tokens": 512,
+    "total_tokens": 16763,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "# The Architecture of Data Integrity and Performance: A Technical Analysis of Indexes, B-Trees, Hash Tables, Transactions, and Replication\n\nIn the realm of mode"
+  },
+  {
+   "arm": "g23-off-pledirect",
+   "task": "essay",
+   "depth": 16384,
+   "repeat": 1,
+   "prompt_n": 16265,
+   "cache_n": 0,
+   "prefill_tok_s": 2145.5,
+   "decode_tok_s": 74.5,
+   "predicted_n": 512,
+   "draft_n": 7,
+   "draft_acc": 2,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16265,
+    "prompt_ms": 7581.1,
+    "prompt_per_token_ms": 0.466,
+    "prompt_per_second": 2145.5,
+    "predicted_n": 512,
+    "predicted_ms": 6869.8,
+    "predicted_per_token_ms": 13.418,
+    "predicted_per_second": 74.5,
+    "draft_n": 7,
+    "draft_n_accepted": 2
+   },
+   "wall_s": 14.55,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 16265,
+    "completion_tokens": 512,
+    "total_tokens": 16777,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "**The Architecture of Data Integrity and Performance: A Technical Analysis of Database Indexes, B-Trees, Hash Tables, Transactions, and Replication**\n\nIn the mo"
+  },
+  {
+   "arm": "g23-off-pledirect",
+   "task": "essay",
+   "depth": 65536,
+   "repeat": 0,
+   "prompt_n": 65114,
+   "cache_n": 0,
+   "prefill_tok_s": 3044.1,
+   "decode_tok_s": 73.7,
+   "predicted_n": 512,
+   "draft_n": 1,
+   "draft_acc": 0,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 65114,
+    "prompt_ms": 21390.0,
+    "prompt_per_token_ms": 0.329,
+    "prompt_per_second": 3044.1,
+    "predicted_n": 512,
+    "predicted_ms": 6950.3,
+    "predicted_per_token_ms": 13.575,
+    "predicted_per_second": 73.7,
+    "draft_n": 1,
+    "draft_n_accepted": 0
+   },
+   "wall_s": 28.49,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 65114,
+    "completion_tokens": 512,
+    "total_tokens": 65626,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "# The Architecture of Data: A Technical Analysis of Database Indexes, B-Trees, Hash Tables, Transactions, and Replication\n\nModern software systems are defined b"
+  },
+  {
+   "arm": "g23-off-pledirect",
+   "task": "essay",
+   "depth": 65536,
+   "repeat": 1,
+   "prompt_n": 65092,
+   "cache_n": 0,
+   "prefill_tok_s": 2991.0,
+   "decode_tok_s": 73.3,
+   "predicted_n": 512,
+   "draft_n": 1,
+   "draft_acc": 0,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 65092,
+    "prompt_ms": 21762.7,
+    "prompt_per_token_ms": 0.334,
+    "prompt_per_second": 2991.0,
+    "predicted_n": 512,
+    "predicted_ms": 6981.1,
+    "predicted_per_token_ms": 13.635,
+    "predicted_per_second": 73.3,
+    "draft_n": 1,
+    "draft_n_accepted": 0
+   },
+   "wall_s": 28.87,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 65092,
+    "completion_tokens": 512,
+    "total_tokens": 65604,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "# The Architecture of Data: A Technical Analysis of Database Indexes, B-Trees, Hash Tables, Transactions, and Replication\n\nModern software systems are defined b"
+  }
+ ]
+}

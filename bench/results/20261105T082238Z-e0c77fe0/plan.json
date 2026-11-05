@@ -1,0 +1,76 @@
+{
+ "base_config": "/mnt/nvme/projects/qwen38-flashnext-unsloth-strata/configs/service-20261105.json",
+ "control": "/mnt/nvme/engines/strata/0.2.10/control",
+ "python": "/mnt/nvme/engines/strata/0.2.10/control/python/bin/python3",
+ "tokenizer": "/mnt/ssd/models/Qwen3.8-Flash-Next-unsloth-GGUF/d962012/packs/ud-iq4_xs/tokenizer",
+ "port": 18442,
+ "gpus": "2,3",
+ "depths": [
+  16384,
+  65536
+ ],
+ "repeat": 3,
+ "max_new": 512,
+ "tasks": [
+  "essay",
+  "code",
+  "ru"
+ ],
+ "arms": [
+  {
+   "name": "svc-g2",
+   "gpus": "2,3",
+   "cfg": {
+    "gpu": [
+     2,
+     3
+    ]
+   }
+  },
+  {
+   "name": "svc-g2-kvres32k",
+   "gpus": "2,3",
+   "cfg": {
+    "gpu": [
+     2,
+     3
+    ]
+   },
+   "set_args": {
+    "--kv-resident": "32768"
+   }
+  },
+  {
+   "name": "svc-g1",
+   "gpus": "2",
+   "cfg": {
+    "gpu": [
+     2
+    ]
+   }
+  },
+  {
+   "name": "svc-g3",
+   "gpus": "0,2,3",
+   "cfg": {
+    "gpu": [
+     0,
+     2,
+     3
+    ]
+   }
+  },
+  {
+   "name": "svc-g4",
+   "gpus": "0,1,2,3",
+   "cfg": {
+    "gpu": [
+     0,
+     1,
+     2,
+     3
+    ]
+   }
+  }
+ ]
+}

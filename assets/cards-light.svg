@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 460" width="920" height="460" role="img" aria-labelledby="t d" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+<title id="t">Same config on 1, 2, 3 and 4 cards</title><desc id="d">Grouped bars: decode tokens per second at 16K context on 1, 2, 3 and 4 RTX 3090 for code, English prose and Russian.</desc>
+<rect width="920" height="460" rx="14" fill="#fcfcfb"/>
+<text x="24" y="44" font-size="22" font-weight="650" fill="#0b0b0b">Same config on 1, 2, 3 and 4 cards</text>
+<text x="24" y="70" font-size="14" fill="#52514e">Decode at 16K context. Layer split across cards; the expert cache grows with VRAM</text>
+<rect x="24" y="88" width="14" height="14" rx="3" fill="#86b6ef"/>
+<text x="44" y="100" font-size="13" fill="#52514e">1 card</text>
+<rect x="118" y="88" width="14" height="14" rx="3" fill="#3987e5"/>
+<text x="138" y="100" font-size="13" fill="#52514e">2 cards</text>
+<rect x="220" y="88" width="14" height="14" rx="3" fill="#1c5cab"/>
+<text x="240" y="100" font-size="13" fill="#52514e">3 cards</text>
+<rect x="322" y="88" width="14" height="14" rx="3" fill="#0d366b"/>
+<text x="342" y="100" font-size="13" fill="#52514e">4 cards</text>
+<line x1="64" x2="896" y1="390.0" y2="390.0" stroke="#e6e5e1" stroke-width="1"/>
+<text x="54" y="394.0" font-size="12" text-anchor="end" fill="#52514e">0</text>
+<line x1="64" x2="896" y1="315.1" y2="315.1" stroke="#e6e5e1" stroke-width="1"/>
+<text x="54" y="319.1" font-size="12" text-anchor="end" fill="#52514e">50</text>
+<line x1="64" x2="896" y1="240.3" y2="240.3" stroke="#e6e5e1" stroke-width="1"/>
+<text x="54" y="244.3" font-size="12" text-anchor="end" fill="#52514e">100</text>
+<line x1="64" x2="896" y1="165.4" y2="165.4" stroke="#e6e5e1" stroke-width="1"/>
+<text x="54" y="169.4" font-size="12" text-anchor="end" fill="#52514e">150</text>
+<text x="18" y="140" font-size="12" fill="#52514e">tok/s</text>
+<path d="M147.7,390.0 V228.8 Q147.7,224.8 151.7,224.8 H169.7 Q173.7,224.8 173.7,228.8 V390.0 Z" fill="#86b6ef"><title>Code, 1 card: 110 tok/s</title></path>
+<path d="M175.7,390.0 V178.0 Q175.7,174.0 179.7,174.0 H197.7 Q201.7,174.0 201.7,178.0 V390.0 Z" fill="#3987e5"><title>Code, 2 cards: 144 tok/s</title></path>
+<path d="M203.7,390.0 V164.6 Q203.7,160.6 207.7,160.6 H225.7 Q229.7,160.6 229.7,164.6 V390.0 Z" fill="#1c5cab"><title>Code, 3 cards: 153 tok/s</title></path>
+<path d="M231.7,390.0 V171.2 Q231.7,167.2 235.7,167.2 H253.7 Q257.7,167.2 257.7,171.2 V390.0 Z" fill="#0d366b"><title>Code, 4 cards: 149 tok/s</title></path>
+<text x="202.7" y="150.6" font-size="14" font-weight="600" text-anchor="middle" fill="#0b0b0b">2nd card +31%</text>
+<text x="202.7" y="414" font-size="14" text-anchor="middle" fill="#0b0b0b">Code</text>
+<path d="M425.0,390.0 V257.3 Q425.0,253.3 429.0,253.3 H447.0 Q451.0,253.3 451.0,257.3 V390.0 Z" fill="#86b6ef"><title>English prose, 1 card: 91 tok/s</title></path>
+<path d="M453.0,390.0 V206.0 Q453.0,202.0 457.0,202.0 H475.0 Q479.0,202.0 479.0,206.0 V390.0 Z" fill="#3987e5"><title>English prose, 2 cards: 126 tok/s</title></path>
+<path d="M481.0,390.0 V202.5 Q481.0,198.5 485.0,198.5 H503.0 Q507.0,198.5 507.0,202.5 V390.0 Z" fill="#1c5cab"><title>English prose, 3 cards: 128 tok/s</title></path>
+<path d="M509.0,390.0 V209.2 Q509.0,205.2 513.0,205.2 H531.0 Q535.0,205.2 535.0,209.2 V390.0 Z" fill="#0d366b"><title>English prose, 4 cards: 123 tok/s</title></path>
+<text x="480.0" y="188.5" font-size="14" font-weight="600" text-anchor="middle" fill="#0b0b0b">2nd card +38%</text>
+<text x="480.0" y="414" font-size="14" text-anchor="middle" fill="#0b0b0b">English prose</text>
+<path d="M702.3,390.0 V263.6 Q702.3,259.6 706.3,259.6 H724.3 Q728.3,259.6 728.3,263.6 V390.0 Z" fill="#86b6ef"><title>Russian, 1 card: 87 tok/s</title></path>
+<path d="M730.3,390.0 V217.9 Q730.3,213.9 734.3,213.9 H752.3 Q756.3,213.9 756.3,217.9 V390.0 Z" fill="#3987e5"><title>Russian, 2 cards: 118 tok/s</title></path>
+<path d="M758.3,390.0 V220.9 Q758.3,216.9 762.3,216.9 H780.3 Q784.3,216.9 784.3,220.9 V390.0 Z" fill="#1c5cab"><title>Russian, 3 cards: 116 tok/s</title></path>
+<path d="M786.3,390.0 V226.5 Q786.3,222.5 790.3,222.5 H808.3 Q812.3,222.5 812.3,226.5 V390.0 Z" fill="#0d366b"><title>Russian, 4 cards: 112 tok/s</title></path>
+<text x="757.3" y="203.9" font-size="14" font-weight="600" text-anchor="middle" fill="#0b0b0b">2nd card +35%</text>
+<text x="757.3" y="414" font-size="14" text-anchor="middle" fill="#0b0b0b">Russian</text>
+<line x1="64" x2="896" y1="390" y2="390" stroke="#52514e" stroke-width="1"/>
+<text x="24" y="442" font-size="12" fill="#52514e">Single request, greedy, 512 new tokens, no thinking, 300 W per card. Mean of repeats 1 and 2. Run 20261105T082238Z.</text>
+</svg>

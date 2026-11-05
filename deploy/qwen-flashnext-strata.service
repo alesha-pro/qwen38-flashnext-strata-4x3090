@@ -1,0 +1,25 @@
+[Unit]
+Description=Qwen3.8-Flash-Next abliterated: Strata 0.2.10 + PR2590 (own sm_86 build), unsloth UD-IQ4_XS + DFlash2 + vector mix-r1, 1-4 GPUs from qwen-flashnext.env, 262K, vision, port 18000
+Conflicts=minimax-m31.service deepseek-1017-abliterated.service deepseek-1017-ud.service deepseek-1017-ud-abliterated.service
+After=minimax-m31.service deepseek-1017-abliterated.service deepseek-1017-ud.service deepseek-1017-ud-abliterated.service
+
+[Service]
+Type=simple
+WorkingDirectory=/mnt/nvme/engines/strata/0.2.10/control
+Environment=STRATA_NO_LARGEPAGES=1
+Environment=PYTHONUNBUFFERED=1
+# defaults = 2 cards; the rig map (:9999) rewrites the env file with the chosen set before start/restart
+Environment=GPUS=2,3 "GPU_LIST=2 3" WAIT_MIB=1500
+EnvironmentFile=-/mnt/nvme/projects/llm-services/qwen-flashnext.env
+ExecStartPre=/mnt/nvme/projects/llm-services/wait_gpus.sh ${WAIT_MIB} 150 $GPU_LIST
+# 0.2.10 listens on the LAN without a key with --no-api-key (no local patch any more)
+ExecStart=/mnt/nvme/engines/strata/0.2.10/control/python/bin/python3 -u -m serve.server --engine strata --config /mnt/nvme/projects/llm-services/qwen-flashnext.json --port 18000 --gpu ${GPUS} --no-api-key
+# session survives a restart: save the live conversation before stop, restore it in the background after start
+ExecStartPost=/bin/sh -c "setsid /mnt/nvme/projects/llm-services/strata_session.sh restore >/dev/null 2>&1 &"
+ExecStop=-/mnt/nvme/projects/llm-services/strata_session.sh save
+KillSignal=SIGINT
+TimeoutStartSec=200
+TimeoutStopSec=240
+Restart=no
+StandardOutput=append:/mnt/nvme/projects/llm-services/logs/qwen-server.log
+StandardError=inherit

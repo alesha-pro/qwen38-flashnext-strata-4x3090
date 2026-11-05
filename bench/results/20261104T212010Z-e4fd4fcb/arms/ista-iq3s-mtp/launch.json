@@ -1,0 +1,58 @@
+{
+ "arm": {
+  "name": "ista-iq3s-mtp",
+  "cfg": {
+   "drafting": "mtp",
+   "gpu": [
+    2,
+    3
+   ]
+  },
+  "extra_args": [],
+  "base_config": "/mnt/nvme/projects/qwen38-flashnext-unsloth-strata/configs/base-ista-iq3s.json"
+ },
+ "argv": [
+  "/mnt/nvme/engines/strata/0.2.10/control/python/bin/python3",
+  "-u",
+  "-m",
+  "serve.server",
+  "--engine",
+  "strata",
+  "--config",
+  "/mnt/nvme/projects/qwen38-flashnext-unsloth-strata/runs/20261104T212010Z-e4fd4fcb/arms/ista-iq3s-mtp/config.json",
+  "--port",
+  "18442",
+  "--gpu",
+  "2,3"
+ ],
+ "cwd": "/mnt/nvme/engines/strata/0.2.10/control",
+ "engine_argv": [
+  "/mnt/nvme/engines/strata/0.2.10/engine/strata",
+  "--pack",
+  "/mnt/nvme/projects/qwen38-flashnext-unsloth-strata/ista-iq3s-data/packs/iq3_s",
+  "--native",
+  "/mnt/ssd/models/Qwen3.8-Flash-Next-abliterated-GSQ-RCO-Strata-GGUF/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+  "--ple-gguf",
+  "/mnt/ssd/models/Qwen3.8-Flash-Next-abliterated-GSQ-RCO-Strata-GGUF/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf",
+  "--expert-profile",
+  "/mnt/nvme/engines/strata/0.2.10/control/data/expert-profile.bin",
+  "--expert-cache",
+  "auto",
+  "--prefill",
+  "auto",
+  "--max-context",
+  "262144",
+  "--kv",
+  "int8",
+  "--mtp",
+  "/mnt/nvme/projects/qwen38-flashnext-unsloth-strata/ista-iq3s-data/mtp/rt",
+  "--spec",
+  "4"
+ ],
+ "env": {},
+ "power_limit_w": {
+  "2": 300.0,
+  "3": 300.0
+ },
+ "started": "2026-11-04T21:49:02Z"
+}

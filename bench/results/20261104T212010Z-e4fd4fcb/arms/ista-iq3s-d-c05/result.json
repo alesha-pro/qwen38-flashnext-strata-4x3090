@@ -1,0 +1,407 @@
+{
+ "arm": {
+  "name": "ista-iq3s-d-c05",
+  "cfg": {
+   "drafting": "dflash2",
+   "gpu": [
+    2,
+    3
+   ],
+   "user_args": [
+    "--draft-conf",
+    "0.5"
+   ]
+  },
+  "extra_args": [
+   "--vram-reserve-later-mib",
+   "1394"
+  ],
+  "base_config": "/mnt/nvme/projects/qwen38-flashnext-unsloth-strata/configs/base-ista-iq3s.json"
+ },
+ "argv": [
+  "/mnt/nvme/engines/strata/0.2.10/control/python/bin/python3",
+  "-u",
+  "-m",
+  "serve.server",
+  "--engine",
+  "strata",
+  "--config",
+  "/mnt/nvme/projects/qwen38-flashnext-unsloth-strata/runs/20261104T212010Z-e4fd4fcb/arms/ista-iq3s-d-c05/config.json",
+  "--port",
+  "18442",
+  "--gpu",
+  "2,3"
+ ],
+ "cwd": "/mnt/nvme/engines/strata/0.2.10/control",
+ "engine_argv": [
+  "/mnt/nvme/engines/strata/0.2.10/engine/strata",
+  "--pack",
+  "/mnt/nvme/projects/qwen38-flashnext-unsloth-strata/ista-iq3s-data/packs/iq3_s",
+  "--native",
+  "/mnt/ssd/models/Qwen3.8-Flash-Next-abliterated-GSQ-RCO-Strata-GGUF/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+  "--ple-gguf",
+  "/mnt/ssd/models/Qwen3.8-Flash-Next-abliterated-GSQ-RCO-Strata-GGUF/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf",
+  "--expert-profile",
+  "/mnt/nvme/engines/strata/0.2.10/control/data/expert-profile.bin",
+  "--expert-cache",
+  "auto",
+  "--prefill",
+  "auto",
+  "--max-context",
+  "262144",
+  "--kv",
+  "int8",
+  "--mtp",
+  "/mnt/nvme/projects/qwen38-flashnext-unsloth-strata/ista-iq3s-data/mtp/rt",
+  "--spec",
+  "4",
+  "--vram-reserve-later-mib",
+  "1394"
+ ],
+ "env": {},
+ "power_limit_w": {
+  "2": 300.0,
+  "3": 300.0
+ },
+ "started": "2026-11-04T21:42:12Z",
+ "ready_s": 296.1,
+ "vram_peak_mib": {
+  "2": 23620,
+  "3": 23436
+ },
+ "rows": [
+  {
+   "arm": "ista-iq3s-d-c05",
+   "task": "essay",
+   "depth": 16384,
+   "repeat": 0,
+   "prompt_n": 16251,
+   "cache_n": 0,
+   "prefill_tok_s": 3067.5,
+   "decode_tok_s": 130.5,
+   "predicted_n": 512,
+   "draft_n": 454,
+   "draft_acc": 288,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16251,
+    "prompt_ms": 5297.8,
+    "prompt_per_token_ms": 0.326,
+    "prompt_per_second": 3067.5,
+    "predicted_n": 512,
+    "predicted_ms": 3923.9,
+    "predicted_per_token_ms": 7.664,
+    "predicted_per_second": 130.5,
+    "draft_n": 454,
+    "draft_n_accepted": 288
+   },
+   "wall_s": 9.3,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 16251,
+    "completion_tokens": 512,
+    "total_tokens": 16763,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "**The Architecture of Data Integrity and Performance: A Technical Analysis of Indexes, B-Trees, Hash Tables, Transactions, and Replication**\n\nIn the realm of mo"
+  },
+  {
+   "arm": "ista-iq3s-d-c05",
+   "task": "essay",
+   "depth": 16384,
+   "repeat": 1,
+   "prompt_n": 16265,
+   "cache_n": 0,
+   "prefill_tok_s": 3234.9,
+   "decode_tok_s": 146.8,
+   "predicted_n": 512,
+   "draft_n": 462,
+   "draft_acc": 319,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16265,
+    "prompt_ms": 5028.0,
+    "prompt_per_token_ms": 0.309,
+    "prompt_per_second": 3234.9,
+    "predicted_n": 512,
+    "predicted_ms": 3487.7,
+    "predicted_per_token_ms": 6.812,
+    "predicted_per_second": 146.8,
+    "draft_n": 462,
+    "draft_n_accepted": 319
+   },
+   "wall_s": 8.62,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 16265,
+    "completion_tokens": 512,
+    "total_tokens": 16777,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "**The Architecture of Data Integrity and Performance: A Technical Analysis of Database Indexes, B-Trees, Hash Tables, Transactions, and Replication**\n\nIn the mo"
+  },
+  {
+   "arm": "ista-iq3s-d-c05",
+   "task": "essay",
+   "depth": 16384,
+   "repeat": 2,
+   "prompt_n": 16269,
+   "cache_n": 0,
+   "prefill_tok_s": 3209.1,
+   "decode_tok_s": 137.6,
+   "predicted_n": 512,
+   "draft_n": 502,
+   "draft_acc": 305,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16269,
+    "prompt_ms": 5069.7,
+    "prompt_per_token_ms": 0.312,
+    "prompt_per_second": 3209.1,
+    "predicted_n": 512,
+    "predicted_ms": 3721.3,
+    "predicted_per_token_ms": 7.268,
+    "predicted_per_second": 137.6,
+    "draft_n": 502,
+    "draft_n_accepted": 305
+   },
+   "wall_s": 8.85,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 16269,
+    "completion_tokens": 512,
+    "total_tokens": 16781,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "**The Architecture of Data Integrity and Performance: A Technical Analysis of Database Indexes, B-Trees, Hash Tables, Transactions, and Replication**\n\nModern da"
+  },
+  {
+   "arm": "ista-iq3s-d-c05",
+   "task": "code",
+   "depth": 16384,
+   "repeat": 0,
+   "prompt_n": 16275,
+   "cache_n": 0,
+   "prefill_tok_s": 3212.1,
+   "decode_tok_s": 163.5,
+   "predicted_n": 512,
+   "draft_n": 524,
+   "draft_acc": 363,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16275,
+    "prompt_ms": 5066.7,
+    "prompt_per_token_ms": 0.311,
+    "prompt_per_second": 3212.1,
+    "predicted_n": 512,
+    "predicted_ms": 3130.6,
+    "predicted_per_token_ms": 6.114,
+    "predicted_per_second": 163.5,
+    "draft_n": 524,
+    "draft_n_accepted": 363
+   },
+   "wall_s": 8.25,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 16275,
+    "completion_tokens": 512,
+    "total_tokens": 16787,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n\"\"\"\nLRU Cache with TTL Expiry, Thread-Safety, and Memoization Decorator.\n\nThis module provides:\n1. `LRUCache`: A thread-safe Least Recently Used cache"
+  },
+  {
+   "arm": "ista-iq3s-d-c05",
+   "task": "code",
+   "depth": 16384,
+   "repeat": 1,
+   "prompt_n": 16264,
+   "cache_n": 0,
+   "prefill_tok_s": 3146.6,
+   "decode_tok_s": 165.7,
+   "predicted_n": 512,
+   "draft_n": 501,
+   "draft_acc": 355,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16264,
+    "prompt_ms": 5168.7,
+    "prompt_per_token_ms": 0.318,
+    "prompt_per_second": 3146.6,
+    "predicted_n": 512,
+    "predicted_ms": 3089.3,
+    "predicted_per_token_ms": 6.034,
+    "predicted_per_second": 165.7,
+    "draft_n": 501,
+    "draft_n_accepted": 355
+   },
+   "wall_s": 8.31,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 16264,
+    "completion_tokens": 512,
+    "total_tokens": 16776,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n\"\"\"\nLRU Cache with TTL Expiry, Thread-Safe Wrapper, and Memoization Decorator.\n\nThis module provides:\n1. `LRUCache`: A Least Recently Used cache with "
+  },
+  {
+   "arm": "ista-iq3s-d-c05",
+   "task": "code",
+   "depth": 16384,
+   "repeat": 2,
+   "prompt_n": 16264,
+   "cache_n": 0,
+   "prefill_tok_s": 3228.4,
+   "decode_tok_s": 164.9,
+   "predicted_n": 512,
+   "draft_n": 512,
+   "draft_acc": 355,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16264,
+    "prompt_ms": 5037.8,
+    "prompt_per_token_ms": 0.31,
+    "prompt_per_second": 3228.4,
+    "predicted_n": 512,
+    "predicted_ms": 3105.1,
+    "predicted_per_token_ms": 6.065,
+    "predicted_per_second": 164.9,
+    "draft_n": 512,
+    "draft_n_accepted": 355
+   },
+   "wall_s": 8.2,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 16264,
+    "completion_tokens": 512,
+    "total_tokens": 16776,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n\"\"\"\nLRU Cache with TTL Expiry, Thread-Safe Wrapper, and Memoization Decorator.\n\nThis module provides:\n1. `LRUCache`: A Least Recently Used cache with "
+  },
+  {
+   "arm": "ista-iq3s-d-c05",
+   "task": "edit",
+   "depth": 16384,
+   "repeat": 0,
+   "prompt_n": 16294,
+   "cache_n": 0,
+   "prefill_tok_s": 3176.6,
+   "decode_tok_s": 192.4,
+   "predicted_n": 226,
+   "draft_n": 191,
+   "draft_acc": 187,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16294,
+    "prompt_ms": 5129.4,
+    "prompt_per_token_ms": 0.315,
+    "prompt_per_second": 3176.6,
+    "predicted_n": 226,
+    "predicted_ms": 1174.5,
+    "predicted_per_token_ms": 5.197,
+    "predicted_per_second": 192.4,
+    "draft_n": 191,
+    "draft_n_accepted": 187
+   },
+   "wall_s": 6.36,
+   "finish": "stop",
+   "usage": {
+    "prompt_tokens": 16294,
+    "completion_tokens": 226,
+    "total_tokens": 16520,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n        if not self.alive():\n            raise EngineDied(\"the engine is unavailable; this request was not sent\")\n        self.progress, self.progress"
+  },
+  {
+   "arm": "ista-iq3s-d-c05",
+   "task": "edit",
+   "depth": 16384,
+   "repeat": 1,
+   "prompt_n": 16247,
+   "cache_n": 0,
+   "prefill_tok_s": 3234.4,
+   "decode_tok_s": 202.8,
+   "predicted_n": 512,
+   "draft_n": 449,
+   "draft_acc": 411,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16247,
+    "prompt_ms": 5023.2,
+    "prompt_per_token_ms": 0.309,
+    "prompt_per_second": 3234.4,
+    "predicted_n": 512,
+    "predicted_ms": 2525.1,
+    "predicted_per_token_ms": 4.932,
+    "predicted_per_second": 202.8,
+    "draft_n": 449,
+    "draft_n_accepted": 411
+   },
+   "wall_s": 7.58,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 16247,
+    "completion_tokens": 512,
+    "total_tokens": 16759,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n    def pen_from_key(self, orig_len: int, prompt_len: int) -> str:\n        \"\"\"` pen_from=N` for a leg that continues a request (prompt + what it gener"
+  },
+  {
+   "arm": "ista-iq3s-d-c05",
+   "task": "edit",
+   "depth": 16384,
+   "repeat": 2,
+   "prompt_n": 16222,
+   "cache_n": 0,
+   "prefill_tok_s": 3222.9,
+   "decode_tok_s": 203.8,
+   "predicted_n": 212,
+   "draft_n": 188,
+   "draft_acc": 170,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16222,
+    "prompt_ms": 5033.3,
+    "prompt_per_token_ms": 0.31,
+    "prompt_per_second": 3222.9,
+    "predicted_n": 212,
+    "predicted_ms": 1040.0,
+    "predicted_per_token_ms": 4.906,
+    "predicted_per_second": 203.8,
+    "draft_n": 188,
+    "draft_n_accepted": 170
+   },
+   "wall_s": 6.12,
+   "finish": "stop",
+   "usage": {
+    "prompt_tokens": 16222,
+    "completion_tokens": 212,
+    "total_tokens": 16434,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n    def _parse_done(self, line):\n        # Parse the engine's DONE line into a dictionary of request metrics.\n        f = line.split()\n        self.la"
+  }
+ ]
+}

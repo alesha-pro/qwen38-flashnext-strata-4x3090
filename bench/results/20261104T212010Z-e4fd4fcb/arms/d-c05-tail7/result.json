@@ -1,0 +1,413 @@
+{
+ "arm": {
+  "name": "d-c05-tail7",
+  "cfg": {
+   "drafting": "dflash2",
+   "gpu": [
+    2,
+    3
+   ],
+   "user_args": [
+    "--draft-conf",
+    "0.5"
+   ]
+  },
+  "extra_args": [
+   "--ple-io",
+   "direct",
+   "--vram-reserve-later-mib",
+   "1394"
+  ],
+  "env": {
+   "STRATA_ROUTE_TAIL_SKIP": "7"
+  }
+ },
+ "argv": [
+  "/mnt/nvme/engines/strata/0.2.10/control/python/bin/python3",
+  "-u",
+  "-m",
+  "serve.server",
+  "--engine",
+  "strata",
+  "--config",
+  "/mnt/nvme/projects/qwen38-flashnext-unsloth-strata/runs/20261104T212010Z-e4fd4fcb/arms/d-c05-tail7/config.json",
+  "--port",
+  "18442",
+  "--gpu",
+  "2,3"
+ ],
+ "cwd": "/mnt/nvme/engines/strata/0.2.10/control",
+ "engine_argv": [
+  "/mnt/nvme/engines/strata/0.2.10/engine/strata",
+  "--pack",
+  "/mnt/ssd/models/Qwen3.8-Flash-Next-unsloth-GGUF/d962012/packs/ud-q4_k_xl",
+  "--native",
+  "/mnt/ssd/models/Qwen3.8-Flash-Next-unsloth-GGUF/d962012/UD-Q4_K_XL/Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf",
+  "--expert-profile",
+  "/mnt/nvme/engines/strata/0.2.10/control/data/expert-profile.bin",
+  "--expert-cache",
+  "auto",
+  "--prefill",
+  "auto",
+  "--max-context",
+  "262144",
+  "--kv",
+  "int8",
+  "--mtp",
+  "/mnt/ssd/models/Qwen3.8-Flash-Next-unsloth-GGUF/d962012/mtp/rt",
+  "--spec",
+  "4",
+  "--ple-io",
+  "direct",
+  "--vram-reserve-later-mib",
+  "1394"
+ ],
+ "env": {
+  "STRATA_ROUTE_TAIL_SKIP": "7"
+ },
+ "power_limit_w": {
+  "2": 300.0,
+  "3": 300.0
+ },
+ "started": "2026-11-04T21:23:18Z",
+ "ready_s": 36.0,
+ "vram_peak_mib": {
+  "2": 23642,
+  "3": 23520
+ },
+ "rows": [
+  {
+   "arm": "d-c05-tail7",
+   "task": "essay",
+   "depth": 16384,
+   "repeat": 0,
+   "prompt_n": 16251,
+   "cache_n": 0,
+   "prefill_tok_s": 2046.0,
+   "decode_tok_s": 91.6,
+   "predicted_n": 512,
+   "draft_n": 469,
+   "draft_acc": 308,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16251,
+    "prompt_ms": 7942.9,
+    "prompt_per_token_ms": 0.489,
+    "prompt_per_second": 2046.0,
+    "predicted_n": 512,
+    "predicted_ms": 5592.2,
+    "predicted_per_token_ms": 10.922,
+    "predicted_per_second": 91.6,
+    "draft_n": 469,
+    "draft_n_accepted": 308
+   },
+   "wall_s": 13.61,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 16251,
+    "completion_tokens": 512,
+    "total_tokens": 16763,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "# The Architecture of Data Integrity and Performance: A Technical Analysis of Indexes, B-Trees, Hash Tables, Transactions, and Replication\n\nIn the realm of mode"
+  },
+  {
+   "arm": "d-c05-tail7",
+   "task": "essay",
+   "depth": 16384,
+   "repeat": 1,
+   "prompt_n": 16265,
+   "cache_n": 0,
+   "prefill_tok_s": 2087.0,
+   "decode_tok_s": 109.6,
+   "predicted_n": 512,
+   "draft_n": 442,
+   "draft_acc": 303,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16265,
+    "prompt_ms": 7793.4,
+    "prompt_per_token_ms": 0.479,
+    "prompt_per_second": 2087.0,
+    "predicted_n": 512,
+    "predicted_ms": 4671.0,
+    "predicted_per_token_ms": 9.123,
+    "predicted_per_second": 109.6,
+    "draft_n": 442,
+    "draft_n_accepted": 303
+   },
+   "wall_s": 12.56,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 16265,
+    "completion_tokens": 512,
+    "total_tokens": 16777,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "**The Architecture of Data Integrity and Performance: A Technical Analysis of Database Indexes, B-Trees, Hash Tables, Transactions, and Replication**\n\nIn the re"
+  },
+  {
+   "arm": "d-c05-tail7",
+   "task": "essay",
+   "depth": 16384,
+   "repeat": 2,
+   "prompt_n": 16269,
+   "cache_n": 0,
+   "prefill_tok_s": 2073.0,
+   "decode_tok_s": 101.3,
+   "predicted_n": 512,
+   "draft_n": 490,
+   "draft_acc": 294,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16269,
+    "prompt_ms": 7848.1,
+    "prompt_per_token_ms": 0.482,
+    "prompt_per_second": 2073.0,
+    "predicted_n": 512,
+    "predicted_ms": 5053.8,
+    "predicted_per_token_ms": 9.871,
+    "predicted_per_second": 101.3,
+    "draft_n": 490,
+    "draft_n_accepted": 294
+   },
+   "wall_s": 12.96,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 16269,
+    "completion_tokens": 512,
+    "total_tokens": 16781,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "**The Architecture of Data Integrity and Performance: A Technical Analysis of Indexes, B-Trees, Hash Tables, Transactions, and Replication**\n\nIn the realm of mo"
+  },
+  {
+   "arm": "d-c05-tail7",
+   "task": "code",
+   "depth": 16384,
+   "repeat": 0,
+   "prompt_n": 16275,
+   "cache_n": 0,
+   "prefill_tok_s": 2094.9,
+   "decode_tok_s": 91.6,
+   "predicted_n": 512,
+   "draft_n": 494,
+   "draft_acc": 368,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16275,
+    "prompt_ms": 7768.8,
+    "prompt_per_token_ms": 0.477,
+    "prompt_per_second": 2094.9,
+    "predicted_n": 512,
+    "predicted_ms": 5587.8,
+    "predicted_per_token_ms": 10.914,
+    "predicted_per_second": 91.6,
+    "draft_n": 494,
+    "draft_n_accepted": 368
+   },
+   "wall_s": 13.41,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 16275,
+    "completion_tokens": 512,
+    "total_tokens": 16787,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n\"\"\"\nLRU Cache with TTL Expiry, Thread-Safety, and Memoization Decorator.\n\nThis module provides:\n1. `LRUCache`: A thread-safe Least Recently Used cache"
+  },
+  {
+   "arm": "d-c05-tail7",
+   "task": "code",
+   "depth": 16384,
+   "repeat": 1,
+   "prompt_n": 16264,
+   "cache_n": 0,
+   "prefill_tok_s": 2103.6,
+   "decode_tok_s": 119.5,
+   "predicted_n": 512,
+   "draft_n": 492,
+   "draft_acc": 374,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16264,
+    "prompt_ms": 7731.6,
+    "prompt_per_token_ms": 0.475,
+    "prompt_per_second": 2103.6,
+    "predicted_n": 512,
+    "predicted_ms": 4283.1,
+    "predicted_per_token_ms": 8.365,
+    "predicted_per_second": 119.5,
+    "draft_n": 492,
+    "draft_n_accepted": 374
+   },
+   "wall_s": 12.07,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 16264,
+    "completion_tokens": 512,
+    "total_tokens": 16776,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n\"\"\"\nLRU Cache with TTL Expiry, Thread-Safety, and Memoization Decorator.\n\nThis module provides:\n1. `LRUCache`: A thread-safe Least Recently Used cache"
+  },
+  {
+   "arm": "d-c05-tail7",
+   "task": "code",
+   "depth": 16384,
+   "repeat": 2,
+   "prompt_n": 16264,
+   "cache_n": 0,
+   "prefill_tok_s": 2111.1,
+   "decode_tok_s": 115.9,
+   "predicted_n": 512,
+   "draft_n": 510,
+   "draft_acc": 370,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16264,
+    "prompt_ms": 7704.2,
+    "prompt_per_token_ms": 0.474,
+    "prompt_per_second": 2111.1,
+    "predicted_n": 512,
+    "predicted_ms": 4415.8,
+    "predicted_per_token_ms": 8.625,
+    "predicted_per_second": 115.9,
+    "draft_n": 510,
+    "draft_n_accepted": 370
+   },
+   "wall_s": 12.18,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 16264,
+    "completion_tokens": 512,
+    "total_tokens": 16776,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n\"\"\"\nLRU Cache with TTL Expiry, Thread-Safety, and Memoization Decorator.\n\nThis module provides:\n1. `LRUCache`: A thread-safe Least Recently Used cache"
+  },
+  {
+   "arm": "d-c05-tail7",
+   "task": "edit",
+   "depth": 16384,
+   "repeat": 0,
+   "prompt_n": 16294,
+   "cache_n": 0,
+   "prefill_tok_s": 2089.5,
+   "decode_tok_s": 73.5,
+   "predicted_n": 226,
+   "draft_n": 186,
+   "draft_acc": 182,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16294,
+    "prompt_ms": 7798.2,
+    "prompt_per_token_ms": 0.479,
+    "prompt_per_second": 2089.5,
+    "predicted_n": 226,
+    "predicted_ms": 3074.7,
+    "predicted_per_token_ms": 13.605,
+    "predicted_per_second": 73.5,
+    "draft_n": 186,
+    "draft_n_accepted": 182
+   },
+   "wall_s": 10.92,
+   "finish": "stop",
+   "usage": {
+    "prompt_tokens": 16294,
+    "completion_tokens": 226,
+    "total_tokens": 16520,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n        if not self.alive():\n            raise EngineDied(\"the engine is unavailable; this request was not sent\")\n        self.progress, self.progress"
+  },
+  {
+   "arm": "d-c05-tail7",
+   "task": "edit",
+   "depth": 16384,
+   "repeat": 1,
+   "prompt_n": 16247,
+   "cache_n": 0,
+   "prefill_tok_s": 2128.1,
+   "decode_tok_s": 95.0,
+   "predicted_n": 512,
+   "draft_n": 454,
+   "draft_acc": 423,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16247,
+    "prompt_ms": 7634.6,
+    "prompt_per_token_ms": 0.47,
+    "prompt_per_second": 2128.1,
+    "predicted_n": 512,
+    "predicted_ms": 5389.2,
+    "predicted_per_token_ms": 10.526,
+    "predicted_per_second": 95.0,
+    "draft_n": 454,
+    "draft_n_accepted": 423
+   },
+   "wall_s": 13.06,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 16247,
+    "completion_tokens": 512,
+    "total_tokens": 16759,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n    def sampling_keys(sampling: dict) -> str:\n        keys = \"\"\n        t = sampling.get(\"temperature\")\n        if isinstance(t, (int, float)) and flo"
+  },
+  {
+   "arm": "d-c05-tail7",
+   "task": "edit",
+   "depth": 16384,
+   "repeat": 2,
+   "prompt_n": 16222,
+   "cache_n": 0,
+   "prefill_tok_s": 2160.5,
+   "decode_tok_s": 108.7,
+   "predicted_n": 196,
+   "draft_n": 173,
+   "draft_acc": 166,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16222,
+    "prompt_ms": 7508.5,
+    "prompt_per_token_ms": 0.463,
+    "prompt_per_second": 2160.5,
+    "predicted_n": 196,
+    "predicted_ms": 1802.9,
+    "predicted_per_token_ms": 9.198,
+    "predicted_per_second": 108.7,
+    "draft_n": 173,
+    "draft_n_accepted": 166
+   },
+   "wall_s": 9.36,
+   "finish": "stop",
+   "usage": {
+    "prompt_tokens": 16222,
+    "completion_tokens": 196,
+    "total_tokens": 16418,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n    def _parse_done(self, line):\n        f = line.split()\n        self.last = {\"generated\": int(f[1]), \"prompt_tokens\": int(f[2]), \"prompt_ms\": float("
+  }
+ ]
+}

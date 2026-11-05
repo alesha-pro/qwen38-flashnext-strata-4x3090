@@ -1,0 +1,56 @@
+{
+ "base_config": "/mnt/nvme/projects/qwen38-flashnext-unsloth-strata/configs/base-iq4xs.json",
+ "control": "/mnt/nvme/engines/strata/0.2.10/control",
+ "python": "/mnt/nvme/engines/strata/0.2.10/control/python/bin/python3",
+ "tokenizer": "/mnt/ssd/models/Qwen3.8-Flash-Next-unsloth-GGUF/d962012/packs/ud-q4_k_xl/tokenizer",
+ "port": 18442,
+ "gpus": "2,3",
+ "depths": [
+  16384
+ ],
+ "repeat": 3,
+ "max_new": 512,
+ "tasks": [
+  "essay",
+  "code",
+  "edit"
+ ],
+ "arms": [
+  {
+   "name": "iq4xs-d-c05",
+   "base_config": "/mnt/nvme/projects/qwen38-flashnext-unsloth-strata/configs/base-iq4xs.json",
+   "cfg": {
+    "drafting": "dflash2",
+    "gpu": [
+     2,
+     3
+    ],
+    "user_args": [
+     "--draft-conf",
+     "0.5"
+    ]
+   },
+   "extra_args": [
+    "--ple-io",
+    "direct",
+    "--vram-reserve-later-mib",
+    "1394"
+   ]
+  },
+  {
+   "name": "iq4xs-mtp",
+   "base_config": "/mnt/nvme/projects/qwen38-flashnext-unsloth-strata/configs/base-iq4xs.json",
+   "cfg": {
+    "drafting": "mtp",
+    "gpu": [
+     2,
+     3
+    ]
+   },
+   "extra_args": [
+    "--ple-io",
+    "direct"
+   ]
+  }
+ ]
+}

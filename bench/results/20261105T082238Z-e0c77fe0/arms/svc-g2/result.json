@@ -1,0 +1,747 @@
+{
+ "arm": {
+  "name": "svc-g2",
+  "gpus": "2,3",
+  "cfg": {
+   "gpu": [
+    2,
+    3
+   ]
+  }
+ },
+ "argv": [
+  "/mnt/nvme/engines/strata/0.2.10/control/python/bin/python3",
+  "-u",
+  "-m",
+  "serve.server",
+  "--engine",
+  "strata",
+  "--config",
+  "/mnt/nvme/projects/qwen38-flashnext-unsloth-strata/runs/20261105T082238Z-e0c77fe0/arms/svc-g2/config.json",
+  "--port",
+  "18442",
+  "--gpu",
+  "2,3"
+ ],
+ "cwd": "/mnt/nvme/engines/strata/0.2.10/control",
+ "engine_argv": [
+  "/mnt/nvme/engines/strata/0.2.10/engine/strata",
+  "--pack",
+  "/mnt/ssd/models/Qwen3.8-Flash-Next-unsloth-GGUF/d962012/packs/ud-iq4_xs",
+  "--native",
+  "/mnt/ssd/models/Qwen3.8-Flash-Next-unsloth-GGUF/d962012/UD-IQ4_XS/Qwen3.8-Flash-Next-UD-IQ4_XS-00001-of-00004.gguf",
+  "--expert-profile",
+  "/mnt/nvme/engines/strata/0.2.10/control/data/expert-profile.bin",
+  "--expert-cache",
+  "auto",
+  "--prefill",
+  "auto",
+  "--max-context",
+  "262144",
+  "--kv",
+  "int8",
+  "--mtp",
+  "/mnt/ssd/models/Qwen3.8-Flash-Next-unsloth-GGUF/d962012/mtp/rt",
+  "--spec",
+  "4",
+  "--ple-io",
+  "direct",
+  "--vram-reserve-later-mib",
+  "1394",
+  "--vram-reserve-mib",
+  "768",
+  "--control-vector-scaled",
+  "/mnt/ssd/models/Qwen3.8-Flash-Next-unsloth-GGUF/d962012/vectors/qwen38-flashnext-refusal-mix-r1.gguf:1.0",
+  "--control-vector-layer-range",
+  "1",
+  "47",
+  "--cvec-mode",
+  "project",
+  "--cvec-dir",
+  "per-layer",
+  "--vision",
+  "--conversation-cache-mib",
+  "8192",
+  "--conversation-cache-slots",
+  "4"
+ ],
+ "env": {},
+ "power_limit_w": {
+  "2": 300.0,
+  "3": 300.0
+ },
+ "started": "2026-11-05T08:22:39Z",
+ "ready_s": 34.0,
+ "vram_peak_mib": {
+  "2": 23567,
+  "3": 23349
+ },
+ "rows": [
+  {
+   "arm": "svc-g2",
+   "task": "essay",
+   "depth": 16384,
+   "repeat": 0,
+   "prompt_n": 16251,
+   "cache_n": 0,
+   "prefill_tok_s": 2447.4,
+   "decode_tok_s": 112.4,
+   "predicted_n": 512,
+   "draft_n": 473,
+   "draft_acc": 297,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16251,
+    "prompt_ms": 6640.2,
+    "prompt_per_token_ms": 0.409,
+    "prompt_per_second": 2447.4,
+    "predicted_n": 512,
+    "predicted_ms": 4556.8,
+    "predicted_per_token_ms": 8.9,
+    "predicted_per_second": 112.4,
+    "draft_n": 473,
+    "draft_n_accepted": 297
+   },
+   "wall_s": 11.28,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 16251,
+    "completion_tokens": 512,
+    "total_tokens": 16763,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "**The Architecture of Data Persistence: A Technical Analysis of Indexes, B-Trees, Hash Tables, Transactions, and Replication**\n\nIn the realm of computer science"
+  },
+  {
+   "arm": "svc-g2",
+   "task": "essay",
+   "depth": 16384,
+   "repeat": 1,
+   "prompt_n": 16265,
+   "cache_n": 0,
+   "prefill_tok_s": 2502.5,
+   "decode_tok_s": 121.4,
+   "predicted_n": 512,
+   "draft_n": 465,
+   "draft_acc": 294,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16265,
+    "prompt_ms": 6499.6,
+    "prompt_per_token_ms": 0.4,
+    "prompt_per_second": 2502.5,
+    "predicted_n": 512,
+    "predicted_ms": 4218.3,
+    "predicted_per_token_ms": 8.239,
+    "predicted_per_second": 121.4,
+    "draft_n": 465,
+    "draft_n_accepted": 294
+   },
+   "wall_s": 10.82,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 16265,
+    "completion_tokens": 512,
+    "total_tokens": 16777,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "**The Architecture of Data Persistence: A Technical Analysis of Indexes, B-Trees, Hash Tables, Transactions, and Replication**\n\nIn the realm of computer science"
+  },
+  {
+   "arm": "svc-g2",
+   "task": "essay",
+   "depth": 16384,
+   "repeat": 2,
+   "prompt_n": 16269,
+   "cache_n": 0,
+   "prefill_tok_s": 2488.5,
+   "decode_tok_s": 129.7,
+   "predicted_n": 512,
+   "draft_n": 469,
+   "draft_acc": 306,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16269,
+    "prompt_ms": 6537.7,
+    "prompt_per_token_ms": 0.402,
+    "prompt_per_second": 2488.5,
+    "predicted_n": 512,
+    "predicted_ms": 3948.1,
+    "predicted_per_token_ms": 7.711,
+    "predicted_per_second": 129.7,
+    "draft_n": 469,
+    "draft_n_accepted": 306
+   },
+   "wall_s": 10.54,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 16269,
+    "completion_tokens": 512,
+    "total_tokens": 16781,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "**The Architecture of Data Integrity and Performance: A Technical Analysis of Indexes, B-Trees, Hash Tables, Transactions, and Replication**\n\nIn the realm of mo"
+  },
+  {
+   "arm": "svc-g2",
+   "task": "essay",
+   "depth": 65536,
+   "repeat": 0,
+   "prompt_n": 65114,
+   "cache_n": 0,
+   "prefill_tok_s": 3409.5,
+   "decode_tok_s": 125.0,
+   "predicted_n": 512,
+   "draft_n": 456,
+   "draft_acc": 300,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 65114,
+    "prompt_ms": 19097.7,
+    "prompt_per_token_ms": 0.293,
+    "prompt_per_second": 3409.5,
+    "predicted_n": 512,
+    "predicted_ms": 4097.4,
+    "predicted_per_token_ms": 8.003,
+    "predicted_per_second": 125.0,
+    "draft_n": 456,
+    "draft_n_accepted": 300
+   },
+   "wall_s": 23.34,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 65114,
+    "completion_tokens": 512,
+    "total_tokens": 65626,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "# The Architecture of Data: A Technical Analysis of Database Indexes, B-Trees, Hash Tables, Transactions, and Replication\n\nModern database management systems (D"
+  },
+  {
+   "arm": "svc-g2",
+   "task": "essay",
+   "depth": 65536,
+   "repeat": 1,
+   "prompt_n": 65092,
+   "cache_n": 0,
+   "prefill_tok_s": 3366.1,
+   "decode_tok_s": 117.5,
+   "predicted_n": 512,
+   "draft_n": 456,
+   "draft_acc": 285,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 65092,
+    "prompt_ms": 19337.5,
+    "prompt_per_token_ms": 0.297,
+    "prompt_per_second": 3366.1,
+    "predicted_n": 512,
+    "predicted_ms": 4356.0,
+    "predicted_per_token_ms": 8.508,
+    "predicted_per_second": 117.5,
+    "draft_n": 456,
+    "draft_n_accepted": 285
+   },
+   "wall_s": 23.81,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 65092,
+    "completion_tokens": 512,
+    "total_tokens": 65604,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "# The Architecture of Data: A Technical Analysis of Indexes, Storage Structures, Transactions, and Replication\n\nModern database management systems (DBMS) are th"
+  },
+  {
+   "arm": "svc-g2",
+   "task": "essay",
+   "depth": 65536,
+   "repeat": 2,
+   "prompt_n": 65096,
+   "cache_n": 0,
+   "prefill_tok_s": 3417.3,
+   "decode_tok_s": 119.2,
+   "predicted_n": 512,
+   "draft_n": 496,
+   "draft_acc": 297,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 65096,
+    "prompt_ms": 19048.8,
+    "prompt_per_token_ms": 0.293,
+    "prompt_per_second": 3417.3,
+    "predicted_n": 512,
+    "predicted_ms": 4295.6,
+    "predicted_per_token_ms": 8.39,
+    "predicted_per_second": 119.2,
+    "draft_n": 496,
+    "draft_n_accepted": 297
+   },
+   "wall_s": 23.46,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 65096,
+    "completion_tokens": 512,
+    "total_tokens": 65608,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "# The Architecture of Data: A Technical Analysis of Database Indexes, B-Trees, Hash Tables, Transactions, and Replication\n\nModern database management systems (D"
+  },
+  {
+   "arm": "svc-g2",
+   "task": "code",
+   "depth": 16384,
+   "repeat": 0,
+   "prompt_n": 16275,
+   "cache_n": 0,
+   "prefill_tok_s": 2425.3,
+   "decode_tok_s": 130.0,
+   "predicted_n": 512,
+   "draft_n": 499,
+   "draft_acc": 363,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16275,
+    "prompt_ms": 6710.6,
+    "prompt_per_token_ms": 0.412,
+    "prompt_per_second": 2425.3,
+    "predicted_n": 512,
+    "predicted_ms": 3938.7,
+    "predicted_per_token_ms": 7.693,
+    "predicted_per_second": 130.0,
+    "draft_n": 499,
+    "draft_n_accepted": 363
+   },
+   "wall_s": 10.69,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 16275,
+    "completion_tokens": 512,
+    "total_tokens": 16787,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n\"\"\"\nLRU Cache with TTL Expiry, Thread-Safety, and Memoization Decorator.\n\nThis module provides:\n1. `LRUCache`: A thread-safe Least Recently Used cache"
+  },
+  {
+   "arm": "svc-g2",
+   "task": "code",
+   "depth": 16384,
+   "repeat": 1,
+   "prompt_n": 16264,
+   "cache_n": 0,
+   "prefill_tok_s": 2555.2,
+   "decode_tok_s": 147.4,
+   "predicted_n": 512,
+   "draft_n": 508,
+   "draft_acc": 362,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16264,
+    "prompt_ms": 6365.0,
+    "prompt_per_token_ms": 0.391,
+    "prompt_per_second": 2555.2,
+    "predicted_n": 512,
+    "predicted_ms": 3472.5,
+    "predicted_per_token_ms": 6.782,
+    "predicted_per_second": 147.4,
+    "draft_n": 508,
+    "draft_n_accepted": 362
+   },
+   "wall_s": 9.88,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 16264,
+    "completion_tokens": 512,
+    "total_tokens": 16776,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n\"\"\"\nLRU Cache with TTL Expiry, Thread-Safety, and Memoization Decorator.\n\nThis module provides:\n1. `LRUCache`: A thread-safe Least Recently Used cache"
+  },
+  {
+   "arm": "svc-g2",
+   "task": "code",
+   "depth": 16384,
+   "repeat": 2,
+   "prompt_n": 16264,
+   "cache_n": 0,
+   "prefill_tok_s": 2579.9,
+   "decode_tok_s": 141.2,
+   "predicted_n": 512,
+   "draft_n": 546,
+   "draft_acc": 359,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16264,
+    "prompt_ms": 6304.1,
+    "prompt_per_token_ms": 0.388,
+    "prompt_per_second": 2579.9,
+    "predicted_n": 512,
+    "predicted_ms": 3627.1,
+    "predicted_per_token_ms": 7.084,
+    "predicted_per_second": 141.2,
+    "draft_n": 546,
+    "draft_n_accepted": 359
+   },
+   "wall_s": 9.96,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 16264,
+    "completion_tokens": 512,
+    "total_tokens": 16776,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n\"\"\"\nLRU Cache with TTL Expiry, Thread-Safety, and Memoization Decorator.\n\nThis module provides:\n1. `LRUCache`: A thread-safe Least Recently Used cache"
+  },
+  {
+   "arm": "svc-g2",
+   "task": "code",
+   "depth": 65536,
+   "repeat": 0,
+   "prompt_n": 65100,
+   "cache_n": 0,
+   "prefill_tok_s": 3463.4,
+   "decode_tok_s": 138.8,
+   "predicted_n": 512,
+   "draft_n": 526,
+   "draft_acc": 352,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 65100,
+    "prompt_ms": 18796.4,
+    "prompt_per_token_ms": 0.289,
+    "prompt_per_second": 3463.4,
+    "predicted_n": 512,
+    "predicted_ms": 3689.1,
+    "predicted_per_token_ms": 7.205,
+    "predicted_per_second": 138.8,
+    "draft_n": 526,
+    "draft_n_accepted": 352
+   },
+   "wall_s": 22.59,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 65100,
+    "completion_tokens": 512,
+    "total_tokens": 65612,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n\"\"\"\nLRU Cache with TTL Expiry, Thread-Safety, and Memoization Decorator.\n\nThis module provides:\n1. `LRUCache`: A Least Recently Used cache with Time-T"
+  },
+  {
+   "arm": "svc-g2",
+   "task": "code",
+   "depth": 65536,
+   "repeat": 1,
+   "prompt_n": 65110,
+   "cache_n": 0,
+   "prefill_tok_s": 3433.0,
+   "decode_tok_s": 143.5,
+   "predicted_n": 512,
+   "draft_n": 529,
+   "draft_acc": 357,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 65110,
+    "prompt_ms": 18965.9,
+    "prompt_per_token_ms": 0.291,
+    "prompt_per_second": 3433.0,
+    "predicted_n": 512,
+    "predicted_ms": 3568.2,
+    "predicted_per_token_ms": 6.969,
+    "predicted_per_second": 143.5,
+    "draft_n": 529,
+    "draft_n_accepted": 357
+   },
+   "wall_s": 22.64,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 65110,
+    "completion_tokens": 512,
+    "total_tokens": 65622,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n\"\"\"\nLRU Cache with TTL Expiry, Thread-Safety, and Memoization Decorator.\n\nThis module provides:\n1. `LRUCache`: A thread-safe Least Recently Used cache"
+  },
+  {
+   "arm": "svc-g2",
+   "task": "code",
+   "depth": 65536,
+   "repeat": 2,
+   "prompt_n": 65092,
+   "cache_n": 0,
+   "prefill_tok_s": 3406.9,
+   "decode_tok_s": 146.4,
+   "predicted_n": 512,
+   "draft_n": 512,
+   "draft_acc": 362,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 65092,
+    "prompt_ms": 19105.8,
+    "prompt_per_token_ms": 0.294,
+    "prompt_per_second": 3406.9,
+    "predicted_n": 512,
+    "predicted_ms": 3497.0,
+    "predicted_per_token_ms": 6.83,
+    "predicted_per_second": 146.4,
+    "draft_n": 512,
+    "draft_n_accepted": 362
+   },
+   "wall_s": 22.7,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 65092,
+    "completion_tokens": 512,
+    "total_tokens": 65604,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "```python\n\"\"\"\nLRU Cache with TTL Expiry, Thread-Safety, and Memoization Decorator.\n\nThis module provides:\n1. `LRUCache`: A thread-safe Least Recently Used cache"
+  },
+  {
+   "arm": "svc-g2",
+   "task": "ru",
+   "depth": 16384,
+   "repeat": 0,
+   "prompt_n": 16285,
+   "cache_n": 0,
+   "prefill_tok_s": 2462.9,
+   "decode_tok_s": 96.4,
+   "predicted_n": 512,
+   "draft_n": 436,
+   "draft_acc": 254,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16285,
+    "prompt_ms": 6612.0,
+    "prompt_per_token_ms": 0.406,
+    "prompt_per_second": 2462.9,
+    "predicted_n": 512,
+    "predicted_ms": 5312.7,
+    "predicted_per_token_ms": 10.376,
+    "predicted_per_second": 96.4,
+    "draft_n": 436,
+    "draft_n_accepted": 254
+   },
+   "wall_s": 11.96,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 16285,
+    "completion_tokens": 512,
+    "total_tokens": 16797,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "**\u0410\u0440\u0445\u0438\u0442\u0435\u043a\u0442\u0443\u0440\u0430 \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u0434\u0438\u0442\u0435\u043b\u044c\u043d\u043e\u0441\u0442\u0438 \u0438 \u0446\u0435\u043b\u043e\u0441\u0442\u043d\u043e\u0441\u0442\u0438 \u0434\u0430\u043d\u043d\u044b\u0445: \u0413\u043b\u0443\u0431\u043e\u043a\u0438\u0439 \u0430\u043d\u0430\u043b\u0438\u0437 \u0438\u043d\u0434\u0435\u043a\u0441\u043e\u0432, B-\u0434\u0435\u0440\u0435\u0432\u044c\u0435\u0432, \u0445\u0435\u0448-\u0442\u0430\u0431\u043b\u0438\u0446, \u0442\u0440\u0430\u043d\u0437\u0430\u043a\u0446\u0438\u0439 \u0438 \u0440\u0435\u043f\u043b\u0438\u043a\u0430\u0446\u0438\u0438**\n\n\u0421\u043e\u0432\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0435 \u0441\u0438\u0441\u0442\u0435\u043c\u044b \u0443\u043f\u0440\u0430\u0432\u043b\u0435\u043d"
+  },
+  {
+   "arm": "svc-g2",
+   "task": "ru",
+   "depth": 16384,
+   "repeat": 1,
+   "prompt_n": 16299,
+   "cache_n": 0,
+   "prefill_tok_s": 2576.3,
+   "decode_tok_s": 118.2,
+   "predicted_n": 512,
+   "draft_n": 421,
+   "draft_acc": 270,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16299,
+    "prompt_ms": 6326.4,
+    "prompt_per_token_ms": 0.388,
+    "prompt_per_second": 2576.3,
+    "predicted_n": 512,
+    "predicted_ms": 4332.8,
+    "predicted_per_token_ms": 8.463,
+    "predicted_per_second": 118.2,
+    "draft_n": 421,
+    "draft_n_accepted": 270
+   },
+   "wall_s": 10.69,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 16299,
+    "completion_tokens": 512,
+    "total_tokens": 16811,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "**\u0410\u0440\u0445\u0438\u0442\u0435\u043a\u0442\u0443\u0440\u0430 \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u0434\u0438\u0442\u0435\u043b\u044c\u043d\u043e\u0441\u0442\u0438 \u0438 \u043d\u0430\u0434\u0435\u0436\u043d\u043e\u0441\u0442\u0438: \u0413\u043b\u0443\u0431\u043e\u043a\u0438\u0439 \u0430\u043d\u0430\u043b\u0438\u0437 \u0438\u043d\u0434\u0435\u043a\u0441\u043e\u0432, B-\u0434\u0435\u0440\u0435\u0432\u044c\u0435\u0432, \u0445\u0435\u0448-\u0442\u0430\u0431\u043b\u0438\u0446, \u0442\u0440\u0430\u043d\u0437\u0430\u043a\u0446\u0438\u0439 \u0438 \u0440\u0435\u043f\u043b\u0438\u043a\u0430\u0446\u0438\u0438 \u0432 \u0441\u0438\u0441\u0442\u0435\u043c\u0430\u0445 \u0443\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u044f \u0431\u0430\u0437\u0430\u043c\u0438 \u0434\u0430\u043d\u043d\u044b\u0445**\n\n"
+  },
+  {
+   "arm": "svc-g2",
+   "task": "ru",
+   "depth": 16384,
+   "repeat": 2,
+   "prompt_n": 16303,
+   "cache_n": 0,
+   "prefill_tok_s": 2542.3,
+   "decode_tok_s": 117.1,
+   "predicted_n": 512,
+   "draft_n": 450,
+   "draft_acc": 265,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16303,
+    "prompt_ms": 6412.6,
+    "prompt_per_token_ms": 0.393,
+    "prompt_per_second": 2542.3,
+    "predicted_n": 512,
+    "predicted_ms": 4372.8,
+    "predicted_per_token_ms": 8.541,
+    "predicted_per_second": 117.1,
+    "draft_n": 450,
+    "draft_n_accepted": 265
+   },
+   "wall_s": 10.82,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 16303,
+    "completion_tokens": 512,
+    "total_tokens": 16815,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "**\u0410\u0440\u0445\u0438\u0442\u0435\u043a\u0442\u0443\u0440\u0430 \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u0434\u0438\u0442\u0435\u043b\u044c\u043d\u043e\u0441\u0442\u0438 \u0438 \u0446\u0435\u043b\u043e\u0441\u0442\u043d\u043e\u0441\u0442\u0438 \u0434\u0430\u043d\u043d\u044b\u0445: \u0413\u043b\u0443\u0431\u043e\u043a\u0438\u0439 \u0430\u043d\u0430\u043b\u0438\u0437 \u0438\u043d\u0434\u0435\u043a\u0441\u043e\u0432, B-\u0434\u0435\u0440\u0435\u0432\u044c\u0435\u0432, \u0445\u0435\u0448-\u0442\u0430\u0431\u043b\u0438\u0446, \u0442\u0440\u0430\u043d\u0437\u0430\u043a\u0446\u0438\u0439 \u0438 \u0440\u0435\u043f\u043b\u0438\u043a\u0430\u0446\u0438\u0438 \u0432 \u0441\u043e\u0432\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0445 \u0441\u0438\u0441\u0442\u0435\u043c\u0430\u0445 \u0443\u043f\u0440\u0430\u0432\u043b\u0435\u043d"
+  },
+  {
+   "arm": "svc-g2",
+   "task": "ru",
+   "depth": 65536,
+   "repeat": 0,
+   "prompt_n": 65148,
+   "cache_n": 0,
+   "prefill_tok_s": 3473.6,
+   "decode_tok_s": 111.1,
+   "predicted_n": 512,
+   "draft_n": 448,
+   "draft_acc": 263,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 65148,
+    "prompt_ms": 18755.4,
+    "prompt_per_token_ms": 0.288,
+    "prompt_per_second": 3473.6,
+    "predicted_n": 512,
+    "predicted_ms": 4606.9,
+    "predicted_per_token_ms": 8.998,
+    "predicted_per_second": 111.1,
+    "draft_n": 448,
+    "draft_n_accepted": 263
+   },
+   "wall_s": 23.46,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 65148,
+    "completion_tokens": 512,
+    "total_tokens": 65660,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "# \u0410\u0440\u0445\u0438\u0442\u0435\u043a\u0442\u0443\u0440\u0430 \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u0434\u0438\u0442\u0435\u043b\u044c\u043d\u043e\u0441\u0442\u0438 \u0438 \u0446\u0435\u043b\u043e\u0441\u0442\u043d\u043e\u0441\u0442\u0438 \u0434\u0430\u043d\u043d\u044b\u0445: \u0413\u043b\u0443\u0431\u043e\u043a\u0438\u0439 \u0430\u043d\u0430\u043b\u0438\u0437 \u0438\u043d\u0434\u0435\u043a\u0441\u043e\u0432, B-\u0434\u0435\u0440\u0435\u0432\u044c\u0435\u0432, \u0445\u0435\u0448-\u0442\u0430\u0431\u043b\u0438\u0446, \u0442\u0440\u0430\u043d\u0437\u0430\u043a\u0446\u0438\u0439 \u0438 \u0440\u0435\u043f\u043b\u0438\u043a\u0430\u0446\u0438\u0438\n\n\u0421\u043e\u0432\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0435 \u0441\u0438\u0441\u0442\u0435\u043c\u044b \u0443\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u044f"
+  },
+  {
+   "arm": "svc-g2",
+   "task": "ru",
+   "depth": 65536,
+   "repeat": 1,
+   "prompt_n": 65126,
+   "cache_n": 0,
+   "prefill_tok_s": 3417.1,
+   "decode_tok_s": 117.5,
+   "predicted_n": 512,
+   "draft_n": 437,
+   "draft_acc": 276,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 65126,
+    "prompt_ms": 19058.6,
+    "prompt_per_token_ms": 0.293,
+    "prompt_per_second": 3417.1,
+    "predicted_n": 512,
+    "predicted_ms": 4358.8,
+    "predicted_per_token_ms": 8.513,
+    "predicted_per_second": 117.5,
+    "draft_n": 437,
+    "draft_n_accepted": 276
+   },
+   "wall_s": 23.51,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 65126,
+    "completion_tokens": 512,
+    "total_tokens": 65638,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "# \u0410\u0440\u0445\u0438\u0442\u0435\u043a\u0442\u0443\u0440\u0430 \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u0434\u0438\u0442\u0435\u043b\u044c\u043d\u043e\u0441\u0442\u0438 \u0438 \u043d\u0430\u0434\u0435\u0436\u043d\u043e\u0441\u0442\u0438: \u0413\u043b\u0443\u0431\u043e\u043a\u0438\u0439 \u0430\u043d\u0430\u043b\u0438\u0437 \u0438\u043d\u0434\u0435\u043a\u0441\u043e\u0432, B-\u0434\u0435\u0440\u0435\u0432\u044c\u0435\u0432, \u0445\u0435\u0448-\u0442\u0430\u0431\u043b\u0438\u0446, \u0442\u0440\u0430\u043d\u0437\u0430\u043a\u0446\u0438\u0439 \u0438 \u0440\u0435\u043f\u043b\u0438\u043a\u0430\u0446\u0438\u0438 \u0432 \u0441\u0438\u0441\u0442\u0435\u043c\u0430\u0445 \u0443\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u044f \u0431\u0430\u0437\u0430\u043c\u0438 \u0434\u0430\u043d\u043d\u044b\u0445\n\n\u0421\u043e"
+  },
+  {
+   "arm": "svc-g2",
+   "task": "ru",
+   "depth": 65536,
+   "repeat": 2,
+   "prompt_n": 65130,
+   "cache_n": 0,
+   "prefill_tok_s": 3425.4,
+   "decode_tok_s": 113.4,
+   "predicted_n": 512,
+   "draft_n": 419,
+   "draft_acc": 265,
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 65130,
+    "prompt_ms": 19014.1,
+    "prompt_per_token_ms": 0.292,
+    "prompt_per_second": 3425.4,
+    "predicted_n": 512,
+    "predicted_ms": 4515.4,
+    "predicted_per_token_ms": 8.819,
+    "predicted_per_second": 113.4,
+    "draft_n": 419,
+    "draft_n_accepted": 265
+   },
+   "wall_s": 23.62,
+   "finish": "length",
+   "usage": {
+    "prompt_tokens": 65130,
+    "completion_tokens": 512,
+    "total_tokens": 65642,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "head": "**\u0410\u0440\u0445\u0438\u0442\u0435\u043a\u0442\u0443\u0440\u0430 \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u0434\u0438\u0442\u0435\u043b\u044c\u043d\u043e\u0441\u0442\u0438 \u0438 \u043d\u0430\u0434\u0435\u0436\u043d\u043e\u0441\u0442\u0438: \u0413\u043b\u0443\u0431\u043e\u043a\u0438\u0439 \u0430\u043d\u0430\u043b\u0438\u0437 \u0438\u043d\u0434\u0435\u043a\u0441\u043e\u0432, B-\u0434\u0435\u0440\u0435\u0432\u044c\u0435\u0432, \u0445\u0435\u0448-\u0442\u0430\u0431\u043b\u0438\u0446, \u0442\u0440\u0430\u043d\u0437\u0430\u043a\u0446\u0438\u0439 \u0438 \u0440\u0435\u043f\u043b\u0438\u043a\u0430\u0446\u0438\u0438 \u0432 \u0441\u0438\u0441\u0442\u0435\u043c\u0430\u0445 \u0443\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u044f \u0431\u0430\u0437\u0430\u043c\u0438 \u0434\u0430\u043d\u043d\u044b\u0445**\n\n"
+  }
+ ]
+}

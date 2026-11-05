@@ -1,0 +1,51 @@
+{
+ "exe": "/mnt/nvme/engines/strata/0.2.10/engine/strata",
+ "args": [
+  "--pack",
+  "/mnt/ssd/models/Qwen3.8-Flash-Next-unsloth-GGUF/d962012/packs/ud-q4_k_xl",
+  "--native",
+  "/mnt/ssd/models/Qwen3.8-Flash-Next-unsloth-GGUF/d962012/UD-Q4_K_XL/Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf",
+  "--expert-profile",
+  "/mnt/nvme/engines/strata/0.2.10/control/data/expert-profile.bin",
+  "--expert-cache",
+  "auto",
+  "--prefill",
+  "auto",
+  "--max-context",
+  "262144",
+  "--kv",
+  "int8",
+  "--mtp",
+  "/mnt/ssd/models/Qwen3.8-Flash-Next-unsloth-GGUF/d962012/mtp/rt",
+  "--spec",
+  "4",
+  "--ple-io",
+  "direct"
+ ],
+ "env": {
+  "STRATA_HC_Q8": "1",
+  "STRATA_ROUTE_TAIL_SKIP": "0",
+  "STRATA_NO_LARGEPAGES": "1"
+ },
+ "cwd": "/mnt/nvme/engines/strata/0.2.10/control",
+ "tokenizer": "/mnt/ssd/models/Qwen3.8-Flash-Next-unsloth-GGUF/d962012/packs/ud-q4_k_xl/tokenizer",
+ "model_name": "qwen3.8-flash-next-unsloth-ud-q4_k_xl",
+ "log": "/mnt/nvme/projects/qwen38-flashnext-unsloth-strata/runs/20261104T212010Z-e4fd4fcb/arms/m-base/engine.log",
+ "host": "127.0.0.1",
+ "port": 18442,
+ "gpu": [
+  2,
+  3
+ ],
+ "layer_split": "auto",
+ "drafting": "mtp",
+ "sampling": {
+  "temperature": 1.0,
+  "top_k": 20,
+  "top_p": 0.95,
+  "min_p": 0.0,
+  "presence_penalty": 0.0,
+  "repetition_penalty": 1.0
+ },
+ "fit_max_tokens": true
+}

@@ -1,0 +1,191 @@
+{
+ "base_config": "/mnt/nvme/projects/qwen38-flashnext-unsloth-strata/configs/base.json",
+ "control": "/mnt/nvme/engines/strata/0.2.10/control",
+ "python": "/mnt/nvme/engines/strata/0.2.10/control/python/bin/python3",
+ "tokenizer": "/mnt/ssd/models/Qwen3.8-Flash-Next-unsloth-GGUF/d962012/packs/ud-q4_k_xl/tokenizer",
+ "port": 18442,
+ "gpus": "2,3",
+ "depths": [
+  16384
+ ],
+ "repeat": 2,
+ "max_new": 512,
+ "tasks": [
+  "essay",
+  "code"
+ ],
+ "arms": [
+  {
+   "name": "t-df2-c035-res",
+   "cfg": {
+    "drafting": "dflash2",
+    "gpu": [
+     2,
+     3
+    ]
+   },
+   "extra_args": [
+    "--ple-io",
+    "direct",
+    "--vram-reserve-later-mib",
+    "1394"
+   ]
+  },
+  {
+   "name": "t-df2-c05-res",
+   "cfg": {
+    "drafting": "dflash2",
+    "gpu": [
+     2,
+     3
+    ],
+    "user_args": [
+     "--draft-conf",
+     "0.5"
+    ]
+   },
+   "extra_args": [
+    "--ple-io",
+    "direct",
+    "--vram-reserve-later-mib",
+    "1394"
+   ]
+  },
+  {
+   "name": "t-df2-c065-res",
+   "cfg": {
+    "drafting": "dflash2",
+    "gpu": [
+     2,
+     3
+    ],
+    "user_args": [
+     "--draft-conf",
+     "0.65"
+    ]
+   },
+   "extra_args": [
+    "--ple-io",
+    "direct",
+    "--vram-reserve-later-mib",
+    "1394"
+   ]
+  },
+  {
+   "name": "t-mtp-base",
+   "cfg": {
+    "drafting": "mtp",
+    "gpu": [
+     2,
+     3
+    ]
+   },
+   "extra_args": [
+    "--ple-io",
+    "direct"
+   ]
+  },
+  {
+   "name": "t-mtp-pw2",
+   "cfg": {
+    "drafting": "mtp",
+    "gpu": [
+     2,
+     3
+    ]
+   },
+   "extra_args": [
+    "--ple-io",
+    "direct",
+    "--pipeline-windows",
+    "2"
+   ]
+  },
+  {
+   "name": "t-mtp-minp07",
+   "cfg": {
+    "drafting": "mtp",
+    "gpu": [
+     2,
+     3
+    ],
+    "user_args": [
+     "--spec-min-p",
+     "0.7"
+    ]
+   },
+   "extra_args": [
+    "--ple-io",
+    "direct"
+   ]
+  },
+  {
+   "name": "t-mtp-tail7",
+   "cfg": {
+    "drafting": "mtp",
+    "gpu": [
+     2,
+     3
+    ]
+   },
+   "extra_args": [
+    "--ple-io",
+    "direct"
+   ],
+   "env": {
+    "STRATA_ROUTE_TAIL_SKIP": "7"
+   }
+  },
+  {
+   "name": "t-mtp-ctx128k",
+   "cfg": {
+    "drafting": "mtp",
+    "gpu": [
+     2,
+     3
+    ],
+    "user_args": [
+     "--max-context",
+     "131072"
+    ]
+   },
+   "extra_args": [
+    "--ple-io",
+    "direct"
+   ]
+  },
+  {
+   "name": "t-mtp-async",
+   "cfg": {
+    "drafting": "mtp",
+    "gpu": [
+     2,
+     3
+    ]
+   },
+   "extra_args": [
+    "--ple-io",
+    "direct",
+    "--adapt-async",
+    "1"
+   ]
+  },
+  {
+   "name": "t-mtp-overlap",
+   "cfg": {
+    "drafting": "mtp",
+    "gpu": [
+     2,
+     3
+    ]
+   },
+   "extra_args": [
+    "--ple-io",
+    "direct"
+   ],
+   "env": {
+    "STRATA_SPLIT_OVERLAP": "1"
+   }
+  }
+ ]
+}
